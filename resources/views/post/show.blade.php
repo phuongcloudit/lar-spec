@@ -139,7 +139,26 @@
         </div>
         <div class="row detail-content__main">
             <div class="slide-img col-xs-12 col-sm-7">
-                <img src="./assets/images/dog.png" alt="">
+                <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+                    <li data-thumb="{{ asset('./assets/images/dog.png') }}">
+                        <img src="{{ asset('./assets/images/dog.png') }}" />
+                    </li>
+                    <li data-thumb="{{ asset('./assets/images/dog.png') }}">
+                        <img src="{{ asset('./assets/images/dog.png') }}" />
+                    </li>
+                    <li data-thumb="{{ asset('./assets/images/dog.png') }}">
+                        <img src="{{ asset('./assets/images/dog.png') }}" />
+                    </li>
+                    <li data-thumb="{{ asset('./assets/images/dog.png') }}">
+                        <img src="{{ asset('./assets/images/dog.png') }}" />
+                    </li>
+                    <li data-thumb="{{ asset('./assets/images/dog.png') }}">
+                        <img src="{{ asset('./assets/images/dog.png') }}" />
+                    </li>
+
+
+                </ul>
+                {{-- <img src="./assets/images/dog.png" alt=""> --}}
             </div>
             <div class="info-order col-xs-12 col-sm-5">
                 <div class="info-order__item">
@@ -163,7 +182,7 @@
                         募集終了まで
                     </div>
                     <div class="info-order__body">
-                        <span class="red">{{ $post->day_in }}日</span>
+                        <span class="red">{{ $post->current }}日</span>
                     </div>
                 </div>
                 <div class="donate-button__out">

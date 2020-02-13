@@ -18,7 +18,23 @@
     </footer>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="{{ asset('/assets/js/owl.carousel.min.js') }}"></script>
-    
+    <script src="{{ asset('/assets/js/lightslider.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+           $('#image-gallery').lightSlider({
+               gallery:true,
+               item:1,
+               thumbItem:4,
+               slideMargin: 0,
+               speed:500,
+               auto:false,
+               loop:true,
+               onSliderLoad: function() {
+                   $('#image-gallery').removeClass('cS-hidden');
+               }  
+           });
+       });
+   </script>
     <script>
         $(".slide-spec").owlCarousel({
             loop: true,

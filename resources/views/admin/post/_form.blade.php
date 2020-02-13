@@ -17,6 +17,9 @@
         {{   Form::date('donate_day_end', \Carbon\Carbon::now(), ['class' => 'form-control']) }}
     </div>
     <div class="form-group">
+     {!! Form::file('image', ['accept' => 'image/*']) !!} 
+    </div>
+    <div class="form-group">
         {{ Form::label('content', "Content") }}
         {!! Form::textarea('content', null, ['id' => 'content', 'class' => 'form-control' ]) !!}
     </div>

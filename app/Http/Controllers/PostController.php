@@ -27,7 +27,7 @@ class PostController extends Controller
         // $interval = date_diff($current, $day_in);
 
         $categories = Category::all();
-        return view('post.show')->withPost($post)->withCategories($categories)->with("day_in");
+        return view('post.show')->withPost($post)->withCategories($categories);
     }
     public function day_left(){
     }

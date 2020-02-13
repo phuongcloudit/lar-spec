@@ -5,4 +5,10 @@
 <title>Special Thanks</title>
 <link rel="stylesheet" href="{{ asset('/assets/css/normalize.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/flexboxgrid.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/lightslider.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/style.css') }}">
+<style>
+    #image-gallery li img{
+        width: 100%;
+    }
+</style>
