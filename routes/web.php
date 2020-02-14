@@ -51,6 +51,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('post', 'PostController')->only('show');
 
 
-
+Route::get('photo', 'Admin\ImageController@index');
+Route::post('save-photo', 'Admin\ImageController@save');
 
 

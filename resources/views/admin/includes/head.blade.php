@@ -5,3 +5,4 @@
 <title> @yield('title')</title>
 
 <link rel="stylesheet" href="{{ asset('admin/css/app.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/jquery.fileupload.css') }}">

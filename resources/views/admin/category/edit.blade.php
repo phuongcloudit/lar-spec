@@ -39,9 +39,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Category <small>Add new Category</small></h3>
-                    </div>
                     {!! Form::model($cat, ['method'=>'PATCH','route'=>['admin.category.update', $cat->id]])!!}
                     @include('admin/category/_form')
                     {!! Form::close() !!}

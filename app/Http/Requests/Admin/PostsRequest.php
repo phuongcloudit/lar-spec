@@ -39,6 +39,8 @@ class PostsRequest extends FormRequest
             'donate_money' => 'required|numeric',
             'donate_day_end' => 'required|date',
             'content' => 'required',
+            'images' => 'required',
+            // 'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'author_id' => ['nullable', 'exists:users,id', new CanBeAuthor],
         ];
     }

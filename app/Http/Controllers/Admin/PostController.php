@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use App\Model\Category;
 use App\Model\Post;
 use App\Model\User;
+use App\Model\Image;
 
 
 class PostController extends Controller
@@ -47,8 +48,34 @@ class PostController extends Controller
     public function store(PostsRequest $request): RedirectResponse
     {
         $post = Post::create($request->only(['title', 'category_id', 'donate_money', 'donate_day_end','content']));
+        
+        // $request->validate([
+        //     'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
 
-        return redirect()->route('admin.post.edit', $post)->with('success','Post created sucessfully');
+        // $this->validate($request, [
+        //     'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        // ]);
+    
+    
+        if($request->hasfile('images'))
+        {
+            foreach($request->file('images') as $file)
+            {
+                $name=$file->getClientOriginalName();
+                $file->move(public_path().'/images/', $name);  
+                // $data[] = $name;  
+                $file= new Image();
+                $file->image_name=$name;
+                $file->post_id=$post->id;
+                $file->save();
+
+            }
+        }
+
+        return redirect()->route('admin.post.edit', $post)->with('success', 'Your post has been successfully added');
+  
+
     }
     
     /**

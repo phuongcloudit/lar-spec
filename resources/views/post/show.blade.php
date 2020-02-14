@@ -140,23 +140,11 @@
         <div class="row detail-content__main">
             <div class="slide-img col-xs-12 col-sm-7">
                 <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                    <li data-thumb="{{ asset('./assets/images/dog.png') }}">
-                        <img src="{{ asset('./assets/images/dog.png') }}" />
+                    @foreach ($images as $item)
+                    <li data-thumb="{{ asset('/images/') }}/{{ $item->image_name }}">
+                        <img src="{{ asset('/images/') }}/{{ $item->image_name }}" />
                     </li>
-                    <li data-thumb="{{ asset('./assets/images/dog.png') }}">
-                        <img src="{{ asset('./assets/images/dog.png') }}" />
-                    </li>
-                    <li data-thumb="{{ asset('./assets/images/dog.png') }}">
-                        <img src="{{ asset('./assets/images/dog.png') }}" />
-                    </li>
-                    <li data-thumb="{{ asset('./assets/images/dog.png') }}">
-                        <img src="{{ asset('./assets/images/dog.png') }}" />
-                    </li>
-                    <li data-thumb="{{ asset('./assets/images/dog.png') }}">
-                        <img src="{{ asset('./assets/images/dog.png') }}" />
-                    </li>
-
-
+                    @endforeach
                 </ul>
                 {{-- <img src="./assets/images/dog.png" alt=""> --}}
             </div>
@@ -197,11 +185,7 @@
         </div>
         <div class="row detail-content__body">
             <div class="col-xs-12 col-sm-7">
-                <p>
-                    {{ $post->content }}
-                </p>
-                <img src="{{ asset('./assets/images/image-post.png') }}" alt="">
-
+                    {!! $post->content !!}
             </div>
             <div class="col-xs-12 col-sm-7">
                 <div class="author-profile-widget">
@@ -224,27 +208,3 @@
     </div>
 </div>
 @endsection
-<!-- <script>
-        $(".slide-spec").owlCarousel({
-            loop: true,
-            responsiveClass: true,
-            nav: true,
-            navText:["<div class='nav-btn prev-slide'></div>","<div class='nav-btn next-slide'></div>"],
-            autoplay: false,
-            autoplayTimeout: 3500,
-            dots: false,
-            smartSpeed: 1000,
-            // mouseDrag: false,
-            // touchDrag: true,
-            responsive: {
-                0: {
-                    items: 3,
-                    margin: 0
-                },
-                768: {
-                    items: 1,
-                    margin: 0
-                }
-            }
-        })
-    </script> -->

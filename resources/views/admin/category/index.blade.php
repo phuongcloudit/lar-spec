@@ -31,9 +31,6 @@
     @endif
     <!-- Default box -->
     <div class="card">
-        <div class="card-header">
-            <h3 class="card-title">Projects</h3>
-        </div>
         <div class="card-body p-0">
             <table class="table table-striped projects">
                 <thead>

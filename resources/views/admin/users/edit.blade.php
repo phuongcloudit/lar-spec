@@ -30,9 +30,6 @@
             </div>
             @endif
                 <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">User <small>Add new User</small></h3>
-                    </div>
                     {!! Form::model($user, ['method' => 'PATCH', 'route' => ['admin.users.update', $user]]) !!}
                     @include('admin.users._form')
                     {!! Form::close() !!}

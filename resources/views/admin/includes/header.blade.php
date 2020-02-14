@@ -28,7 +28,7 @@
      <!-- Messages Dropdown Menu -->
      <li class="nav-item dropdown">
      <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="true">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="">
+              <img src="" class="user-image" alt="">
               <span class="hidden-xs"> 
                   <!-- Auth::user()->name  -->
 

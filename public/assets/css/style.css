@@ -212,7 +212,7 @@ header .header-content .header-nav .button-menu ul li.button-3 a { background: u
 
 .detail-content__main .info-order .donate-button__out .button-dn a::after { content: ""; position: absolute; width: 0px; height: 0px; border-bottom: 8px solid transparent; border-top: 8px solid transparent; border-left: 13px solid #fff; right: 10px; }
 
-.detail-content__body { margin-top: 20px; margin-bottom: 50px; }
+.detail-content__body { margin-top: 20px; margin-bottom: 50px; word-break: break-all; }
 
 .detail-content__body .author-profile-widget { margin-top: 30px; padding: 20px; border: 1px solid #e7975a; }
 

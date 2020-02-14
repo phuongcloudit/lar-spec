@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Post;
+use App\Model\Image;
 use App\Model\Category;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -24,12 +25,9 @@ class PostController extends Controller
 
         $current = Carbon::now();
         $day_in = $post->donate_date_end;
-        // $interval = date_diff($current, $day_in);
-
         $categories = Category::all();
-        return view('post.show')->withPost($post)->withCategories($categories);
+
+        $images = Image::where('post_id', $post->id)->get();
+        return view('post.show')->withPost($post)->withCategories($categories)->withImages($images);
     }
-    public function day_left(){
-    }
-  
 }

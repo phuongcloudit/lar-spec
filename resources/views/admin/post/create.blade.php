@@ -18,8 +18,8 @@
 </section>
 <section class="content">
     <div class="container-fluid">
-    {!! Form::open(['route' => 'admin.post.store', 'method' => 'POST']) !!}
-
+    {!! Form::open(['route' => 'admin.post.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => "fileUpload"]) !!}
+    @csrf
         <div class="row">
         <div class="col-12 col-md-12 col-lg-9 order-2 order-md-1">
 
@@ -34,9 +34,7 @@
                 </div>
                 @endif
                 <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Post <small>Add new Post</small></h3>
-                    </div>
+                  
                     @include('admin.post._form')
 
                 </div>

@@ -32,9 +32,6 @@
                 </div>
                 @endif
                 <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Category <small>Add new Category</small></h3>
-                    </div>
                     {!! Form::open(['route' => 'admin.category.store', 'method' => 'POST']) !!}
                     @include('admin.category._form')
                     {!! Form::close() !!}
