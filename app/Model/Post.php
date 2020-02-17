@@ -17,10 +17,10 @@ class Post extends Model
     public function author(): BelongsTo {
         return $this->belongsTo(User::class, 'author_id');
     }
-    public function category(): BelongsTo {
-        return $this->belongsTo(Category::class, 'category_id');
-    }
-    // public function images(): BelongsToMany {
-    //     return $this->BelongsToMany(Image::class, 'id');
+    // public function category(): BelongsTo {
+    //     return $this->belongsTo(Category::class, 'category_id');
     // }
+    public function category() {
+      return $this->belongsTo('App\Model\Category');
+    }
 }

@@ -30,7 +30,6 @@
      <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="true">
               <img src="" class="user-image" alt="">
               <span class="hidden-xs"> 
-                  <!-- Auth::user()->name  -->
 
               </span>
             </a>

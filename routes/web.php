@@ -20,38 +20,32 @@ Route::name('admin.')->prefix('admin')->group(function () {
         'uses' => 'DashboardController@index'
     ])->name('dashboard');
     Route::resource('users', 'Admin\UserController')->only(['index', 'edit', 'update']);
-   
-   // Category
     Route::resource('category', 'Admin\CategoryController');
     Route::resource('post', 'Admin\PostController');
 });
 
+Route::group(['middleware' => ['auth', 'admin']], function(){
+
+    Route::get('/dashboard', function(){
+        return view('admin.dashboard.index');
+    });
+
+});
 
 // public route
 
 Route::get('/', function () {
     return view('pages.top');
 });
-Route::get('/category', function () {
-    return view('category.index');
-});
-
-Route::get('/detail', function () {
-    return view('detail.index');
-});
 
 
-// Route::resource('category', 'CategoryController')->only('show');
+
+
+Route::resource('post', 'PostController')->only('show');
+Route::resource('category', 'CategoryController')->only('show');
+
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::resource('post', 'PostController')->only('show');
-
-
-Route::get('photo', 'Admin\ImageController@index');
-Route::post('save-photo', 'Admin\ImageController@save');
-
-

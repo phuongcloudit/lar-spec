@@ -16,6 +16,10 @@ class UserController extends Controller
     /**
      * Show the application users index.
      */
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     public function index(): View
     {
         return view('admin.users.index', [
