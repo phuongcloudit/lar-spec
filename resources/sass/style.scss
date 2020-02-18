@@ -48,6 +48,9 @@ a {
 img {
   max-width: 100%;
 }
+p{
+  line-height: 1.5;
+}
 .row {
   margin-right: 0;
   margin-left: 0;
@@ -720,4 +723,10 @@ footer {
 }
 .banner-01.owl-carousel .next-slide {
   right: -25px;
+}
+
+// custom slide in page detail
+.lSGallery{
+display: flex;
+align-items: center;
 }

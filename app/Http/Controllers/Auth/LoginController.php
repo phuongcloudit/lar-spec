@@ -24,12 +24,4 @@ class LoginController extends Controller
         }
     }
 
-    // public function guard()
-    // {
-    //     return Auth::guard('admin');
-    // }
-    // public function showLoginForm()
-    // {
-    //     return view('auth.login');
-    // }
 }

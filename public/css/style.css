@@ -56,6 +56,10 @@ img {
   max-width: 100%;
 }
 
+p {
+  line-height: 1.5;
+}
+
 .row {
   margin-right: 0;
   margin-left: 0;
@@ -805,5 +809,10 @@ footer .footer .copyright {
 
 .banner-01.owl-carousel .next-slide {
   right: -25px;
+}
+
+.lSGallery {
+  display: flex;
+  align-items: center;
 }
 

@@ -63,7 +63,7 @@
                   
                         </td>
                         <td class="project-state">
-                            Success
+                            {{ $user->created_at }}
                         </td>
                         <td class="project-actions text-right">
                             <a class="btn btn-primary btn-sm" href="#">

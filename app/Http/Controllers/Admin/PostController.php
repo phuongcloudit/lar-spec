@@ -10,7 +10,8 @@ use App\Model\Category;
 use App\Model\Post;
 use App\Model\User;
 use App\Model\Image;
-
+use Auth;
+// use Session;
 
 class PostController extends Controller
 {
@@ -24,7 +25,7 @@ class PostController extends Controller
         $categories = Category::all();
         $posts = Post::all();
         // $posts = Post::with('category')->get();
-        return view('admin.post.index')->withCategories($categories)->withPosts($posts);
+        return view('admin.post.index')->withPosts($posts);
 
     }
 
@@ -47,7 +48,9 @@ class PostController extends Controller
      */
     public function store(PostsRequest $request): RedirectResponse
     {
-        $post = Post::create($request->only(['title', 'category_id', 'donate_money', 'donate_day_end','content']));
+        
+       
+        // $post = Post::create($request->only(['title', 'category_id', 'donate_money', 'donate_day_end','content']));
         
         // $request->validate([
         //     'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -56,8 +59,16 @@ class PostController extends Controller
         // $this->validate($request, [
         //     'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         // ]);
-    
-    
+
+       
+        $post = new Post;
+        $post->title = $request->title;
+        $post->slug = $request->slug;
+        $post->category_id = $request->category_id;
+        $post->content = $request->content;
+        $post->author_id = Auth::user()->id;
+        $post->save();
+       
         if($request->hasfile('images'))
         {
             foreach($request->file('images') as $file)
@@ -69,13 +80,14 @@ class PostController extends Controller
                 $file->image_name=$name;
                 $file->post_id=$post->id;
                 $file->save();
-
             }
         }
 
         return redirect()->route('admin.post.edit', $post)->with('success', 'Your post has been successfully added');
   
-
+        // Session::flash('success','A Post created sucessfully');
+        // return redirect()->route('admin.post.index');
+    
     }
     
     /**
@@ -98,8 +110,9 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        $images = Image::where('post_id', $id)->get();
         $categories = Category::pluck('name', 'id');
-        return view('admin.post.edit')->withPost($post)->withCategories($categories);
+        return view('admin.post.edit')->withPost($post)->withCategories($categories)->withImages($images);;
     }
 
     /**
@@ -110,15 +123,41 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function update(Request $request, $id)
+    public function update(PostsRequest $request, $id)
     {
-        // $post = Post::update($request->only(['title', 'category_id', 'donate_money', 'donate_day_end','content']));
+        
 
-        // return redirect()->route('admin.posts.edit', $post)->with('success','Post Updated sucessfully');
-        request()->validate([
-            'title' => 'required|max:255'
-        ]);
-        Post::find($id)->update($request->all());
+        $post = Post::find($id);
+
+        // if ($request->input('slug') == $post->slug){
+        //     $this->validate($request, array){
+        //         'slug' => 'required';
+        //     }
+        // }
+
+
+        $post->title = $request->title;
+        $post->slug = $request->slug;
+        $post->category_id = $request->category_id;
+        $post->content = $request->content;
+        $post->author_id = Auth::user()->id;
+        $post->save();
+       
+        if($request->hasfile('images'))
+        {
+            foreach($request->file('images') as $file)
+            {
+                $name=$file->getClientOriginalName();
+                $file->move(public_path().'/images/', $name);  
+                // $data[] = $name;  
+                $file= new Image();
+                $file->image_name=$name;
+                $file->post_id=$post->id;
+                $file->save();
+            }
+        }
+
+
         return redirect()->route('admin.post.edit', $id)->with('success','Post Updated sucessfully');
     }
     /**

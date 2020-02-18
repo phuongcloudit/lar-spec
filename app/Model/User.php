@@ -43,23 +43,5 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Role::class)->withTimestamps();
     }
-  
-  
 
 }
-
-
-class Admin extends Authenticatable
-    {
-        use Notifiable;
-
-        protected $guard = 'admin';
-
-        protected $fillable = [
-            'name', 'email', 'password',
-        ];
-
-        protected $hidden = [
-            'password', 'remember_token',
-        ];
-    }

@@ -61,7 +61,7 @@
                       {{ $post->id }}
                       </td>
                       <td>
-                          <a> {{ $post->title }} </a> <br/>
+                      <a href="{{ url('') }}/post/{{ $post->slug }}"> {{ $post->title }} </a> <br/>
                           <small> Posted at {{ $post->created_at }} </small>
                       </td>
                       <td>
@@ -73,7 +73,7 @@
                       {{ $post->updated_at }}
                       </td>
                       <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="{{ route('post.show', $post->id) }}">
+                      <a class="btn btn-primary btn-sm" href="{{ url('') }}/post/{{ $post->slug }}">
                               <i class="fas fa-folder">
                               </i>
                               View

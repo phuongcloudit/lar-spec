@@ -11,11 +11,11 @@ class Post extends Model
 
     
     protected $table = 'posts';
-    protected $fillable = ['title','author_id','donate_money','donate_day_end', 'content','category_id'];
+    protected $fillable = ['title','author_id','donate_day_end', 'content','category_id'];
     public $timestamps = true;
     
     public function author(): BelongsTo {
-        return $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo('App\Model\Category', 'author_id');
     }
     // public function category(): BelongsTo {
     //     return $this->belongsTo(Category::class, 'category_id');

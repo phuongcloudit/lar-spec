@@ -21,8 +21,7 @@
     {!! Form::open(['route' => 'admin.post.store', 'method' => 'POST', 'enctype' => 'multipart/form-data', 'id' => "fileUpload"]) !!}
     @csrf
         <div class="row">
-        <div class="col-12 col-md-12 col-lg-9 order-2 order-md-1">
-
+            <div class="col-12 col-md-12 col-lg-9 order-2 order-md-1">
                 @if(count($errors) > 0)
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>Error!</strong> 
@@ -34,20 +33,17 @@
                 </div>
                 @endif
                 <div class="card card-primary">
-                  
                     @include('admin.post._form')
-
                 </div>
             </div>
             <div class="col-12 col-md-12 col-lg-3 order-1 order-md-2">
-            <div class="text-center mt-5 mb-3">
+                <div class="text-center mt-5 mb-3">
                       {{ Form::submit('Submit', ['class' => 'btn btn-primary']) }}
                     <a href="#" class="btn btn-warning">Cancel</a>
                 </div>
             </div>
         </div>
         {!! Form::close() !!}
-
     </div>
 </section>
 @endsection

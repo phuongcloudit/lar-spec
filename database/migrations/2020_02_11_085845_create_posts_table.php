@@ -17,9 +17,8 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('photos')->nullable();
-            $table->integer('donate_money');
             $table->integer('donate_people')->nullable();
-            $table->dateTime('donate_day_end');
+            $table->dateTime('donate_day_end')->nullable();
             $table->longText('content')->nullable();
             $table->integer('category_id');
             $table->bigInteger('author_id')->unsigned()->default(0);

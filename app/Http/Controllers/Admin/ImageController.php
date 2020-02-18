@@ -45,4 +45,11 @@ class ImageController extends Controller
           $image = Photo::latest()->first(['images']);
           return Response()->json($image);
     }
+
+    public function destroy($id){
+      $del = Image::find($id);
+      Storage::delete($del->path);
+      $del->delete();
+      return redirect
+    }
 }

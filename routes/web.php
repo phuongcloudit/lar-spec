@@ -14,37 +14,38 @@
 
 // admin route
 
+
+
 Route::name('admin.')->prefix('admin')->group(function () {
-    // Dashboard
-    Route::get('dashboard', [
-        'uses' => 'DashboardController@index'
-    ])->name('dashboard');
-    Route::resource('users', 'Admin\UserController')->only(['index', 'edit', 'update']);
-    Route::resource('category', 'Admin\CategoryController');
-    Route::resource('post', 'Admin\PostController');
-});
-
-Route::group(['middleware' => ['auth', 'admin']], function(){
-
-    Route::get('/dashboard', function(){
-        return view('admin.dashboard.index');
+    Route::group(['middleware' => ['auth', 'admin']], function(){
+        // Route::get('/dashboard', function(){
+        //     return view('admin.dashboard.index');
+        // });
+        Route::get('dashboard', [
+            'uses' => 'DashboardController@index'
+        ])->name('dashboard');
+        Route::resource('users', 'Admin\UserController')->only(['index', 'edit', 'update']);
+        Route::resource('category', 'Admin\CategoryController');
+        Route::resource('post', 'Admin\PostController');
+    
     });
-
 });
 
 // public route
-
-Route::get('/', function () {
-    return view('pages.top');
+Route::group(['middleware' => ['web']], function(){
+    Route::get('post/{slug}', ['as' => 'post.single', 'uses' => 'PostController@getSingle'])
+    ->where('slug', '[\w\d\-\_]+');
+    Route::get('/', function () {
+        return view('pages.top');
+    });
+    
 });
 
 
 
 
-Route::resource('post', 'PostController')->only('show');
+// Route::resource('post', 'PostController')->only('show');
 Route::resource('category', 'CategoryController')->only('show');
-
-
 
 Auth::routes();
 

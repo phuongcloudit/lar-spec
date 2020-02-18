@@ -28,6 +28,20 @@ class PostController extends Controller
         $categories = Category::all();
 
         $images = Image::where('post_id', $post->id)->get();
+
+
+        // $post->slug = $slug->createSlug($request->title);
+
+
         return view('post.show')->withPost($post)->withCategories($categories)->withImages($images);
+    }
+
+    public function getSingle($slug){
+        // return $slug;
+        $post = Post::where('slug', '=', $slug)->first();
+        $categories = Category::all();
+        $images = Image::where('post_id', $post->id)->get();
+        return view('post.single')->withPost($post)->withCategories($categories)->withImages($images);
+        
     }
 }

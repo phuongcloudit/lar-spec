@@ -28,15 +28,19 @@
      <!-- Messages Dropdown Menu -->
      <li class="nav-item dropdown">
      <a href="#" class="nav-link" data-toggle="dropdown" aria-expanded="true">
-              <img src="" class="user-image" alt="">
+              <img src="https://adminlte.io/themes/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="">
               <span class="hidden-xs"> 
-
+                {{ Auth::user()->name }}
               </span>
             </a>
          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
              <a href="#" class="dropdown-item dropdown-footer">Profile</a>
              <div class="dropdown-divider"></div>
-             <a href="" class="dropdown-item dropdown-footer">Sign out</a>
+         <a href="{{ route('logout') }}" class="dropdown-item dropdown-footer"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>
+
+        <form id="logout-form" class="d-none" action="{{ route('logout') }}" method="POST">
+            @csrf
+        </form>
          </div>
      </li>
      

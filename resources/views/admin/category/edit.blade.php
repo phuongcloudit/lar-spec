@@ -37,7 +37,7 @@
         </div>
         @endif
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card card-primary">
                     {!! Form::model($cat, ['method'=>'PATCH','route'=>['admin.category.update', $cat->id]])!!}
                     @include('admin/category/_form')

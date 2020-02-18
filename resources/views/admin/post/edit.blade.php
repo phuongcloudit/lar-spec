@@ -57,6 +57,9 @@
                     <p class="text-sm">Author:
                         <b class="d-block">Deveint Inc</b>
                     </p>
+                    <p class="text-sm">Url:
+                    <b class="d-block"><a href="{{ url($post->slug) }}">{{ $post->slug }}</a></b>
+                    </p>
                     <p class="text-sm">Posted at:
                         <b class="d-block">{{ $post->created_at }}</b>
                     </p>
