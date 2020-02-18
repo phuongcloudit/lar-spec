@@ -1,0 +1,14 @@
+@font-face {
+    font-family: "KozGoPr6N";
+    src: url("../fonts/KozGoPr6N-Regular.otf");
+  }
+  @font-face {
+    font-family: "KozGoPr6N";
+    font-weight: bold;
+    src: url("../fonts/KozGoPr6N-Bold.otf");
+  }
+  @font-face {
+    font-family: "ShinGoPro";
+    font-weight: bold;
+    src: url("../fonts/ShinGoPro-Bold.otf");
+  }

@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="{{ asset('/assets/css/flexboxgrid.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/lightslider.css') }}">
 <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('/assets/css/fonts.css') }}">
 <style>
     #image-gallery li img{
         width: 100%;
