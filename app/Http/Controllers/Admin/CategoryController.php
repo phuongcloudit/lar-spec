@@ -54,9 +54,11 @@ class CategoryController extends Controller
 
         $this->validate($request, array(
             'name'=> 'required|max:255',
+            'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
         ));
         $cat = new Category;
         $cat->name = $request->name;
+        $cat->slug = $request->slug;
         $cat->description = $request->description;
         $cat->save();
         Session::flash('success','Category created sucessfully');
@@ -97,10 +99,21 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-         request()->validate([
-            'name' => 'required|max:255'
-        ]);
-        Category::find($id)->update($request->all());
+        $cat = Category::find($id);
+        if ($request->input('slug') == $cat->slug){
+            $this->validate($request, array(
+                'slug' => 'required',
+            ));
+        } else{
+            $this->validate($request, array(
+                'name' => 'required|max:255',
+                'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+            ));
+        }
+        $cat->name = $request->name;
+        $cat->slug = $request->slug;
+        $cat->description = $request->description;
+        $cat->save();
         return redirect()->route('admin.category.index')->with('success','Category Updated sucessfully');
             
     }

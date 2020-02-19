@@ -5,7 +5,7 @@
     @include('includes.head')
 </head>
 
-<body class="indedx">
+<body @if(Request::is('/')) class="index" @endif >
     <header>
         @include('includes.header')
     </header>
@@ -37,6 +37,7 @@
    </script>
     <script>
         $(".slide-spec").owlCarousel({
+            items: 6,
             loop: true,
             responsiveClass: true,
             nav: true,
@@ -49,12 +50,12 @@
             // touchDrag: true,
             responsive: {
                 0: {
-                    items: 3,
-                    margin: 0
+                    items: 1,
+                    margin: 40
                 },
                 768: {
                     items: 1,
-                    margin: 0
+                    margin: 40
                 }
             }
         })

@@ -652,7 +652,7 @@
                         2020.02.06
                     </div>
                     <div class="news-item__content-out col-sm-10 col-xs-12">
-                        <div class="row">
+                        <div class="row middle-xs">
                             <span class="news-type col-sm-2">
                                 カテゴリー
                             </span>
@@ -668,7 +668,7 @@
                         2020.02.06
                     </div>
                     <div class="news-item__content-out col-sm-10 col-xs-12">
-                        <div class="row">
+                        <div class="row middle-xs">
                             <span class="news-type col-sm-2">
                                 カテゴリー
                             </span>
@@ -684,7 +684,7 @@
                         2020.02.06
                     </div>
                     <div class="news-item__content-out col-sm-10 col-xs-12">
-                        <div class="row">
+                        <div class="row middle-xs">
                             <span class="news-type col-sm-2">
                                 カテゴリー
                             </span>

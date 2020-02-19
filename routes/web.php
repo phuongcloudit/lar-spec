@@ -38,6 +38,8 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('/', function () {
         return view('pages.top');
     });
+    Route::get('category/{slug}', ['as' => 'category.single', 'uses' => 'CategoryController@getSingle'])
+    ->where('slug', '[\w\d\-\_]+');
     
 });
 

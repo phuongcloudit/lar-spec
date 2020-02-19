@@ -8,7 +8,7 @@ body {
   overflow-x: hidden;
 }
 .index {
-  background-image: url(../images/top/main-cover.jpg);
+  background-image: url('../images/top/main-cover.jpg');
   background-position: top center;
   background-repeat: no-repeat;
   // position: absolute;
@@ -664,8 +664,12 @@ footer {
     }
   }
 }
+.slide-spec__outner{
+    max-width: 1920px;
+    overflow: hidden;
+}
 .slide-spec {
-  max-width: 600px;
+  max-width: 400px;
   text-align: center;
   .slide-item {
     text-align: left;
@@ -697,18 +701,21 @@ footer {
 // custom owl carousel
 .owl-carousel .owl-stage-outer {
   overflow: unset;
+  @media screen and (max-width: 768px) {
+    overflow: hidden;
+  }
 }
 
 .owl-carousel .prev-slide {
   background: url(../images/prev-nav.png) center no-repeat;
   background-size: cover;
-  left: 0;
+  left: -40px;
 }
 
 .owl-carousel .next-slide {
   background: url(../images/next-nav.png) center no-repeat;
   background-size: cover;
-  right: 0;
+  right: -40px;
 }
 
 .owl-carousel .nav-btn {
