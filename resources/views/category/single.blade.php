@@ -116,7 +116,7 @@
 
         <a class="item" href="/post/{{ $post->id }}">
                     <div class="item-img">
-                        <img src="./assets/images/dog.png" alt="">
+                    <img src="" alt="">
                         <div class="snippet">
                             {{ $post->title }}
                         </div>

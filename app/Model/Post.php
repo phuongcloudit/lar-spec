@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Post extends Model
 {
-
-    
     protected $table = 'posts';
     protected $fillable = ['title','author_id','donate_day_end', 'content','category_id'];
     public $timestamps = true;
@@ -17,10 +15,12 @@ class Post extends Model
     public function author(): BelongsTo {
         return $this->belongsTo('App\Model\Category', 'author_id');
     }
-    // public function category(): BelongsTo {
-    //     return $this->belongsTo(Category::class, 'category_id');
-    // }
+  
     public function category() {
       return $this->belongsTo('App\Model\Category');
+    }
+    
+    public function images() {
+      return $this->hasMany('App\Model\Image');
     }
 }

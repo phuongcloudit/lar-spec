@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\PostsRequest;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use App\Model\Category;
+use Auth;
 use App\Model\Post;
 use App\Model\User;
 use App\Model\Image;
-use Auth;
+use App\Model\Category;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Admin\PostsRequest;
 // use Session;
 
 class PostController extends Controller
@@ -73,9 +74,9 @@ class PostController extends Controller
         {
             foreach($request->file('images') as $file)
             {
-                $name=$file->getClientOriginalName();
-                $file->move(public_path().'/uploads/', $name);  
-                // $data[] = $name;  
+                // $name=$file->getClientOriginalName();
+                $name=$file->hashName();
+                $path = Storage::putFile('public/uploads', $file);
                 $file= new Image();
                 $file->image_name=$name;
                 $file->post_id=$post->id;
@@ -150,9 +151,8 @@ class PostController extends Controller
         {
             foreach($request->file('images') as $file)
             {
-                $name=$file->getClientOriginalName();
-                $file->move(public_path().'/uploads/', $name);  
-                // $data[] = $name;  
+                $name=$file->hashName();
+                $path = Storage::putFile('public/uploads', $file);
                 $file= new Image();
                 $file->image_name=$name;
                 $file->post_id=$post->id;

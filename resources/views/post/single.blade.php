@@ -1,6 +1,101 @@
 @extends('layouts.app')
 @section('content')
 
+<!-- <div class="row center-xs">
+        <div class="slide-spec between-xs owl-carousel owl-theme">
+            <div class="slide-item">
+                <div class="image">
+                    <img src="./assets/images/dog.png" alt="">
+                </div>
+                <div class="snippet">
+                    <div class="cate">
+                        Demo
+                    </div>
+                    <div class="title">
+                        わからない誰かわからない誰かわからない誰か
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="image">
+                    <img src="./assets/images/dog.png" alt="">
+                </div>
+                <div class="snippet">
+                    <div class="cate">
+                        Demo
+                    </div>
+                    <div class="title">
+                        わからない誰かわからない誰かわからない誰か
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="image">
+                    <img src="./assets/images/dog.png" alt="">
+                </div>
+                <div class="snippet">
+                    <div class="cate">
+                        Demo
+                    </div>
+                    <div class="title">
+                        わからない誰かわからない誰かわからない誰か
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="image">
+                    <img src="./assets/images/dog.png" alt="">
+                </div>
+                <div class="snippet">
+                    <div class="cate">
+                        Demo
+                    </div>
+                    <div class="title">
+                        わからない誰かわからない誰かわからない誰か
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="image">
+                    <img src="./assets/images/dog.png" alt="">
+                </div>
+                <div class="snippet">
+                    <div class="cate">
+                        Demo
+                    </div>
+                    <div class="title">
+                        わからない誰かわからない誰かわからない誰か
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="image">
+                    <img src="./assets/images/dog.png" alt="">
+                </div>
+                <div class="snippet">
+                    <div class="cate">
+                        Demo
+                    </div>
+                    <div class="title">
+                        わからない誰かわからない誰かわからない誰か
+                    </div>
+                </div>
+            </div>
+            <div class="slide-item">
+                <div class="image">
+                    <img src="./assets/images/dog.png" alt="">
+                </div>
+                <div class="snippet">
+                    <div class="cate">
+                        Demo
+                    </div>
+                    <div class="title">
+                        わからない誰かわからない誰かわからない誰か
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div> -->
 <div class="nav-header">
     <div class="container">
         <div class="row center-xs">
@@ -45,13 +140,13 @@
         <div class="row detail-content__main">
             <div class="slide-img col-xs-12 col-sm-7">
                 <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                    @foreach ($images as $item)
-                    <li data-thumb="{{ asset('/uploads/') }}/{{ $item->image_name }}">
-                        <img src="{{ asset('/uploads/') }}/{{ $item->image_name }}" />
+                    @foreach ($post->images as $item)
+                    <li data-thumb="{{ url('/') }}/storage/uploads/{{ $item->image_name }}">
+                        <img src="{{ url('/') }}/storage/uploads/{{ $item->image_name }}" />
                     </li>
                     @endforeach
                 </ul>
-                {{-- <img src="http://dev.projecthtml.com/special-thanks/public/assets/images/dog.png" alt=""> --}}
+                {{-- <img src="./assets/images/dog.png" alt=""> --}}
             </div>
             <div class="info-order col-xs-12 col-sm-5">
                 <div class="info-order__item">
@@ -111,78 +206,5 @@
             </div>
         </div>
     </div>
-</div>
-
-<div class="row center-xs">
-    <div class="row col-xs-12 center-xs slide-spec__outner">
-        <div class="slide-spec between-xss owl-carousel owl-theme">
-            <div class="slide-item">
-                <div class="image">
-                    <img src="http://dev.projecthtml.com/special-thanks/public/assets/images/dog.png" alt="">
-                </div>
-                <div class="snippet">
-                    <div class="cate">
-                        Demo
-                    </div>
-                    <div class="title">
-                        わからない誰かわからない誰かわからない誰か
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="image">
-                    <img src="http://dev.projecthtml.com/special-thanks/public/assets/images/dog.png" alt="">
-                </div>
-                <div class="snippet">
-                    <div class="cate">
-                        Demo
-                    </div>
-                    <div class="title">
-                        わからない誰かわからない誰かわからない誰か
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="image">
-                    <img src="http://dev.projecthtml.com/special-thanks/public/assets/images/dog.png" alt="">
-                </div>
-                <div class="snippet">
-                    <div class="cate">
-                        Demo
-                    </div>
-                    <div class="title">
-                        わからない誰かわからない誰かわからない誰か
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="image">
-                    <img src="http://dev.projecthtml.com/special-thanks/public/assets/images/dog.png" alt="">
-                </div>
-                <div class="snippet">
-                    <div class="cate">
-                        Demo
-                    </div>
-                    <div class="title">
-                        わからない誰かわからない誰かわからない誰か
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="image">
-                    <img src="http://dev.projecthtml.com/special-thanks/public/assets/images/dog.png" alt="">
-                </div>
-                <div class="snippet">
-                    <div class="cate">
-                        Demo
-                    </div>
-                    <div class="title">
-                        わからない誰かわからない誰かわからない誰か
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-      
 </div>
 @endsection

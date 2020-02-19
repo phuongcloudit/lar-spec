@@ -19,15 +19,18 @@ class CategoryController extends Controller {
     //     //     $images = Image::where('post_id', $post->id)->get();
     //     //     return view('category.show', compact('posts'),compact('cat'));
     //     //  }
+
+
     //     $category = Category::all();
 
     //      if($category){
-    //          $posts = Post::where('category_id',$id)->get();
-    //          $cat = Category::find($id);
-    //           return view('category.show', compact('posts'),compact('cat'));
-    //       }
+    //         $cats = Category::with(['posts'])->find($id);
+    //         return view('category.show', compact('cats'));
+    //      }
     //      return view('errors.404');
     // }
+
+
     public function getSingle($slug){
         $category = Category::all();
         $cate = Category::where('slug', '=', $slug)->first();
@@ -35,9 +38,7 @@ class CategoryController extends Controller {
             $posts = Post::where('category_id',$cate->id)->get();
             $cat = Category::find($cate->id);
 
-            // $img = Image::where("post_id",$post)
-
-             return view('category.single', compact('posts'),compact('cat'));
+             return view('category.single', compact('posts'),compact('cat'));;
          }
         return view('errors.404');
         

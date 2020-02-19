@@ -20,11 +20,11 @@ class DatabaseSeeder extends Seeder
         Role::firstOrCreate(['name' => Role::ROLE_EDITOR]);
         $role_admin = Role::firstOrCreate(['name' => Role::ROLE_ADMIN]);
         $user = User::firstOrCreate(
-            ['email' => 'dongphuong2102@gmail.com'],
+            ['email' => 'admin@gmail.com'],
             [
                 'name' => 'Admin User',
                 'usertype' => 'admin',
-                'password' => Hash::make('pcloudit21'),
+                'password' => Hash::make('admin123'),
                 'email_verified_at' => now()
             ]
         );

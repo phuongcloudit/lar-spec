@@ -140,9 +140,9 @@
         <div class="row detail-content__main">
             <div class="slide-img col-xs-12 col-sm-7">
                 <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                    @foreach ($images as $item)
-                    <li data-thumb="{{ asset('/images/') }}/{{ $item->image_name }}">
-                        <img src="{{ asset('/images/') }}/{{ $item->image_name }}" />
+                    @foreach ($post->images as $item)
+                    <li data-thumb="{{ url('/') }}/storage/uploads/{{ $item->image_name }}">
+                        <img src="{{ url('/') }}/storage/uploads/{{ $item->image_name }}" />
                     </li>
                     @endforeach
                 </ul>

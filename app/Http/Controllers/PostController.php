@@ -19,29 +19,18 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id): View
-    {   
-        $post = Post::find($id);
-
-        $current = Carbon::now();
-        $day_in = $post->donate_date_end;
-        $categories = Category::all();
-
-        $images = Image::where('post_id', $post->id)->get();
-
-
-        // $post->slug = $slug->createSlug($request->title);
-
-
-        return view('post.show')->withPost($post)->withCategories($categories)->withImages($images);
-    }
+    // public function show($id): View
+    // {   
+    //     $post = Post::with(["category","images"])->find($id);
+    //     $categories = Category::all();
+    //     return view('post.show')->withPost($post)->withCategories($categories);
+    // }
 
     public function getSingle($slug){
-        // return $slug;
-        $post = Post::where('slug', '=', $slug)->first();
+        $post = Post::with(["category","images"])->where('slug', '=', $slug)->first();
         $categories = Category::all();
-        $images = Image::where('post_id', $post->id)->get();
-        return view('post.single')->withPost($post)->withCategories($categories)->withImages($images);
+        // $images = Image::where('post_id', $post->id)->get();
+        return view('post.single')->withPost($post)->withCategories($categories);
         
     }
 }

@@ -105,14 +105,14 @@
     <div class="container">
         <div class="row">
             <h2 class="title">
-            {{ $cat->name }}<span>{{ $cat->description }}</span>
+            {{ $cats->name }}<span>{{ $cats->description }}</span>
             </h2>
         </div>
         <div class="row content">
-            @if ($posts->isEmpty())
+            @if ($cats->posts->isEmpty())
              <p> Post is Empty</p>
             @else
-                @foreach($posts as $post)
+                @foreach($cats->posts as $post)
 
         <a class="item" href="/post/{{ $post->id }}">
                     <div class="item-img">

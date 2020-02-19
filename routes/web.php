@@ -18,9 +18,7 @@
 
 Route::name('admin.')->prefix('admin')->group(function () {
     Route::group(['middleware' => ['auth', 'admin']], function(){
-        // Route::get('/dashboard', function(){
-        //     return view('admin.dashboard.index');
-        // });
+        
         Route::get('dashboard', [
             'uses' => 'DashboardController@index'
         ])->name('dashboard');
@@ -38,8 +36,8 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('/', 'HomeController@index');
     Route::get('category/{slug}', ['as' => 'category.single', 'uses' => 'CategoryController@getSingle'])
     ->where('slug', '[\w\d\-\_]+');
-Route::resource('category', 'CategoryController')->only('show');
-    
+    // Route::resource('category', 'CategoryController')->only('show');
+    // Route::resource('post', 'PostController')->only('show');
 });
 
 Auth::routes();
