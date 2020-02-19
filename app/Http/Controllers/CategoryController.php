@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Model\Category;
+
 use App\Model\Post;
 use App\Model\Image;
+use App\Model\Category;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CategoryController extends Controller {
 
@@ -32,7 +34,10 @@ class CategoryController extends Controller {
         if($category){
             $posts = Post::where('category_id',$cate->id)->get();
             $cat = Category::find($cate->id);
-             return view('category.show', compact('posts'),compact('cat'));
+
+            // $img = Image::where("post_id",$post)
+
+             return view('category.single', compact('posts'),compact('cat'));
          }
         return view('errors.404');
         

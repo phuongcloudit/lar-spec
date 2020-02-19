@@ -35,20 +35,11 @@ Route::name('admin.')->prefix('admin')->group(function () {
 Route::group(['middleware' => ['web']], function(){
     Route::get('post/{slug}', ['as' => 'post.single', 'uses' => 'PostController@getSingle'])
     ->where('slug', '[\w\d\-\_]+');
-    Route::get('/', function () {
-        return view('pages.top');
-    });
+    Route::get('/', 'HomeController@index');
     Route::get('category/{slug}', ['as' => 'category.single', 'uses' => 'CategoryController@getSingle'])
     ->where('slug', '[\w\d\-\_]+');
+Route::resource('category', 'CategoryController')->only('show');
     
 });
 
-
-
-
-// Route::resource('post', 'PostController')->only('show');
-Route::resource('category', 'CategoryController')->only('show');
-
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

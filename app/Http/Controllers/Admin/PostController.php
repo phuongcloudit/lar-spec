@@ -74,7 +74,7 @@ class PostController extends Controller
             foreach($request->file('images') as $file)
             {
                 $name=$file->getClientOriginalName();
-                $file->move(public_path().'/images/', $name);  
+                $file->move(public_path().'/uploads/', $name);  
                 // $data[] = $name;  
                 $file= new Image();
                 $file->image_name=$name;
@@ -151,7 +151,7 @@ class PostController extends Controller
             foreach($request->file('images') as $file)
             {
                 $name=$file->getClientOriginalName();
-                $file->move(public_path().'/images/', $name);  
+                $file->move(public_path().'/uploads/', $name);  
                 // $data[] = $name;  
                 $file= new Image();
                 $file->image_name=$name;

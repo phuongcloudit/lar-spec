@@ -33,15 +33,19 @@
     <div class="container">
         <div class="row">
             <h2 class="title">
-                TOPICS<span>【トピックス】<br>スタッフ注目のプロジェクト</span>
+             
             </h2>
         </div>
-        <div class="row content between-xs">
-            <a class="item" href="">
+        <div class="row content">
+            @if ($posts->isEmpty())
+            <p> Post is Empty</p>
+           @else
+            @foreach ($posts as $post)
+            <a class="item" href="{{ url('') }}/post/{{ $post->slug }}">
                 <div class="item-img">
                     <img src="./assets/images/dog.png" alt="">
                     <div class="snippet">
-                        タイトルタイトルタイトルタイトルタイトルタイトル
+                        {{ $post->title }}
                     </div>
                 </div>
                 <div class="item-donate">
@@ -63,244 +67,11 @@
                     </div>
                 </div>
             </a>
-            <a class="item" href="">
-                <div class="item-img">
-                    <img src="./assets/images/dog.png" alt="">
-                    <div class="snippet">
-                        タイトルタイトルタイトルタイトルタイトルタイトル
-                    </div>
-                </div>
-                <div class="item-donate">
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>総額
-                        </div>
-                        <div class="right">
-                            <span>¥000.000</span>
-                        </div>
-                    </div>
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>者数
-                        </div>
-                        <div class="right">
-                            <span>100人</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a class="item" href="">
-                <div class="item-img">
-                    <img src="./assets/images/dog.png" alt="">
-                    <div class="snippet">
-                        タイトルタイトルタイトルタイトルタイトルタイトル
-                    </div>
-                </div>
-                <div class="item-donate">
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>総額
-                        </div>
-                        <div class="right">
-                            <span>¥000.000</span>
-                        </div>
-                    </div>
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>者数
-                        </div>
-                        <div class="right">
-                            <span>100人</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a class="item" href="">
-                <div class="item-img">
-                    <img src="./assets/images/dog.png" alt="">
-                    <div class="snippet">
-                        タイトルタイトルタイトルタイトルタイトルタイトル
-                    </div>
-                </div>
-                <div class="item-donate">
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>総額
-                        </div>
-                        <div class="right">
-                            <span>¥000.000</span>
-                        </div>
-                    </div>
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>者数
-                        </div>
-                        <div class="right">
-                            <span>100人</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a class="item" href="">
-                <div class="item-img">
-                    <img src="./assets/images/dog.png" alt="">
-                    <div class="snippet">
-                        タイトルタイトルタイトルタイトルタイトルタイトル
-                    </div>
-                </div>
-                <div class="item-donate">
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>総額
-                        </div>
-                        <div class="right">
-                            <span>¥000.000</span>
-                        </div>
-                    </div>
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>者数
-                        </div>
-                        <div class="right">
-                            <span>100人</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a class="item" href="">
-                <div class="item-img">
-                    <img src="./assets/images/dog.png" alt="">
-                    <div class="snippet">
-                        タイトルタイトルタイトルタイトルタイトルタイトル
-                    </div>
-                </div>
-                <div class="item-donate">
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>総額
-                        </div>
-                        <div class="right">
-                            <span>¥000.000</span>
-                        </div>
-                    </div>
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>者数
-                        </div>
-                        <div class="right">
-                            <span>100人</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a class="item" href="">
-                <div class="item-img">
-                    <img src="./assets/images/dog.png" alt="">
-                    <div class="snippet">
-                        タイトルタイトルタイトルタイトルタイトルタイトル
-                    </div>
-                </div>
-                <div class="item-donate">
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>総額
-                        </div>
-                        <div class="right">
-                            <span>¥000.000</span>
-                        </div>
-                    </div>
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>者数
-                        </div>
-                        <div class="right">
-                            <span>100人</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a class="item" href="">
-                <div class="item-img">
-                    <img src="./assets/images/dog.png" alt="">
-                    <div class="snippet">
-                        タイトルタイトルタイトルタイトルタイトルタイトル
-                    </div>
-                </div>
-                <div class="item-donate">
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>総額
-                        </div>
-                        <div class="right">
-                            <span>¥000.000</span>
-                        </div>
-                    </div>
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>者数
-                        </div>
-                        <div class="right">
-                            <span>100人</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a class="item" href="">
-                <div class="item-img">
-                    <img src="./assets/images/dog.png" alt="">
-                    <div class="snippet">
-                        タイトルタイトルタイトルタイトルタイトルタイトル
-                    </div>
-                </div>
-                <div class="item-donate">
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>総額
-                        </div>
-                        <div class="right">
-                            <span>¥000.000</span>
-                        </div>
-                    </div>
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>者数
-                        </div>
-                        <div class="right">
-                            <span>100人</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            <a class="item" href="">
-                <div class="item-img">
-                    <img src="./assets/images/dog.png" alt="">
-                    <div class="snippet">
-                        タイトルタイトルタイトルタイトルタイトルタイトル
-                    </div>
-                </div>
-                <div class="item-donate">
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>総額
-                        </div>
-                        <div class="right">
-                            <span>¥000.000</span>
-                        </div>
-                    </div>
-                    <div class="item-donate__item">
-                        <div class="left">
-                            募金<br>者数
-                        </div>
-                        <div class="right">
-                            <span>100人</span>
-                        </div>
-                    </div>
-                </div>
-            </a>
-            </diav>
+            @endforeach
+            @endif
         </div>
 </section>
-<section id="new" class="category">
+{{-- <section id="new" class="category">
     <div class="container">
         <div class="row">
             <h2 class="title">
@@ -570,7 +341,7 @@
             </a>
         </div>
     </div>
-</section>
+</section> --}}
 <section id="category">
     <div class="container">
         <div class="row">
@@ -647,6 +418,7 @@
         </div>
         <div class="row center-xs">
             <div class="content">
+                
                 <div class="news-item row">
                     <div class="news-item__time col-sm-2 col-xs-12">
                         2020.02.06
@@ -663,38 +435,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="news-item row">
-                    <div class="news-item__time col-sm-2 col-xs-12">
-                        2020.02.06
-                    </div>
-                    <div class="news-item__content-out col-sm-10 col-xs-12">
-                        <div class="row middle-xs">
-                            <span class="news-type col-sm-2">
-                                カテゴリー
-                            </span>
-                            <div class="news-item__content-in col-sm-10">
-                                テキストテキストテキストテキストテキストテキストテキストテキスト
-                                テキストテキストテキストテキストテキストテキストテキスト
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="news-item row">
-                    <div class="news-item__time col-sm-2 col-xs-12">
-                        2020.02.06
-                    </div>
-                    <div class="news-item__content-out col-sm-10 col-xs-12">
-                        <div class="row middle-xs">
-                            <span class="news-type col-sm-2">
-                                カテゴリー
-                            </span>
-                            <div class="news-item__content-in col-sm-10">
-                                テキストテキストテキストテキストテキストテキストテキストテキスト
-                                テキストテキストテキストテキストテキストテキストテキスト
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>

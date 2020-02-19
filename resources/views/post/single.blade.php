@@ -46,8 +46,8 @@
             <div class="slide-img col-xs-12 col-sm-7">
                 <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
                     @foreach ($images as $item)
-                    <li data-thumb="{{ asset('/images/') }}/{{ $item->image_name }}">
-                        <img src="{{ asset('/images/') }}/{{ $item->image_name }}" />
+                    <li data-thumb="{{ asset('/uploads/') }}/{{ $item->image_name }}">
+                        <img src="{{ asset('/uploads/') }}/{{ $item->image_name }}" />
                     </li>
                     @endforeach
                 </ul>

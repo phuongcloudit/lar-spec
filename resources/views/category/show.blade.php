@@ -118,7 +118,7 @@
                     <div class="item-img">
                         <img src="./assets/images/dog.png" alt="">
                         <div class="snippet">
-                            タイトルタイトルタイトルタイトルタイトルタイトル
+                            {{ $post->title }}
                         </div>
                     </div>
                     <div class="item-donate">

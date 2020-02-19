@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Model\Post;
+use App\Model\Category;
+use App\Http\Controllers\Controller;
+
 
 class HomeController extends Controller
 {
@@ -11,10 +14,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -23,6 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $category = Category::all()->first();
+        // $category = Category::with('posts')->get();
+        // var_dump($category);
+        $posts = Post::where('category_id',$category->id)->get();
+        return view('pages.top', compact('posts'));
+
     }
 }

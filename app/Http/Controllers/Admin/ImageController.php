@@ -29,11 +29,11 @@ class ImageController extends Controller
             
             // for save original image
             $ImageUpload = Image::make($files);
-            $originalPath = 'public/images/';
+            $originalPath = 'public/uploads/';
             $ImageUpload->save($originalPath.time().$files->getClientOriginalName());
             
             // for save thumnail image
-            $thumbnailPath = 'public/images/thumbnail/';
+            $thumbnailPath = 'public/uploads/thumbnail/';
             $ImageUpload->resize(250,125);
             $ImageUpload = $ImageUpload->save($thumbnailPath.time().$files->getClientOriginalName());
         
@@ -50,6 +50,6 @@ class ImageController extends Controller
       $del = Image::find($id);
       Storage::delete($del->path);
       $del->delete();
-      return redirect
+      return redirect;
     }
 }
