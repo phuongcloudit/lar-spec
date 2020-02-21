@@ -18,13 +18,13 @@
 
 Route::name('admin.')->prefix('admin')->group(function () {
     Route::group(['middleware' => ['auth', 'admin']], function(){
-        
         Route::get('dashboard', [
             'uses' => 'DashboardController@index'
         ])->name('dashboard');
         Route::resource('users', 'Admin\UserController')->only(['index', 'edit', 'update']);
         Route::resource('category', 'Admin\CategoryController');
         Route::resource('post', 'Admin\PostController');
+        Route::resource('news', 'Admin\NewsController');
     
     });
 });
