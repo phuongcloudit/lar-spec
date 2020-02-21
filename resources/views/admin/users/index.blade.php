@@ -6,12 +6,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Projects</h1>
+                <h1>All Users</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Projects</li>
+                    <li class="breadcrumb-item active">All Users</li>
                 </ol>
             </div>
         </div>
@@ -66,20 +66,16 @@
                             {{ $user->created_at }}
                         </td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-primary btn-sm" href="#">
-                                <i class="fas fa-folder">
+                            <a class="btn btn-primary btn-sm" href="#" title="View">
+                                <i class="fas fa-eye"></i>
                                 </i>
-                                View
                             </a>
-                            <a class="btn btn-info btn-sm" href="{{ route('admin.users.edit', $user) }}">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                Edit
+                            <a class="btn btn-success btn-sm" href="{{ route('admin.users.edit', $user) }}" title="Edit">
+                                <i class="fas fa-edit"></i>
                             </a>
-                            <a class="btn btn-danger btn-sm" href="#">
+                            <a class="btn btn-danger btn-sm" href="#" title="Delete">
                                 <i class="fas fa-trash">
                                 </i>
-                                Delete
                             </a>
                         </td>
                     </tr>

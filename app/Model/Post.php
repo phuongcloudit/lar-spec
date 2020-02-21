@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class Post extends Model
 {
     protected $table = 'posts';
-    protected $fillable = ['title','author_id','donate_day_end', 'content','category_id'];
+    protected $fillable = ['title','author_id','donate_day_end', 'content','category_id','slug'];
     public $timestamps = true;
     
     public function author(): BelongsTo {

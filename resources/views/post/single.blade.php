@@ -1,101 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-<!-- <div class="row center-xs">
-        <div class="slide-spec between-xs owl-carousel owl-theme">
-            <div class="slide-item">
-                <div class="image">
-                    <img src="./assets/images/dog.png" alt="">
-                </div>
-                <div class="snippet">
-                    <div class="cate">
-                        Demo
-                    </div>
-                    <div class="title">
-                        わからない誰かわからない誰かわからない誰か
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="image">
-                    <img src="./assets/images/dog.png" alt="">
-                </div>
-                <div class="snippet">
-                    <div class="cate">
-                        Demo
-                    </div>
-                    <div class="title">
-                        わからない誰かわからない誰かわからない誰か
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="image">
-                    <img src="./assets/images/dog.png" alt="">
-                </div>
-                <div class="snippet">
-                    <div class="cate">
-                        Demo
-                    </div>
-                    <div class="title">
-                        わからない誰かわからない誰かわからない誰か
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="image">
-                    <img src="./assets/images/dog.png" alt="">
-                </div>
-                <div class="snippet">
-                    <div class="cate">
-                        Demo
-                    </div>
-                    <div class="title">
-                        わからない誰かわからない誰かわからない誰か
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="image">
-                    <img src="./assets/images/dog.png" alt="">
-                </div>
-                <div class="snippet">
-                    <div class="cate">
-                        Demo
-                    </div>
-                    <div class="title">
-                        わからない誰かわからない誰かわからない誰か
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="image">
-                    <img src="./assets/images/dog.png" alt="">
-                </div>
-                <div class="snippet">
-                    <div class="cate">
-                        Demo
-                    </div>
-                    <div class="title">
-                        わからない誰かわからない誰かわからない誰か
-                    </div>
-                </div>
-            </div>
-            <div class="slide-item">
-                <div class="image">
-                    <img src="./assets/images/dog.png" alt="">
-                </div>
-                <div class="snippet">
-                    <div class="cate">
-                        Demo
-                    </div>
-                    <div class="title">
-                        わからない誰かわからない誰かわからない誰か
-                    </div>
-                </div>
-            </div>
-        </div>
-      </div> -->
+
 <div class="nav-header">
     <div class="container">
         <div class="row center-xs">
@@ -191,7 +97,7 @@
                 <div class="author-profile-widget">
                     <div class="author-info">
                         <div class="author-image">
-                            <img src="./assets/images/author.png" alt="">
+                        <img src="{{ asset("/assets/images/author.png") }}" alt="">
                         </div>
                         <div class="author-name">
                             テキストテキ
@@ -207,4 +113,5 @@
         </div>
     </div>
 </div>
+@include('shared.slide')
 @endsection

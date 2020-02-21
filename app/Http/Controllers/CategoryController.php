@@ -35,9 +35,9 @@ class CategoryController extends Controller {
         $category = Category::all();
         $cate = Category::where('slug', '=', $slug)->first();
         if($category){
-            $posts = Post::where('category_id',$cate->id)->get();
+            $posts = Post::with('images')->where('category_id',$cate->id)->get();
             $cat = Category::find($cate->id);
-
+            // var_dump($posts);
              return view('category.single', compact('posts'),compact('cat'));;
          }
         return view('errors.404');

@@ -55,7 +55,7 @@
           
           <li class="nav-item has-treeview  menu-open">
             <a href="{{ route('admin.users.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>
                 Users
               <i class="fas fa-angle-left right"></i>

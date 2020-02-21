@@ -151,8 +151,8 @@ header .header-content .header-nav .button-menu ul li.button-3 a {
   content: "";
   background-image: url(/images/footprint.png?fd001964a6b9496ec035af498baea567);
   background-repeat: no-repeat;
-  width: 41px;
-  height: 35px;
+  width: 34px;
+  height: 29px;
   background-size: cover;
   left: 0;
   z-index: 22;
@@ -475,9 +475,10 @@ header .header-content .header-nav .button-menu ul li.button-3 a {
 
 #donate-banner .banner-title {
   position: absolute;
-  font-size: 48px;
+  font-size: 45px;
   color: #fff;
   font-weight: normal;
+  text-shadow: 2px 2px #111010;
 }
 
 @media screen and (max-width: 768px) {

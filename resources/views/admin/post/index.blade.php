@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Projects</h1>
+            <h1>Posts/Project</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Projects</li>
+              <li class="breadcrumb-item active">Posts/Project</li>
             </ol>
           </div>
         </div>
@@ -34,7 +34,6 @@
           <table class="table table-striped projects">
               <thead>
                   <tr>
-                      
                       <th style="width: 5%">
                           ID 
                       </th>
@@ -74,19 +73,15 @@
                       </td>
                       <td class="project-actions text-right">
                       <a class="btn btn-primary btn-sm" href="{{ url('') }}/post/{{ $post->slug }}">
-                              <i class="fas fa-folder">
-                              </i>
-                              View
+                             <i class="fas fa-eye"></i>
                           </a>
-                          <a class="btn btn-info btn-sm" href="{{ route('admin.post.edit', $post) }}">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Edit
+                          <a class="btn btn-success btn-sm" href="{{ route('admin.post.edit', $post) }}">
+                            <i class="fas fa-edit"></i>
                           </a>
                           {!! Form::open(['method' => 'DELETE', 'route'=>['admin.post.destroy', $post->id],
-                            'style'=> 'display:inline'])
+                            'style'=> 'display:inline', 'title' => 'Delete'])
                             !!}
-                            {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i> ' .'Delete',
+                            {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i> ',
                             ['class' => 'btn btn-danger btn-sm', 'name' => 'submit', 'type' => 'submit']) !!}
                             {!! Form::close() !!}
                       </td>

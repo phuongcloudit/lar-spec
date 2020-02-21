@@ -20,11 +20,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $category = Category::all()->first();
-        // $category = Category::with('posts')->get();
-        // var_dump($category);
-        $posts = Post::where('category_id',$category->id)->get();
+        $posts = Post::with('images')->orderBy('created_at', 'desc')->take(10)->get();
         return view('pages.top', compact('posts'));
-
     }
 }

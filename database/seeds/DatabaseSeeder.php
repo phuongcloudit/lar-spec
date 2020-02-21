@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Model\Role;
 use App\Model\User;
+use App\Model\Category;
+use Illuminate\Database\Seeder;
 // use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
@@ -30,5 +31,11 @@ class DatabaseSeeder extends Seeder
         );
 
         $user->roles()->sync([$role_admin->id]);
+
+        $category = Category::firstOrCreate(
+            ['name' => 'uncategorized'],
+            ['description' => 'All post/project uncategorized'],
+            ['slug' => 'uncategorized'],
+        );
     }
 }

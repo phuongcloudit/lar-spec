@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="{{ asset('/assets/css/lightslider.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/owl.carousel.min.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/owl.theme.default.min.css') }}">
-<link rel="stylesheet" href="{{ asset('/assets/css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('/css/style.css') }}">
 <link rel="stylesheet" href="{{ asset('/assets/css/fonts.css') }}">
 <style>
     #image-gallery li img{
