@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
     protected $table = 'news';
-    protected $fillable = ['datetime','news_type','news_content'];
+    protected $fillable = ['date_time','news_type','news_content'];
     public $timestamps = true;
 }

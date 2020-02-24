@@ -1,7 +1,7 @@
 <div class="card-body">
     <div class="form-group">
-        {{ Form::label('datetime', "Date time") }}
-        {{ Form::text('datetime', null, ['class' => 'form-control']) }}
+        {{ Form::label('date_time', "Date time") }}
+        {{ Form::text('date_time', null, ['class' => 'form-control']) }}
     </div>
     <div class="form-group">
         {{ Form::label('news_type', "New Type:") }}

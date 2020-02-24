@@ -16,7 +16,7 @@
                 </ol>
             </div>
         </div>
-    </div><!-- /.container-fluid -->
+    </div>
 </section>
 
 <!-- Main content -->
@@ -67,7 +67,7 @@
                            {{ $news_item->id }}
                         </td>
                         <td>
-                            {{ $news_item->datetime }}
+                            {{ $news_item->date_time }}
                         </td>
                         <td>
                             {{ $news_item->news_type }}

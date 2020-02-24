@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\News;
 use App\Model\Post;
 use App\Model\Category;
 use App\Http\Controllers\Controller;
@@ -21,6 +22,7 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Post::with('images')->orderBy('created_at', 'desc')->take(10)->get();
-        return view('pages.top', compact('posts'));
+        $news = News::orderBy('created_at', 'desc')->take(5)->get();
+        return view('pages.top', compact(['posts','news']));
     }
 }

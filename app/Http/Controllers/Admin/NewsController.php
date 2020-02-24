@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Auth;
-
 use App\Model\News;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -24,12 +22,12 @@ class NewsController extends Controller
     {
 
         $this->validate($request, array(
-            'datetime'=> 'required',
+            'date_time'=> 'required',
             'news_type' => 'required',
             'news_content' => 'required',
         ));
         $news = new News;
-        $news->datetime = $request->datetime;
+        $news->date_time = $request->date_time;
         $news->news_type = $request->news_type;
         $news->news_content = $request->news_content;
         $news->save();
@@ -37,5 +35,27 @@ class NewsController extends Controller
         return redirect()->route('admin.news.index');
    
    
+    }
+    public function edit($id)
+    {
+        $news = News::find($id);
+        return view('admin.news.edit', compact('news'));
+    }
+    public function update(Request $request, $id)
+    {
+        $news = News::find($id);
+      
+        $news->date_time = $request->date_time;
+        $news->news_type = $request->news_type;
+        $news->news_content = $request->news_content;
+        $news->save();
+        return redirect()->route('admin.news.index')->with('success','News Updated sucessfully');
+            
+    }
+
+    public function destroy($id)
+    {
+        News::find($id)->delete();
+        return redirect()->route('admin.news.index')->with('success','A News deleted successfully');
     }
 }

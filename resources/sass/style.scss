@@ -27,7 +27,7 @@ main {
 .container {
   max-width: 70em;
   @media screen and (max-width: 992px) {
-    padding: 0 10px;
+    // padding: 0 10px;
   }
 }
 // reset
@@ -241,14 +241,16 @@ header {
     .item {
       background-color: #efeeee;
       color: #333;
-      width: 18%;
+      width: 17%;
       overflow: hidden;
       border: 1px solid #e0d8d8;
       margin-bottom: 25px;
-      margin-left: 15px;
-      margin-right: 15px;
+      margin-left: 10px;
+      margin-right: 10px;
       @media screen and (max-width: 768px) {
         font-size: 12px;
+        margin-left: 2%;
+        margin-right: 2%;
       }
       &:hover{
         border: 1px solid #3b839bb5 !important;
@@ -276,6 +278,9 @@ header {
           .left {
             width: 20%;
             font-size: 12px;
+            @media screen and (max-width: 768px) {
+              font-size: 11px;
+            }
           }
           .right {
             width: 80%;
@@ -296,7 +301,7 @@ header {
         }
       }
       @media screen and (max-width: 992px) {
-        width: 46%;
+        width: 45%;
       }
     }
     @media screen and (max-width: 992px) {
@@ -369,7 +374,7 @@ header {
     }
   }
   .content {
-    width: 75%;
+    // width: 75%;
     .item {
       background-color: #fff;
       width: 170px;
@@ -406,8 +411,12 @@ header {
 #donate-banner {
   margin: 50px 0;
   .banner {
-    width: 70%;
-    position: relative;
+    background: url(../images/donate-banner.jpg) top center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    // width: 70%;
+    // position: relative;
+    padding: 100px 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -422,12 +431,14 @@ header {
       }
     }
     @media screen and (max-width: 768px) {
-      width: 90%;
+      // width: 90%;
+      background-size: cover;
     }
   }
 }
 #news {
   .content {
+    width: 100%;
     .news-item {
       // display: flex;
       align-items: center;
@@ -485,6 +496,9 @@ header {
     background-color: #ffffffe6;
     padding: 40px 50px;
     line-height: 2;
+    @media screen and (max-width: 768px) {
+      padding: 20px 25px;
+    }
     a {
       color: #e39963;
     }
