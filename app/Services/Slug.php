@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Model\Post;
+use App\Models\Post;
 
 class Slug
 {

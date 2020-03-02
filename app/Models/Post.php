@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,14 +13,14 @@ class Post extends Model
     public $timestamps = true;
     
     public function author(): BelongsTo {
-        return $this->belongsTo('App\Model\Category', 'author_id');
+        return $this->belongsTo('App\Models\Category', 'author_id');
     }
   
     public function category() {
-      return $this->belongsTo('App\Model\Category');
+      return $this->belongsTo('App\Models\Category');
     }
     
     public function images() {
-      return $this->hasMany('App\Model\Image');
+      return $this->hasMany('App\Models\Image');
     }
 }

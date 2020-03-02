@@ -82,6 +82,25 @@
                 <div class="donate-button__out">
                     <div class="button-dn">
                         <a class="color-dn1" href="">このプロジェクトに募金する</a>
+                        <div class="donate-form">
+                            <form method="POST" action="{{ route('donate.store',['id' =>  $post->id])}}" >
+                                @csrf
+                                <label>
+                                    Your Name
+                                    <input type="text" name="name" value="このプロジェクトに募金する">
+                                </label>
+                                <label>
+                                    Email
+                                    <input type="email" name="email" value="default@demo.com">
+                                </label>
+
+                                <label>
+                                    Money
+                                    <input type="number" name="money" value="{{  rand(50,500) }}">
+                                </label>
+                                <button> Donate</button>
+                            </form>
+                        </div>
                     </div>
                     <div class="button-dn">
                         <a class="color-dn2" href="">募金現場レポート</a>

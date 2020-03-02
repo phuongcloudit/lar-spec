@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Post;
-use App\Model\Category;
+use App\Models\Post;
+use App\Models\Category;
 use App\Http\Controllers\Controller;
 
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
-use App\Model\Post;
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -14,6 +14,6 @@ class Category extends Model
     public $timestamps = true;
   
     public function posts() {
-        return $this->hasMany('App\Model\Post');
+        return $this->hasMany('App\Models\Post');
     }
 }

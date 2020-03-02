@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
-use App\Model\Post;
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -13,7 +13,7 @@ class Image extends Model
     public $timestamps = true;
     
     public function imgs() {
-        return $this->belongsTo('App\Model\Post');
+        return $this->belongsTo('App\Models\Post');
       }
 
 }

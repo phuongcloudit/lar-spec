@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-Use App\Model\Image;
+Use App\Models\Image;
 // Use Image;
 use Validator,Redirect,Response,File;
 use Intervention\Image\Exception\NotReadableException;

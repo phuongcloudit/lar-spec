@@ -13,8 +13,18 @@
 
 
 // admin route
+Route::prefix("donate")->group(function($route){
+    Route::post("/{id}/store/","DonateController@store")->name("donate.store");
+    Route::post("/confirm/","DonateController@store")->name("donate.confirm");
 
+})
 
+Route::get('order', function(){
+    return view("epsilons.order");
+});
+Route::get('confirm', function(){
+    return view("epsilons.confirm");
+});
 
 Route::name('admin.')->prefix('admin')->group(function () {
     Route::group(['middleware' => ['auth', 'admin']], function(){

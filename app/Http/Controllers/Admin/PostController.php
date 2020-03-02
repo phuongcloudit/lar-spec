@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use Auth;
-use App\Model\Post;
-use App\Model\User;
-use App\Model\Image;
-use App\Model\Category;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Image;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
