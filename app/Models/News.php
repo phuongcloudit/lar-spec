@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Model;
+namespace App\Models;
 
-use App\Model\News;
 use Illuminate\Database\Eloquent\Model;
 
 class News extends Model
