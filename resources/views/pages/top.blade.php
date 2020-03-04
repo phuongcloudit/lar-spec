@@ -133,34 +133,6 @@
 @include('shared.donate-banner')
 
 <section class="category" id="news">
-    <div class="container">
-        <div class="row">
-            <h2 class="title">
-                NEWS<span>【ニュース】<br>新着情報</span>
-            </h2>
-        </div>
-        <div class="row center-xs">
-            <div class="content">
-                
-                <div class="news-item row">
-                    <div class="news-item__time col-sm-2 col-xs-12">
-                        2020.02.06
-                    </div>
-                    <div class="news-item__content-out col-sm-10 col-xs-12">
-                        <div class="row middle-xs">
-                            <span class="news-type col-sm-2">
-                                カテゴリー
-                            </span>
-                            <div class="news-item__content-in col-sm-10">
-                                テキストテキストテキストテキストテキストテキストテキストテキスト
-                                テキストテキストテキストテキストテキストテキストテキスト
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-    </div>
+    @include('pages._news')
 </section>
 @stop

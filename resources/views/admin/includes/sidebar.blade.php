@@ -93,6 +93,29 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview  menu-open">
+            <a href="{{ route('admin.news.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                News
+              <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.news.create') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>New news</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin.news.index') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>All news</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
     </div>
