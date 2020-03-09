@@ -1,53 +1,66 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\DonateRequest;
 
+use App\Models\Post;
 use App\Models\Donate;
 use Illuminate\Http\Request;
 use App\Payments\Epsilon;
-use App\Http\Requests\DonateRequest;
+
 
 class DonateController extends Controller
 {
     protected $default_name     =   "Default";
     protected $default_email    =   "default@demo.com";
+    protected $item_prefix  =   "SPEC";
     public function store(DonateRequest $request, $id){
+        $post = Post::findOrFail($id);
         $data   =   [
-            "post_id"       =>  $id,
-            "money"         =>  $request->money,
-            "eps_user_name" =>  $request->name?:$this->default_name,
-            "eps_email"     =>  $request->email?:$this->default_email
+            'user_id'       =>  rand(0,99999999),
+            'user_name'     =>  $request->name?:$this->default_name,
+            'user_mail_add' =>  $request->email?:$this->default_email,
+            'item_code'     =>  $this->item_prefix.$post->id,
+            'item_name'     =>  $post->title,
+            'order_number'  =>  time(),
+            'item_price'    =>  $request->money,
+            'memo1'         =>  $post->id,
+            'memo2'         =>  ""
         ];
-        $donate     =   Donate::create($data);
-        $epsilon    =   new Epsilon($donate);
-        $result     =   $epsilon->createOrder();
-        if($result["status"] === 1)
-            return redirect($result["redirect"]);
 
-        exit($result["status_code"]);
+        $epsilon    =   new Epsilon();
+        $result     =   $epsilon->createOrder($data);
+        if($result):
+            if(isset($result["result"]) && $result["result"] == 1 && isset($result["redirect"]) && $result["redirect"]):
+                return redirect($result["redirect"]);
+            endif;
+            $error = isset($result["err_detail"])?$result["err_detail"]:"Lỗi không xác định!";
+            return redirect()->back()->withErrors($error);
+        endif;
+        abort(403);
     }
 
     public function confirm(Request $request){
-        if($request->result != 1)
-            exit("ERROR");
-
-        $donate = Donate::where("eps_order_number",$request->order_number)->where("eps_user_id",$request->user_id)->first();
         
-        if(is_null($donate))
-            abort(404);
-
-        //update trans_code
-        $donate->trans_code = $request->trans_code;
-        $donate->save();
-        $donate->refresh();
-
-        $epsilon    =   new Epsilon($donate);
+        $epsilon    =   new Epsilon();
         $result     =   $epsilon->confirmOrder();
+        if($result["result"] == 0)
+            return redirect()->route("donate.error")->withErrors($result["err_detail"]);
 
-        if($result["status"] === 1)
-            return redirect($result["redirect"]);
-
-        exit($result["status_code"]);
+        return redirect()->route("donate.thanks",["trans_code"  =>  $result["trans_code"],"user_id" =>  $result["user_id"]]);
+    }
+    public function cancel(Request $request){        
+        return view("donates.cancel");
         
     }
+    public function error(Request $request){        
+        return view("donates.error");
+        
+    }
+    public function thanks($trans_code,$user_id){  
+        $donate     =   Donate::whereTransCode($trans_code)->whereUserId($user_id)->first();
+        return view("donates.thanks",compact('donate'));
+        
+    }
+    
 }

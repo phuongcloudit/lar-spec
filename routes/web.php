@@ -15,7 +15,10 @@
 // admin route
 Route::prefix("donate")->group(function($route){
     Route::post("/{id}/store/","DonateController@store")->name("donate.store");
-    Route::post("/confirm/","DonateController@store")->name("donate.confirm");
+    Route::get("/confirm/","DonateController@confirm")->name("donate.confirm");
+    Route::get("/cancel/","DonateController@cancel")->name("donate.cancel");
+    Route::get("/error/","DonateController@error")->name("donate.error");
+    Route::get("/thanks/{trans_code}/{user_id}/","DonateController@thanks")->name("donate.thanks");
 
 });
 

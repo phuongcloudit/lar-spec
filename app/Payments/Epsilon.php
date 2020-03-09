@@ -5,6 +5,7 @@ use PEAR;
 use HTTP_Request2;
 use XML_Unserializer;
 
+use Request;
 use App\Models\Donate;
 
 class Epsilon
@@ -34,48 +35,56 @@ class Epsilon
     protected $xml_result       =   1;
     protected $character_code   =   "UTF8";
 
-
-    public function __construct(Donate $donate){
+    protected $payment_name = array(
+        1 => "VISA/MASTER/DINERS",
+        2 => "JCB/AMEX",
+        3 => "コンビニエンスストア",
+        4 => "ジャパンネット銀行",
+        5 => "楽天銀行",
+        6 => "カンガルー代引",
+        7 => "ペイジー",
+        8 => "ウェブマネー",
+        9 => "Yahoo!ウォレット",
+        11 => "PayPal",
+        12 => "BitCash",
+        13 => "電子マネーちょコム",
+        14 => "ゆうパックコレクト",
+        15 => "スマートフォンキャリア決済",
+        16 => "JCB　PREMO",
+        17 => "SBIネット銀行",
+        18 => "GMO後払い",
+        19 => "多通貨クレジットカード決済",
+    );
+    public function __construct(){
         $this->base_uri         =   config("payments.epsilon.env") == "production" ? config("payments.epsilon.base_uri") :   config("payments.epsilon.test_uri");
         $this->contract_code    =   config("payments.epsilon.contract_code");
         $this->contract_pass    =   config("payments.epsilon.contract_pass");
-        $this->donate = $donate;
+        // /$this->donate = $donate;
     }
-    public function createOrder(){
+    public function createOrder($data){
         try{
-            $this->donate->eps_payment_code     =   $this->st_code[$this->st];
-            $this->donate->eps_mission_code     =   $this->mission_code;
-            $this->donate->eps_process_code     =   $this->process_code;
-            $this->donate->save();
-            $this->donate->refresh();
-
+            $data["version"]        =   $this->epsilon_vertion;
+            $data["contract_code"]  =   $this->contract_code;
+            $data["st_code"]        =   $this->st_code[$this->st];
+            $data["mission_code"]   =   $this->mission_code;
+            $data["process_code"]   =   $this->process_code;
+            $data["xml_result"]     =   $this->xml_result;
+            $data["character_code"] =   $this->character_code;
+            
             $create_order_url   =   $this->base_uri.self::CREATE_ORDER_URL;
-
             $request = new HTTP_Request2($create_order_url, HTTP_Request2::METHOD_POST, $this->create_order_options);
 
-            $request->addPostParameter('version',       $this->epsilon_vertion );
-            $request->addPostParameter('contract_code', $this->contract_code);
-            $request->addPostParameter('user_id',       $this->donate->eps_user_id);
-            $request->addPostParameter('user_name',     mb_convert_encoding($this->donate->eps_user_name, "UTF-8", "auto"));
-            $request->addPostParameter('user_mail_add', $this->donate->eps_email);
-            $request->addPostParameter('item_code',     $this->donate->eps_item_code);
-            $request->addPostParameter('item_name',     mb_convert_encoding($this->donate->eps_item_name, "UTF-8", "auto"));
-            $request->addPostParameter('order_number',  $this->donate->eps_order_number);
-            $request->addPostParameter('st_code',       $this->donate->eps_payment_code);
-            $request->addPostParameter('mission_code',  $this->donate->eps_mission_code);
-            $request->addPostParameter('item_price',    $this->donate->money);
-            $request->addPostParameter('process_code',  $this->donate->eps_process_code);
-            $request->addPostParameter('memo1',         $this->donate->eps_memo1);
-            $request->addPostParameter('memo2',         $this->donate->eps_memo2);
-            $request->addPostParameter('xml',           $this->xml_result);
-            $request->addPostParameter('character_code',$this->character_code);
+            foreach ($data as $key => $value) {
+                $request->addPostParameter($key,  $value);
+            }
+
             $response = $request->send();
 
             // Kiểm tra lỗi xử lý
             if (PEAR::isError($response))
                 return [
-                    "status"        =>  0,
-                    "status_code"   =>  "response_error"
+                    "result"        =>  0,
+                    "err_detail"   =>  "支払情報の取得に失敗しました"
                 ];
 
             $res_code = $response->getStatus();
@@ -83,8 +92,8 @@ class Epsilon
             // Kiểm tra lỗi server epslion
             if($res_code != 200)
                 return [
-                    "status"        =>  0,
-                    "status_code"   =>  "epslion_server_error"
+                    "result"        =>  0,
+                    "err_detail"   =>  "支払情報の取得に失敗しました"
                 ];
 
             // Xử lý kết quả trả về
@@ -98,129 +107,153 @@ class Epsilon
             // Kiểm tra định dạng trả về
             if ($unseriliz_st !== true)
                 return [
-                    "status"        =>  0,
-                    "status_code"   =>  "xml_parser_error"
+                    "result"        =>  0,
+                    "err_detail"   =>  "支払情報の取得に失敗しました"
                 ];
 
             $res_array = $unserializer->getUnserializedData();
-
+            $result = array();
             foreach($res_array['result'] as $uns_k => $uns_v){
                 $result_atr_key = key($uns_v);
                 $result_atr_val = current($uns_v);
 
                 switch ($result_atr_key) {
                     case 'redirect':
-                        $this->donate->eps_redirect = rawurldecode($result_atr_val);
+                        $result['redirect']     =   rawurldecode($result_atr_val);
                         break;
                     case 'err_code':
-                        $this->donate->is_xml_error = true;
-                        $this->donate->xml_error_cd = $result_atr_val;
+                        $result['err_code']     =   $result_atr_val;
                         break;
                     case 'err_detail':
-                        $this->donate->xml_error_msg = mb_convert_encoding(urldecode($result_atr_val), "UTF-8" ,"auto");
+                        $result['err_detail']   =    mb_convert_encoding(urldecode($result_atr_val), "UTF-8" ,"auto");
                         break;
                     case 'memo1':
-                        $this->donate->xml_memo1_msg = mb_convert_encoding(urldecode($result_atr_val), "UTF-8" ,"auto");
+                        $result['memo1']        =    mb_convert_encoding(urldecode($result_atr_val), "UTF-8" ,"auto");
                         break;
                     case 'memo2':
-                        $this->donate->xml_memo2_msg = mb_convert_encoding(urldecode($result_atr_val), "UTF-8" ,"auto");
+                        $result['memo2']        =   mb_convert_encoding(urldecode($result_atr_val), "UTF-8" ,"auto");
                         break;
                     case 'result':
-                        $this->donate->eps_result = mb_convert_encoding(urldecode($result_atr_val), "UTF-8" ,"auto");
+                        $result['result']       =    mb_convert_encoding(urldecode($result_atr_val), "UTF-8" ,"auto");
                         break;
-                        case 'trans_code':
-                        $this->donate->trans_code = mb_convert_encoding(urldecode($result_atr_val), "UTF-8" ,"auto");
+                    case 'trans_code':
+                        $result['trans_code']   =   mb_convert_encoding(urldecode($result_atr_val), "UTF-8" ,"auto");
                         break;
                     default:
                     break;
                 }
             }
-            $this->donate->save();
-            return [
-                "status"    =>  1,
-                "redirect"  =>  $this->donate->eps_redirect
-            ];
+            return $result;
         } catch (\Exception $e) {
             return [
-                "status"    =>  0,
-                "status_code"  =>  "epslion_error"
+                "result"    =>  0,
+                "err_detail"  =>  "支払情報の取得に失敗しました"
             ];
         }
         
     }
-    public function confirmOrder(Request $request){
-        try{
-            $confirm_order_url = $this->base_uri.self::CONFIRM_ORDER_URL;
-            $request = new HTTP_Request2($confirm_order_url, HTTP_Request2::METHOD_POST);
-            $request->setConfig(array(
-              'ssl_verify_peer' => false,
-            #  'ssl_verify_peer' => true,
-                'ssl_cafile' => '/etc/ssl/certs/ca-bundle.crt', //ルートCA証明書ファイルを指定
-            ));
+    public function confirmOrder(){
+        $data = Request::all();
+       
+        $confirm_order_url = $this->base_uri.self::CONFIRM_ORDER_URL;
+        $request = new HTTP_Request2($confirm_order_url, HTTP_Request2::METHOD_POST);
+        $request->setConfig(array(
+          'ssl_verify_peer' => false,
+        #  'ssl_verify_peer' => true,
+            'ssl_cafile' => '/etc/ssl/certs/ca-bundle.crt', //ルートCA証明書ファイルを指定
+        ));
 
-            $request->addPostParameter('contract_code', $this->contract_code);
-            $request->addPostParameter('trans_code',    $this->donate->trans_code);
-            $request->setAuth($this->contract_code, $this->contract_pass,   HTTP_Request2::AUTH_BASIC);
-            $response = $request->send();
+        $request->addPostParameter('contract_code', $this->contract_code);
+        $request->addPostParameter('trans_code',    $data['trans_code']);
+        $request->setAuth($this->contract_code, $this->contract_pass,   HTTP_Request2::AUTH_BASIC);
+        $response = $request->send();
 
 
-            if (PEAR::isError($response))
-                return [
-                    "status"        =>  0,
-                    "status_code"   =>  "response_error"
-                ];
-
-            $res_code = $response->getStatus();
-
-            // Kiểm tra lỗi server epslion
-            if($res_code != 200)
-                return [
-                    "status"        =>  0,
-                    "status_code"   =>  "epslion_server_error"
-                ];
-
-            // Xử lý kết quả trả về
-
-            $res_content = $response->getBody();
-            $temp_xml_res = str_replace("x-sjis-cp932", "UTF-8", $res_content);
-            $unserializer = new XML_Unserializer();
-            $unserializer->setOption('parseAttributes', TRUE);
-            $unseriliz_st = $unserializer->unserialize($temp_xml_res);
-
-            // Kiểm tra định dạng trả về
-            if ($unseriliz_st !== true)
-                return [
-                    "status"        =>  0,
-                    "status_code"   =>  "xml_parser_error"
-                ];
-
-            $res_array = $unserializer->getUnserializedData(); 
-            //error check   
-            if(isset($res_array['result']['result']) && $res_array['result']['result'] == "0"){  
-                return [
-                    "status"        =>  0,
-                    "status_code"   =>  "processing_failed"
-                ]; 
-            }   
-        
-            $result = array(); 
-
-            //pram setting  
-            foreach($res_array['result'] as $uns_k => $uns_v){  
-
-                $result_atr_key = key($uns_v);
-                $result_atr_val = current($uns_v);
-                $result[$result_atr_key] =  mb_convert_encoding(urldecode($result_atr_val), "UTF-8" ,"auto");
-            }
-            $this->donate->result = json_encode($result);
-            $this->donate->save();
-
-        } catch (\Exception $e) {
+        if (PEAR::isError($response))
             return [
-                "status"    =>  0,
-                "status_code"  =>  "epslion_error"
+                "result"        =>  0,
+                "err_detail"   =>  "response_error"
+            ];
+
+        $res_code = $response->getStatus();
+
+        // Kiểm tra lỗi server epslion
+        if($res_code != 200)
+            return [
+                "result"        =>  0,
+                "err_detail"   =>  "支払情報の取得に失敗しました"
+            ];
+
+        // Xử lý kết quả trả về
+
+        $res_content = $response->getBody();
+        $temp_xml_res = str_replace("x-sjis-cp932", "UTF-8", $res_content);
+        $unserializer = new XML_Unserializer();
+        $unserializer->setOption('parseAttributes', TRUE);
+        $unseriliz_st = $unserializer->unserialize($temp_xml_res);
+
+        // Kiểm tra định dạng trả về
+        if ($unseriliz_st !== true)
+            return [
+                "result"        =>  0,
+                "err_detail"   =>  "支払情報の取得に失敗しました"
+            ];
+
+        $res_array = $unserializer->getUnserializedData(); 
+
+        //error check   
+        if(isset($res_array['result']['result']) && $res_array['result']['result'] == "0"){  
+            return [
+                "result"        =>  0,
+                "err_detail"   =>  "処理に失敗しました"
+            ]; 
+        }   
+        
+        $result = array(); 
+
+        //pram setting  
+        foreach($res_array['result'] as $uns_k => $uns_v){ 
+            $result_atr_key = key($uns_v);
+            $result_atr_val = current($uns_v);
+            $result[$result_atr_key] =  mb_convert_encoding(urldecode($result_atr_val), "UTF-8" ,"auto");
+        }
+
+        $check_exists = Donate::whereTransCode($result["trans_code"])->whereUserId($result["user_id"])->first();
+        
+        if($check_exists){
+            return [
+                "result"        =>  1,
+                "trans_code"    =>  $check_exists->trans_code,
+                "user_id"       =>  $check_exists->user_id,
             ];
         }
 
+        $data = [
+            "post_id"          =>   $result["memo1"],
+            "trans_code"       =>   $result["trans_code"],
+            "user_id"          =>   $result["user_id"],
+            "state"            =>   $result["state"],
+            "money"            =>   $result["item_price"],
+            "payment_name"     =>   $this->get_payment_name($result["payment_code"]),
+            "credit_time"      =>   $result["credit_time"],
+            "last_update"      =>   $result["last_update"],
+            "user_mail_add"    =>   $result["user_mail_add"],
+            "user_name"        =>   $result["user_name"],
+            "item_code"        =>   $result["item_code"],
+            "item_name"        =>   $result["item_name"],
+            "order_number"     =>   $result["order_number"],
+            "st_code"          =>   $result["st_code"],
+            "pay_time"         =>   $result["pay_time"],
+            "epsilon_info"     =>   json_encode($result)
+        ];
+        $donate     =   Donate::create($data);
+        return [
+            "result"        =>  1,
+            "trans_code"    =>  $donate->trans_code,
+            "user_id"       =>  $donate->user_id,
+        ];
+    }
+    protected function get_payment_name($payment_code){
+        return isset($this->payment_name[$payment_code])?$this->payment_name[$payment_code]:"N/A";
     }
 }

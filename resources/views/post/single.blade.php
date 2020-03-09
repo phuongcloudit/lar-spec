@@ -79,26 +79,69 @@
                         <span class="red">{{ $post->current }}日</span>
                     </div>
                 </div>
+                <style type="text/css">
+                    .donate-form .donate-control{
+                        display: block;
+                        margin-bottom: 10px;
+                    }
+                    .donate-form .donate-control input{
+                        width: 100%;
+                        padding: 7px 10px;
+                        box-sizing: border-box;
+                    }
+                    .donate-form .donate-action button{
+                        background-color: #ccc;
+                        border: none;
+                        display: inline-block;
+                        color: #fff;
+                        padding: 15px 35px;
+                        border-radius: 8px;
+                        position: relative;
+                        background-color: #35a06a;
+                        cursor: pointer;
+                    }
+                    .donate-form .donate-action button:after{
+                    content: "";
+                    position: absolute;
+                    width: 0px;
+                    height: 0px;
+                    border-bottom: 8px solid transparent;
+                    border-top: 8px solid transparent;
+                    border-left: 13px solid #fff;
+                    right: 10px;
+                    }
+                </style>
                 <div class="donate-button__out">
                     <div class="button-dn">
                         <a class="color-dn1" href="">このプロジェクトに募金する</a>
                         <div class="donate-form">
+                            @if($errors->any())
+                            <div class="errors">{{$errors->first()}}</div>
+                            @endif
                             <form method="POST" action="{{ route('donate.store',['id' =>  $post->id])}}" >
                                 @csrf
-                                <label>
-                                    Your Name
-                                    <input type="text" name="name" value="このプロジェクトに募金する">
-                                </label>
-                                <label>
-                                    Email
-                                    <input type="email" name="email" value="default@demo.com">
-                                </label>
-
-                                <label>
-                                    Money
-                                    <input type="number" name="money" value="{{  rand(50,500) }}">
-                                </label>
-                                <button> Donate</button>
+                                <div class="donate-control">
+                                    <label>
+                                        Your Name
+                                        <?php $names = array("Nam","Thảo");  ?>
+                                        <input type="text" name="name" value="<?php echo "Bạn ".$names[array_rand($names)]." giấu tên";?>">
+                                    </label>
+                                </div>
+                                <div class="donate-control">
+                                    <label>
+                                        Email
+                                        <input type="email" name="email" value="default@demo.com">
+                                    </label>
+                                </div>
+                                <div class="donate-control">
+                                    <label>
+                                        Money
+                                        <input type="number" name="money" value="{{  rand(50,500) }}">
+                                    </label>
+                                </div>
+                                <div class="donate-action">
+                                    <button type="submit" class="color-dn1"> Donate</button>
+                                </div>
                             </form>
                         </div>
                     </div>
