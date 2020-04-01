@@ -17,6 +17,11 @@ body {
   z-index: -4;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 main {
   position: relative;
 }
@@ -646,7 +651,8 @@ header .header-content .header-nav .button-menu ul li.button-3 a {
   margin-bottom: 15px;
 }
 
-.detail-content__main .info-order .donate-button__out .button-dn a {
+.detail-content__main .info-order .donate-button__out .button-dn a,
+.detail-content__main .info-order .donate-button__out .button-dn button {
   display: inline-block;
   color: #fff;
   padding: 15px 15px;
@@ -655,15 +661,18 @@ header .header-content .header-nav .button-menu ul li.button-3 a {
   padding-right: 30px;
 }
 
-.detail-content__main .info-order .donate-button__out .button-dn a.color-dn1 {
+.detail-content__main .info-order .donate-button__out .button-dn a.color-dn1,
+.detail-content__main .info-order .donate-button__out .button-dn button.color-dn1 {
   background-color: #35a06a;
 }
 
-.detail-content__main .info-order .donate-button__out .button-dn a.color-dn2 {
+.detail-content__main .info-order .donate-button__out .button-dn a.color-dn2,
+.detail-content__main .info-order .donate-button__out .button-dn button.color-dn2 {
   background-color: #e7975a;
 }
 
-.detail-content__main .info-order .donate-button__out .button-dn a::after {
+.detail-content__main .info-order .donate-button__out .button-dn a::after,
+.detail-content__main .info-order .donate-button__out .button-dn button::after {
   content: "";
   position: absolute;
   width: 0px;

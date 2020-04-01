@@ -60,7 +60,7 @@
                         募金総額
                     </div>
                     <div class="info-order__body">
-                        <span class="red">¥{{ $post->donate_money }}</span>
+                        <span class="red">¥{{ $money_donate }}</span>
                     </div>
                 </div>
                 <div class="info-order__item">
@@ -68,15 +68,38 @@
                         募金者数
                     </div>
                     <div class="info-order__body">
-                        {{ $post->donate_people }}人
+                        {{ $people }} 人
                     </div>
                 </div>
                 <div class="info-order__item">
                     <div class="info-order__title">
                         募集終了まで
                     </div>
+                    <?php
+                        $first_date = strtotime($post->donate_day_end);
+                        $second_date = strtotime(Carbon\Carbon::now());
+                        $datediff = abs($first_date - $second_date);
+                        // echo floor($datediff / (60*60*24));
+
+                        $date1 = new DateTime($post->donate_day_end);
+                        $date2 = new DateTime(Carbon\Carbon::now());
+                        $interval = $date1->diff($date2);
+                        // echo $interval->y . " years, " . $interval->m . " months, " . $interval->d . " days ";
+
+                        $date1 = $post->donate_day_end;
+                        $date2 = Carbon\Carbon::now();
+                      
+                        $diff = abs(strtotime($date2) - strtotime($date1));
+                        $years = floor($diff / (365*60*60*24));
+                        $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+                        $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24) / (60*60*24));
+                        $hours = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24) / (60*60));
+                        $minutes = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60) / 60);
+                        $seconds = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60 - $minutes*60));
+                        // echo $years." years, ".$months." months, ".$days." days, ".$hours." hours, ".$minutes." minutes, ".$seconds." seconds";
+                        ?>
                     <div class="info-order__body">
-                        <span class="red">{{ $post->current }}日</span>
+                        <span class="red"><?php echo floor($datediff / (60*60*24)) ?> 日</span>
                     </div>
                 </div>
                 <style type="text/css">
@@ -113,7 +136,6 @@
                 </style>
                 <div class="donate-button__out">
                     <div class="button-dn">
-                        <a class="color-dn1" href="">このプロジェクトに募金する</a>
                         <div class="donate-form">
                             @if($errors->any())
                             <div class="errors">{{$errors->first()}}</div>
@@ -122,25 +144,12 @@
                                 @csrf
                                 <div class="donate-control">
                                     <label>
-                                        Your Name
-                                        <?php $names = array("Nam","Thảo");  ?>
-                                        <input type="text" name="name" value="<?php echo "Bạn ".$names[array_rand($names)]." giấu tên";?>">
-                                    </label>
-                                </div>
-                                <div class="donate-control">
-                                    <label>
-                                        Email
-                                        <input type="email" name="email" value="default@demo.com">
-                                    </label>
-                                </div>
-                                <div class="donate-control">
-                                    <label>
-                                        Money
+                                    <p>※募金する金額を入力してください:</p>
                                         <input type="number" name="money" value="{{  rand(50,500) }}">
                                     </label>
                                 </div>
                                 <div class="donate-action">
-                                    <button type="submit" class="color-dn1"> Donate</button>
+                                    <button class="color-dn1" type="submit" class="color-dn1">このプロジェクトに募金する</button>
                                 </div>
                             </form>
                         </div>

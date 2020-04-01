@@ -58,7 +58,7 @@
                         <b class="d-block">Deveint Inc</b>
                     </p>
                     <p class="text-sm">Url:
-                    <b class="d-block"><a href="{{ url($post->slug) }}">{{ $post->slug }}</a></b>
+                    <b class="d-block"><a href="{{ url('') }}/post/{{ $post->slug }}" target="_blank">{{ $post->slug }}</a></b>
                     </p>
                     <p class="text-sm">Posted at:
                         <b class="d-block">{{ $post->created_at }}</b>
@@ -67,7 +67,7 @@
                         <b class="d-block">{{ $post->updated_at }}</b>
                     </p>
                     <p class="text-sm">Category:
-                        <b class="d-block">{{ $post->updated_at }}</b>
+                        <b class="d-block">{{ $post->category->name }}</b>
                     </p>
                 </div>
                

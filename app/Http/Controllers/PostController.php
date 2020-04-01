@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Post;
 use App\Models\Image;
 use App\Models\Category;
@@ -29,8 +30,12 @@ class PostController extends Controller
     public function getSingle($slug){
         $post = Post::with(["category","images"])->where('slug', '=', $slug)->first();
         $categories = Category::all();
+
+        $people = DB::table('donates')->where('state', '=', '1')->count();
+        $money_donate = DB::table("donates")->where('state', '=', '1')->sum('money');
+        // echo $money_total;
         // $images = Image::where('post_id', $post->id)->get();
-        return view('post.single')->withPost($post)->withCategories($categories);
+        return view('post.single',compact('people','money_donate'))->withPost($post)->withCategories($categories);
         
     }
 }

@@ -16,6 +16,10 @@ body {
   width: 100%;
   z-index: -4;
 }
+img{
+  max-width: 100%;
+    height: auto;
+}
 main {
   // background-color: #f9f9f9;
   // padding-top: 50px;
@@ -573,7 +577,7 @@ header {
         margin-top: 25px;
         .button-dn {
           margin-bottom: 15px;
-          a {
+          a,button {
             display: inline-block;
             color: #fff;
             padding: 15px 15px;

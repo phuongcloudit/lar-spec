@@ -67,6 +67,7 @@ class PostController extends Controller
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
         $post->content = $request->content;
+        $post->donate_day_end = $request->donate_day_end;
         $post->author_id = Auth::user()->id;
         $post->save();
        
@@ -144,6 +145,7 @@ class PostController extends Controller
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
         $post->content = $request->content;
+        $post->donate_day_end = $request->donate_day_end;
         $post->author_id = Auth::user()->id;
         $post->save();
        

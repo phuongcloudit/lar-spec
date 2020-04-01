@@ -40908,3 +40908,8 @@ a.text-dark:focus {
   margin-top: -2px;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
