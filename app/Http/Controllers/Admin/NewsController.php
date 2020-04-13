@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Model\News;
+use App\Models\News;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;

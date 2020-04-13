@@ -21,8 +21,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('images')->orderBy('created_at', 'desc')->take(10)->get();
+        $posts = Post::with('images','donates')->orderBy('created_at', 'desc')->take(10)->get();
         $news = News::orderBy('created_at', 'desc')->take(5)->get();
+
         return view('pages.top', compact(['posts','news']));
     }
 }

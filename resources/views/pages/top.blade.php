@@ -65,7 +65,7 @@
                             募金<br>者数
                         </div>
                         <div class="right">
-                            <span>100人</span>
+                            <span>{{ $post->donates->count() }}人</span>
                         </div>
                     </div>
                 </div>

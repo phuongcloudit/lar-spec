@@ -68,7 +68,7 @@
                         募金者数
                     </div>
                     <div class="info-order__body">
-                        {{ $people }} 人
+                        {{ $people }}人
                     </div>
                 </div>
                 <div class="info-order__item">
@@ -88,18 +88,24 @@
 
                         $date1 = $post->donate_day_end;
                         $date2 = Carbon\Carbon::now();
-                      
-                        $diff = abs(strtotime($date2) - strtotime($date1));
-                        $years = floor($diff / (365*60*60*24));
-                        $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
-                        $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24) / (60*60*24));
-                        $hours = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24) / (60*60));
-                        $minutes = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60) / 60);
-                        $seconds = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60 - $minutes*60));
+
+                        if (strtotime($date2) > strtotime($date1)){
+                            $time_end = "end";
+                        } else{
+                            $diff = abs(strtotime($date2) - strtotime($date1));
+                            $years = floor($diff / (365*60*60*24));
+                            $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+                            $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24) / (60*60*24));
+                            $hours = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24) / (60*60));
+                            $minutes = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60) / 60);
+                            $seconds = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24 - $days*60*60*24 - $hours*60*60 - $minutes*60));
+                            $time_end = floor($datediff / (60*60*24));
+                        }
+                       
                         // echo $years." years, ".$months." months, ".$days." days, ".$hours." hours, ".$minutes." minutes, ".$seconds." seconds";
                         ?>
                     <div class="info-order__body">
-                        <span class="red"><?php echo floor($datediff / (60*60*24)) ?> 日</span>
+                        <span class="red"><?php echo $time_end ?>日</span>
                     </div>
                 </div>
                 <style type="text/css">

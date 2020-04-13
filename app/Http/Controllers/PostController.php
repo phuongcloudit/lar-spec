@@ -31,8 +31,8 @@ class PostController extends Controller
         $post = Post::with(["category","images"])->where('slug', '=', $slug)->first();
         $categories = Category::all();
 
-        $people = DB::table('donates')->where('state', '=', '1')->count();
-        $money_donate = DB::table("donates")->where('state', '=', '1')->sum('money');
+        $people = DB::table('donates')->where('state', '=', '1')->where('post_id', '=', $post->id)->count();
+        $money_donate = DB::table("donates")->where('state', '=', '1')->where('post_id', '=', $post->id)->sum('money');
         // echo $money_total;
         // $images = Image::where('post_id', $post->id)->get();
         return view('post.single',compact('people','money_donate'))->withPost($post)->withCategories($categories);
