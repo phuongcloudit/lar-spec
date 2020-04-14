@@ -11,15 +11,31 @@
 |
 */
 
+Auth::routes();
+
 
 // admin route
+Route::name('admin.')->prefix('admin')->namespace("Admin")->group(function () {
+    Route::group(['middleware' => ['auth', 'admin']], function(){
+        Route::get('/','DashboardController@index')->name('dashboard');
+        
+        Route::resource('categories', 'CategoryController');
+        Route::get('posts/donate/{post}', 'PostController@donate')->name("posts.donate");
+        Route::get('posts/donate/cancel/{donate}', 'PostController@cancel')->name("posts.donate.cancel");
+        Route::get('posts/donate/confirm/{donate}', 'PostController@confirm')->name("posts.donate.confirm");
+        Route::resource('posts', 'PostController');
+        Route::resource('news', 'NewsController');
+        Route::resource('users', 'UserController')->only(['index', 'edit', 'update']);
+    
+    });
+});
+
 Route::prefix("donate")->group(function($route){
     Route::post("/{id}/store/","DonateController@store")->name("donate.store");
     Route::get("/confirm/","DonateController@confirm")->name("donate.confirm");
     Route::get("/cancel/","DonateController@cancel")->name("donate.cancel");
     Route::get("/error/","DonateController@error")->name("donate.error");
     Route::get("/thanks/{trans_code}/{user_id}/","DonateController@thanks")->name("donate.thanks");
-
 });
 
 Route::get('order', function(){
@@ -28,24 +44,9 @@ Route::get('order', function(){
 Route::get('confirm', function(){
     return view("epsilons.confirm");
 });
-
-Route::name('admin.')->prefix('admin')->group(function () {
-    Route::group(['middleware' => ['auth', 'admin']], function(){
-        Route::get('dashboard', [
-            'uses' => 'DashboardController@index'
-        ])->name('dashboard');
-        Route::resource('users', 'Admin\UserController')->only(['index', 'edit', 'update']);
-        Route::resource('category', 'Admin\CategoryController');
-        Route::resource('post', 'Admin\PostController');
-        Route::resource('news', 'Admin\NewsController');
-    
-    });
-});
-
 // public route
 Route::group(['middleware' => ['web']], function(){
-    Route::get('post/{slug}', ['as' => 'post.single', 'uses' => 'PostController@getSingle'])
-    ->where('slug', '[\w\d\-\_]+');
+    Route::get('/{slug}', 'PostController@getSingle')->where('slug', '[\w\d\-\_]+')->name("post.detail");
     Route::get('/', 'HomeController@index');
     Route::get('category/{slug}', ['as' => 'category.single', 'uses' => 'CategoryController@getSingle'])
     ->where('slug', '[\w\d\-\_]+');
@@ -53,4 +54,3 @@ Route::group(['middleware' => ['web']], function(){
     // Route::resource('post', 'PostController')->only('show');
 });
 
-Auth::routes();

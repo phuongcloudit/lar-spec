@@ -21,13 +21,17 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::all();
-        $posts = Post::all();
-        // $posts = Post::with('category')->get();
-        return view('admin.post.index')->withPosts($posts);
-
+        $posts = new Post;
+        if($request->has("category_name")){
+            $category = Category::where("slug", $request->category_name)->first();
+            if($category)
+                $posts = $posts->where("category_id",$category->id);
+        }
+        $limit = $request->limit?$request->limit:20;
+        $posts = $posts->paginate($limit);
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -38,7 +42,7 @@ class PostController extends Controller
     public function create()
     {
         $categories = Category::pluck('name', 'id');
-        return view('admin.post.create')->withCategories($categories);
+        return view('admin.posts.create')->withCategories($categories);
     }
 
     /**
@@ -85,7 +89,7 @@ class PostController extends Controller
             }
         }
 
-        return redirect()->route('admin.post.edit', $post)->with('success', 'Your post has been successfully added');
+        return redirect()->route('admin.posts.edit', $post)->with('success', 'Your post has been successfully added');
   
         // Session::flash('success','A Post created sucessfully');
         // return redirect()->route('admin.post.index');
@@ -114,7 +118,7 @@ class PostController extends Controller
         $post = Post::find($id);
         $images = Image::where('post_id', $id)->get();
         $categories = Category::pluck('name', 'id');
-        return view('admin.post.edit')->withPost($post)->withCategories($categories)->withImages($images);;
+        return view('admin.posts.edit')->withPost($post)->withCategories($categories)->withImages($images);;
     }
 
     /**
@@ -163,7 +167,7 @@ class PostController extends Controller
         }
 
 
-        return redirect()->route('admin.post.edit', $id)->with('success','Post Updated sucessfully');
+        return redirect()->route('admin.posts.edit', $id)->with('success','Post Updated sucessfully');
     }
     /**
      * Remove the specified resource from storage.
@@ -174,8 +178,11 @@ class PostController extends Controller
     public function destroy($id)
     {
         Post::find($id)->delete();
-        return redirect()->route('admin.post.index')->with('success','A Post deleted successfully');
+        return redirect()->route('admin.posts.index')->with('success','A Post deleted successfully');
     }
 
+    public function donate(Post $post){        
+        return view('admin.posts.donate')->withPost($post);
+    }
     
 }

@@ -26,21 +26,11 @@
             </button>
         </div>
         @endif
-        @if(count($errors) > 0)
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>Error!</strong>
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
         <div class="row">
             <div class="col-md-6">
                 <div class="card card-primary">
-                    {!! Form::model($cat, ['method'=>'PATCH','route'=>['admin.category.update', $cat->id]])!!}
-                    @include('admin/category/_form')
+                    {!! Form::model($cat, ['method'=>'PATCH','route'=>['admin.categories.update', $cat->id]])!!}
+                    @include('admin/categories/_form')
                     {!! Form::close() !!}
 
                 </div>

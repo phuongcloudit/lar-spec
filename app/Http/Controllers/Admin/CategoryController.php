@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Session;
+use App\Http\Requests\Admin\CategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -20,21 +21,16 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         
-        $categories = Category::all();
-        return view('admin.category.index')->withCategories($categories);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('admin.category.create');
+        $categories = Category::with('posts');
+        if($request->has("category_name")){
+            $categories = $categories->where("name",$request->category_name)->orWhere('slug',$request->category_name);
+        }
+        $limit = $request->limit?$request->limit:20;
+        $categories = $categories->paginate($limit);
+        return view('admin.categories.index')->withCategories($categories);
     }
 
     /**
@@ -43,39 +39,11 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        // request()->validate([
-        //     'name' => 'required|max:255'
-        // ]);
-        // Category::create($request->all());
-        // return redirect()->route('admin.category.index')->with('success','Category created sucessfully');
-            
-
-        $this->validate($request, array(
-            'name'=> 'required|max:255',
-            'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-        ));
-        $cat = new Category;
-        $cat->name = $request->name;
-        $cat->slug = $request->slug;
-        $cat->description = $request->description;
-        $cat->save();
-        Session::flash('success','Category created sucessfully');
-        return redirect()->route('admin.category.index');
-   
-   
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $data = $request->only("name","slug","description");
+        $category = Category::create($data);
+        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -86,8 +54,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $cat = Category::find($id);
-        return view('admin.category.edit', compact('cat'));
+        $cat = Category::findOrFail($id);
+        return view('admin.categories.edit', compact('cat'));
     }
 
     /**
@@ -97,9 +65,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        $cat = Category::find($id);
+        $cat = Category::findOrFail($id);
         if ($request->input('slug') == $cat->slug){
             $this->validate($request, array(
                 'slug' => 'required',
@@ -114,7 +82,7 @@ class CategoryController extends Controller
         $cat->slug = $request->slug;
         $cat->description = $request->description;
         $cat->save();
-        return redirect()->route('admin.category.index')->with('success','Category Updated sucessfully');
+        return redirect()->route('admin.categories.index')->with('success','Category Updated sucessfully');
             
     }
 
@@ -126,7 +94,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        Category::find($id)->delete();
-        return redirect()->route('admin.category.index')->with('success','A category deleted successfully');
+        Category::findOrFail($id)->delete();
+        return redirect()->route('admin.categories.index')->with('success','A category deleted successfully');
     }
 }

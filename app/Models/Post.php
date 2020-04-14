@@ -13,7 +13,7 @@ class Post extends Model
     public $timestamps = true;
     
     public function author(): BelongsTo {
-        return $this->belongsTo('App\Models\Category', 'author_id');
+        return $this->belongsTo('App\Models\User', 'author_id');
     }
   
     public function category() {
@@ -26,5 +26,14 @@ class Post extends Model
 
     public function donates() {
       return $this->hasMany('App\Models\Donate');
+    }
+    public function getAuthNameAttribute(){
+        return $this->author->name;
+    }
+    public function getTotalDonatedAttribute(){
+        return $this->donates()->where('state',1)->sum("money");
+    }
+    public function getTotalDonatedFormatAttribute(){
+        return number_format($this->total_donated);
     }
 }

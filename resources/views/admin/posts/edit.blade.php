@@ -19,7 +19,7 @@
 </section>
 <section class="content">
     <div class="container-fluid">
-    {!! Form::model($post, ['method'=>'PATCH','route'=>['admin.post.update', $post->id]])!!}
+    {!! Form::model($post, ['method'=>'PATCH','route'=>['admin.posts.update', $post->id]])!!}
 
         <div class="row">
 
@@ -43,7 +43,7 @@
                 </div>
                 @endif
                 <div class="card card-primary">
-                    @include('admin.post._form')
+                    @include('admin.posts._form')
 
                 </div>
             </div>
