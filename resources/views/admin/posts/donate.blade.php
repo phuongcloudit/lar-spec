@@ -20,7 +20,7 @@
 <!-- Main content -->
 <section class="content">
 
-    <div style="padding: 0 15px;">
+   <div class="container-fluid">
 		@include("admin.includes.message")
         <div class="row">
             <div class="col-sm-4">

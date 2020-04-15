@@ -19,38 +19,21 @@
 </section>
 <section class="content">
     <div class="container-fluid">
-    {!! Form::model($post, ['method'=>'PATCH','route'=>['admin.posts.update', $post->id]])!!}
-
+         @include("admin.includes.message")
+        {!! Form::model($post, ['method'=>'PATCH','route'=>['admin.posts.update', $post->id]])!!}
         <div class="row">
-
             <div class="col-12 col-md-12 col-lg-9 order-2 order-md-1">
-                @if(count($errors) > 0)
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>Error!</strong>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
-                @if ($message = Session::get('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Success!</strong> {{ $message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                @endif
                 <div class="card card-primary">
                     @include('admin.posts._form')
-
                 </div>
             </div>
             <div class="col-12 col-md-12 col-lg-3 order-1 order-md-2">
             <div class="text-center mt-5 mb-3">
-                      {{ Form::submit('Submit', ['class' => 'btn btn-primary']) }}
-                    <a href="#" class="btn btn-warning">Cancel</a>
+                    {!! Form::button('<i class="fas fa-save"></i> Save', ['class' => 'btn btn-primary', 'name' => 'submit', 'type' => 'submit']) !!} 
+                    <a  class="btn btn-success" href="{{ route('post.detail',['slug'=> $post->slug]) }}" target="_blank">
+                        <i class="fas fa-eye"></i> View
+                    </a>
+                    <a href="#" class="btn btn-warning"><i class="fas fa-trash"></i> Cancel</a>
                 </div>
                 <h3 class="text-primary"><i class="fas fa-paint-brush"></i> Infomation</h3>
                 <div class="text-muted">
@@ -58,7 +41,9 @@
                         <b class="d-block">Deveint Inc</b>
                     </p>
                     <p class="text-sm">Url:
-                    <b class="d-block"><a href="{{ url('') }}/post/{{ $post->slug }}" target="_blank">{{ $post->slug }}</a></b>
+                        <b class="d-block">
+                            
+                        </b>
                     </p>
                     <p class="text-sm">Posted at:
                         <b class="d-block">{{ $post->created_at }}</b>

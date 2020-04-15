@@ -41,7 +41,7 @@
             <p> Post is Empty</p>
            @else
             @foreach ($posts as $post)
-            <a class="item" href="{{ url('') }}/post/{{ $post->slug }}">
+            <a class="item" href="{{ route('post.detail',['slug'=> $post->slug]) }}">
                 <div class="item-img">
                     @foreach ($post->images as $item)
                     <img src="{{ url('/') }}/storage/uploads/{{ $item->image_name }}" alt="">

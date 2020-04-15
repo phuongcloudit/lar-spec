@@ -1,4 +1,4 @@
-<a href="" class="brand-link text-center">
+<a href="{{ route('home') }}" target="_blank" class="brand-link text-center">
 	@if(!Auth::check())
 	<img src="{{ asset('assets/images/logo-admin.png') }}" alt="" class="brand-image" style="opacity: .8">
 	<span class="brand-text font-weight-light">Admin</span>

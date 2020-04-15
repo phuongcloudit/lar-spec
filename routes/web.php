@@ -48,8 +48,8 @@ Route::get('confirm', function(){
 });
 // public route
 Route::group(['middleware' => ['web']], function(){
+    Route::get('/', 'HomeController@index')->name("home");
     Route::get('/{slug}', 'PostController@getSingle')->where('slug', '[\w\d\-\_]+')->name("post.detail");
-    Route::get('/', 'HomeController@index');
     Route::get('category/{slug}', ['as' => 'category.single', 'uses' => 'CategoryController@getSingle'])
     ->where('slug', '[\w\d\-\_]+');
     // Route::resource('category', 'CategoryController')->only('show');

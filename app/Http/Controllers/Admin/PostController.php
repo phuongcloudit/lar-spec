@@ -32,7 +32,7 @@ class PostController extends Controller
                 $posts = $posts->where("category_id",$category->id);
         }
         $limit = $request->limit?$request->limit:20;
-        $posts = $posts->paginate($limit);
+        $posts = $posts->orderby("updated_at","DESC")->paginate($limit);
         return view('admin.posts.index', compact('posts'));
     }
 
