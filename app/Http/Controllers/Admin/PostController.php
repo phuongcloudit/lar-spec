@@ -7,11 +7,13 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Category;
+use App\Models\Donate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\Admin\PostsRequest;
+use Carbon\Carbon;
 // use Session;
 
 class PostController extends Controller
@@ -184,5 +186,38 @@ class PostController extends Controller
     public function donate(Post $post){        
         return view('admin.posts.donate')->withPost($post);
     }
-    
+    public function cancel(Donate $donate){        
+        $donate->state = 0;
+        $donate->save();
+        return redirect()->route('admin.posts.donate',$donate->post_id)->with('success','Success');
+    }
+    public function confirm(Donate $donate){        
+        $donate->state = 1;
+        $donate->save();
+        return redirect()->route('admin.posts.donate',$donate->post_id)->with('success','Success');
+    }
+    public function storeDonate(Request $request, Post $post){
+        $data = [
+            "post_id"          =>   $post->id,
+            "trans_code"       =>   rand(0,9999999),
+            "user_id"          =>   rand(0,99999999),
+            "state"            =>   1,
+            "money"            =>   $request->money,
+            "payment_name"     =>   "現金",
+            "credit_time"      =>   Carbon::now(),
+            "last_update"      =>   Carbon::now(),
+            "user_mail_add"    =>   "donate@specialthanks.jp",
+            "user_name"        =>   "現金",
+            "item_code"        =>   "SPEC".$post->id,
+            "item_name"        =>   $post->title,
+            "order_number"     =>   time(),
+            "st_code"          =>   "現金",
+            "pay_time"         =>   1,
+            "epsilon_info"     =>   json_encode([])
+        ];
+        
+        if(Donate::create($data))
+            return redirect()->route('admin.posts.donate',$post)->with('success','このプロジェクトに金額を追加しました。');
+        return redirect()->route('admin.posts.donate',$post)->with('error','このプロジェクトに金額が追加できませんでした。');
+    }
 }

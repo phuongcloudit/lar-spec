@@ -21,8 +21,10 @@ Route::name('admin.')->prefix('admin')->namespace("Admin")->group(function () {
         
         Route::resource('categories', 'CategoryController');
         Route::get('posts/donate/{post}', 'PostController@donate')->name("posts.donate");
-        Route::get('posts/donate/cancel/{donate}', 'PostController@cancel')->name("posts.donate.cancel");
-        Route::get('posts/donate/confirm/{donate}', 'PostController@confirm')->name("posts.donate.confirm");
+
+        Route::post('posts/donate/{post}/store', 'PostController@storeDonate')->name("posts.donate.store");
+        Route::put('posts/donate/cancel/{donate}', 'PostController@cancel')->name("posts.donate.cancel");
+        Route::put('posts/donate/confirm/{donate}', 'PostController@confirm')->name("posts.donate.confirm");
         Route::resource('posts', 'PostController');
         Route::resource('news', 'NewsController');
         Route::resource('users', 'UserController')->only(['index', 'edit', 'update']);

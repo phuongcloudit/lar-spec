@@ -25,7 +25,7 @@ class Post extends Model
     }
 
     public function donates() {
-      return $this->hasMany('App\Models\Donate');
+      return $this->hasMany('App\Models\Donate')->orderby("created_at","DESC")->orderby("id","DESC");
     }
     public function getAuthNameAttribute(){
         return $this->author->name;

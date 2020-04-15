@@ -19,16 +19,9 @@
 
 <!-- Main content -->
 <section class="content">
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> {{ $message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
 
     <div style="padding: 0 15px;">
+		@include("admin.includes.message")
         <div class="row">
             <div class="col-sm-4">
                 <div class="card">
@@ -46,7 +39,10 @@
             <div class="col-sm-8">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="text-right">募金された金額合計: {{ $post->total_donated_format }} 円</h2>
+                        <h3 class="card-title">募金された金額合計: {{ $post->total_donated_format }} 円</h3>
+                        <div class="card-tools" style="float: right;">
+                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-hand-holding-usd"></i> 募金金額を追加</button>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped projects">
                                 <thead>
@@ -61,7 +57,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($post->donates as $donate)
-                                    <tr @if($donate->state != 1) style="background: #fffdc5;" @endif>
+                                    <tr @if($donate->state != 1) class="donate-canceled" @endif>
                                         <td>{{ $donate->user_id }}</td>
                                         <td>{{ $donate->trans_code }}</td>
                                         <td>{{ $donate->payment_name }}</td>
@@ -69,12 +65,12 @@
                                         <td>{{ $donate->money }}  円</td>
                                          <td class="project-actions text-right">
                                             @if($donate->state == 1)
-                                            {!! Form::open(['method' => 'PATCH', 'route'=>['admin.posts.donate.cancel', $donate], 'style'=> 'display:inline', 'title' => 'Delete']) !!} 
-                                                {!! Form::button('<i class="fas fa-user-minus"></i>', ['class' => 'btn btn-warning btn-sm delete-confirm', 'name' => 'submit', 'type' => 'submit']) !!} 
+                                            {!! Form::open(['method' => 'PUT', 'route'=>['admin.posts.donate.cancel', $donate], 'style'=> 'display:inline', 'title' => 'Delete']) !!} 
+                                                {!! Form::button('<i class="fas fa-user-minus"></i> キャンセル', ['class' => 'btn btn-warning btn-sm donate-cancel', 'name' => 'submit', 'type' => 'submit']) !!} 
                                             {!! Form::close() !!}
                                             @else
-                                            {!! Form::open(['method' => 'PATCH', 'route'=>['admin.posts.donate.confirm', $donate], 'style'=> 'display:inline', 'title' => 'Delete']) !!} 
-                                                {!! Form::button('<i class="fas fa-hand-holding-usd"></i>', ['class' => 'btn btn-success btn-sm donate-confirm', 'name' => 'submit', 'type' => 'submit']) !!} 
+                                            {!! Form::open(['method' => 'PUT', 'route'=>['admin.posts.donate.confirm', $donate], 'style'=> 'display:inline', 'title' => 'Delete']) !!} 
+                                                {!! Form::button('<i class="fas fa-hand-holding-usd"></i> 募金金額を追加', ['class' => 'btn btn-success btn-sm donate-confirm', 'name' => 'submit', 'type' => 'submit']) !!} 
                                             {!! Form::close() !!}
                                             @endif
                                         </td>
@@ -88,6 +84,53 @@
             </div>
         </div>
     </div>
-</section>
+</section><!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			{!! Form::open(['method' => 'POST', 'route'=>['admin.posts.donate.store', $post]]) !!} 
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">に募金する</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				{{ Form::label('money', "金額入力") }}
+        		{{ Form::text('money', null, ['type'=>'number', "pattern"=>"\d*", 'class' => 'form-control']) }}
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+				{!! Form::button('<i class="fas fa-hand-holding-usd"></i> 確認', ['class' => 'btn btn-success donate-confirm', 'name' => 'submit', 'type' => 'submit']) !!} 
+			</div>
+			{!! Form::close() !!}
+		</div>
+	</div>
+</div>
 
 @stop
+@push("stylesheets")
+<style type="text/css">
+	.donate-canceled{
+		background-color: #f8d7da !important;
+    	border-bottom: 2px solid #c71a2c;
+	}
+    
+</style>
+@endpush();
+
+   
+@push("scripts")
+<script type="text/javascript">
+	
+	$(function(){
+		$(".donate-confirm, .donate-cancel").click(function(){
+			if(confirm("Are you sure?")){
+				return true;
+			}else{
+				return false;
+			}
+		})
+	})
+</script>
+@endpush()
