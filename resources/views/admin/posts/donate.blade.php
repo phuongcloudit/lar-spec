@@ -115,11 +115,8 @@
 		background-color: #f8d7da !important;
     	border-bottom: 2px solid #c71a2c;
 	}
-    
 </style>
-@endpush();
-
-   
+@endpush()
 @push("scripts")
 <script type="text/javascript">
 	
