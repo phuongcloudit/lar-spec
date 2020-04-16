@@ -5,13 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-
 class Post extends Model
 {
     protected $table = 'posts';
     protected $fillable = ['title','author_id','donate_day_end', 'content','category_id','slug'];
     public $timestamps = true;
-    
+    protected static function boot()
+    {
+        parent::boot();
+        static::saving(function ($model) {
+            if(!$model->slug){
+                $model->slug = $model->title;
+            }
+        });
+    }
+
     public function author(): BelongsTo {
         return $this->belongsTo('App\Models\User', 'author_id');
     }
@@ -29,6 +37,9 @@ class Post extends Model
     }
     public function getAuthNameAttribute(){
         return $this->author->name;
+    }
+    public function getTotalDonatedNumberAttribute(){
+        return $this->donates()->where('state',1)->count();
     }
     public function getTotalDonatedAttribute(){
         return $this->donates()->where('state',1)->sum("money");

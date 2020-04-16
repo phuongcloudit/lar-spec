@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,WAAY;EACR,KAAK,EAAE,IAAI;EACX,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;EACZ,aAAa,EAAE,GAAG;EAClB,YAAY,EAAE,IAAI;EAClB,UAAU,EAAE,IAAI;;AAEpB,GAAG;EACC,SAAS,EAAE,IAAI;EACb,MAAM,EAAE,IAAI",
+"sources": ["../sass/custom-admin.scss"],
+"names": [],
+"file": "custom-admin.css"
+}

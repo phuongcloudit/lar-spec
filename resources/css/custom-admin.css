@@ -1,0 +1,13 @@
+.user-image {
+  float: left;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-top: -2px; }
+
+img {
+  max-width: 100%;
+  height: auto; }
+
+/*# sourceMappingURL=custom-admin.css.map */

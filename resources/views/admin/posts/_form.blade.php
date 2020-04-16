@@ -5,7 +5,7 @@
     </div>
     <div class="form-group">
         {{ Form::label('slug', "Slug: ") }}
-        {{ Form::text('slug', null, array('class' => 'form-control', 'required' => '', 'minlength' => '5')) }}
+        {{ Form::text('slug', null, array('class' => 'form-control',  'minlength' => '5')) }}
     </div>
     <div class="row">
         <div class="col-12 col-md-12 col-lg-6">

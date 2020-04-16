@@ -60,7 +60,7 @@
                         募金総額
                     </div>
                     <div class="info-order__body">
-                        <span class="red">¥{{ $money_donate }}</span>
+                        <span class="red">¥{{ $post->total_donate_format }}</span>
                     </div>
                 </div>
                 <div class="info-order__item">
@@ -68,7 +68,7 @@
                         募金者数
                     </div>
                     <div class="info-order__body">
-                        {{ $people }}人
+                        {{ $post->total_donated_number }}人
                     </div>
                 </div>
                 <div class="info-order__item">
@@ -143,15 +143,16 @@
                 <div class="donate-button__out">
                     <div class="button-dn">
                         <div class="donate-form">
-                            @if($errors->any())
-                            <div class="errors">{{$errors->first()}}</div>
-                            @endif
+                            
                             <form method="POST" action="{{ route('donate.store',['id' =>  $post->id])}}" >
                                 @csrf
                                 <div class="donate-control">
                                     <label>
-                                    <p>※募金する金額を入力してください:</p>
-                                        <input type="number" name="money" value="{{  rand(50,500) }}">
+                                        <p>※募金する金額を入力してください:</p>
+                                        <input type="number" name="money" value="">
+                                        @if($errors->any())
+                                        <div class="errors">{{$errors->first()}}</div>
+                                        @endif
                                     </label>
                                 </div>
                                 <div class="donate-action">

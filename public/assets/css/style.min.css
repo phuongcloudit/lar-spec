@@ -1,0 +1,296 @@
+@charset "UTF-8";
+html, html * {
+  box-sizing: border-box; }
+
+body {
+  font-family: "小塚ゴシック Pr6N", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
+  font-size: 16px;
+  color: #000000;
+  margin: 0; }
+  body.home header#header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999; }
+  body.home main img {
+    display: block;
+    margin: 0 auto; }
+  body img {
+    max-width: 100%; }
+  body p {
+    margin-top: 0;
+    margin-bottom: 1em;
+    line-height: 1.5em; }
+  body a {
+    color: #ed731d;
+    text-decoration: none; }
+    body a:hover {
+      text-decoration: underline; }
+
+.container {
+  width: 1230px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto; }
+
+.red {
+  color: #d71528; }
+
+header#header .header-content {
+  padding-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center; }
+  header#header .header-content .header-nav > ul {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -5px;
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+    header#header .header-content .header-nav > ul > li > a {
+      position: relative;
+      display: inline-block; }
+      header#header .header-content .header-nav > ul > li > a img {
+        display: block; }
+      header#header .header-content .header-nav > ul > li > a span {
+        width: 100%;
+        height: 100%;
+        z-index: +9;
+        color: #FFF;
+        font-size: 18px;
+        position: absolute;
+        top: 0;
+        left: 0%;
+        display: flex;
+        align-items: center;
+        justify-content: center; }
+      header#header .header-content .header-nav > ul > li > a:hover img {
+        opacity: .8; }
+
+.section {
+  padding: 50px 0; }
+
+.heading {
+  font-size: 52px;
+  font-family: "HiraginoSans W0", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
+  position: relative;
+  margin-top: 0;
+  margin-bottom: 20px;
+  line-height: 1em;
+  padding: 25px 35px;
+  padding-bottom: 10px;
+  font-weight: normal; }
+  .heading:before, .heading:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #160306;
+    width: 2px;
+    height: 100%; }
+  .heading:after {
+    width: 5px;
+    left: 7px; }
+  .heading p {
+    font-size: 16px;
+    font-family: "小塚ゴシック Pr6N", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
+    margin-top: 15px;
+    margin-bottom: 0; }
+    .heading p::first-letter {
+      margin-left: -.5em; }
+
+#home-content {
+  margin: 0;
+  font-size: 18px;
+  background-image: url("../images/home/home-content-bg.png");
+  background-position: top 60px center;
+  background-repeat: no-repeat;
+  position: relative;
+  margin-top: -60px;
+  overflow: hidden; }
+  #home-content .content {
+    overflow: hidden;
+    width: calc( 50% + 600px);
+    max-width: 100%;
+    float: right;
+    background-color: rgba(255, 255, 255, 0.8); }
+    #home-content .content > .container {
+      margin-left: 0;
+      padding: 60px 70px; }
+      #home-content .content > .container p {
+        line-height: 1.8em;
+        margin-bottom: 2em; }
+
+.projects {
+  margin-left: -10px;
+  margin-right: -10px;
+  display: flex;
+  flex-wrap: wrap; }
+  .projects .project {
+    width: 25%;
+    margin-bottom: 25px;
+    padding-left: 10px;
+    padding-right: 10px; }
+    .projects .project .project-item {
+      display: block;
+      border: 1px solid #bc173f;
+      background-color: #efefee;
+      text-decoration: none; }
+      .projects .project .project-item .thumbnail {
+        position: relative;
+        height: 0;
+        padding-bottom: 80%;
+        background-size: cover;
+        background-position: center; }
+        .projects .project .project-item .thumbnail .project-info {
+          position: absolute;
+          width: 100%;
+          left: 0;
+          bottom: 1px; }
+          .projects .project .project-item .thumbnail .project-info .category span {
+            background-color: #6b6b6b;
+            color: #ffffff;
+            font-size: 14px;
+            padding: 7px 15px;
+            display: inline-block;
+            border-radius: 27px; }
+          .projects .project .project-item .thumbnail .project-info .title {
+            padding: 5px 7px;
+            background-color: rgba(255, 255, 255, 0.8); }
+            .projects .project .project-item .thumbnail .project-info .title h3 {
+              font-size: 16px;
+              color: #231815;
+              font-weight: normal;
+              line-height: 1.5em;
+              font-family: "小塚ゴシック Pr6N", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
+              margin: 0;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis; }
+      .projects .project .project-item .details {
+        padding: 10px 0 5px 0; }
+        .projects .project .project-item .details .detail {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center; }
+          .projects .project .project-item .details .detail .th {
+            font-size: 12px;
+            width: 60px;
+            text-align: center;
+            color: #323333; }
+          .projects .project .project-item .details .detail .td {
+            font-size: 26px;
+            width: calc(100% - 60px);
+            color: #000000;
+            text-align: right;
+            padding: 5px;
+            padding-right: 20px;
+            border-bottom: 1px solid #c0bdbd;
+            font-weight: bold;
+            font-family: "HiraginoSans W4", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro"; }
+  .projects.colums-5 .project {
+    width: 20%; }
+  .projects.colums-3 .project {
+    width: 33.3333%; }
+
+#categories {
+  padding: 60px 0;
+  text-align: center;
+  background-image: url("../images/home/categories-bg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative; }
+  #categories h2 {
+    font-size: 52px;
+    font-family: "HiraginoSans W0", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
+    font-weight: normal;
+    margin: 0;
+    margin-bottom: 50px; }
+    #categories h2 span {
+      margin-top: 20px;
+      font-family: "小塚ゴシック Pr6N", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
+      font-size: 18px;
+      display: block; }
+  #categories ul.categories {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; }
+    #categories ul.categories li .category {
+      margin: 0 10px;
+      width: 205px;
+      height: 205px;
+      border-radius: 50%;
+      background-color: #FFF;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center; }
+      #categories ul.categories li .category .title {
+        width: 100%;
+        color: #231815;
+        font-size: 19px; }
+
+.banner {
+  padding: 60px 0; }
+  .banner img {
+    display: block;
+    margin: 0 auto; }
+
+#news .news {
+  margin-top: 20px; }
+  #news .news ul {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 930px; }
+    #news .news ul li {
+      border-bottom: 1px solid #9f9e9f;
+      padding: 5px 15px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      color: #231815;
+      margin-bottom: 10px; }
+      #news .news ul li .date {
+        width: 150px;
+        font-family: "HiraginoSans W3", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
+        font-size: 22px; }
+      #news .news ul li .category {
+        width: 100px; }
+        #news .news ul li .category span {
+          padding: 5px 10px;
+          border-radius: 10px;
+          background-color: #6b6b6b;
+          color: #FFF;
+          font-size: 14px; }
+      #news .news ul li .content {
+        width: calc(100% - 250px);
+        padding-right: 80px;
+        font-size: 18px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        position: relative; }
+        #news .news ul li .content:after {
+          position: absolute;
+          content: "";
+          width: 80px;
+          height: 100%;
+          background-image: url("../images/common/detail-news.png");
+          background-position: center;
+          background-repeat: no-repeat;
+          right: 0;
+          top: 0;
+          transform: translateY(-5px); }

@@ -66,16 +66,9 @@ class PostController extends Controller
         // $this->validate($request, [
         //     'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         // ]);
-
-       
-        $post = new Post;
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->category_id = $request->category_id;
-        $post->content = $request->content;
-        $post->donate_day_end = $request->donate_day_end;
-        $post->author_id = Auth::user()->id;
-        $post->save();
+        $data = $request->only("title","slug","category_id","content","donate_day_end");
+        $data["author_id"]  =   Auth::user()->id;        
+        $post = Post::create($data);
        
         if($request->hasfile('images'))
         {
@@ -134,17 +127,8 @@ class PostController extends Controller
     public function update(PostsRequest $request, $id)
     {
         
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
 
-        if ($request->input('slug') == $post->slug){
-            $this->validate($request, array(
-                'slug' => 'required',
-            ));
-        } else{
-            $this->validate($request, array(
-                'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-            ));
-        }
 
 
         $post->title = $request->title;
