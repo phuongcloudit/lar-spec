@@ -294,3 +294,8 @@ header#header .header-content {
           right: 0;
           top: 0;
           transform: translateY(-5px); }
+
+footer {
+  margin-top: 100px;
+  background-color: #f3a47d;
+  padding-top: 65px; }
