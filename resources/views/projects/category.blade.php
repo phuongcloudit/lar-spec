@@ -2,16 +2,10 @@
 @push('scripts')
 <script type="text/javascript">
     $(document).ready(function(){
-        /*$('.ae-select-content').each(function(index){
-            $(this).html($(this).closest(".dropdown-wrapper").find('li.selected').find("a").html());
-        });*/
         $('.select-category').click(function(){
             $(this).children(".dropdown").slideToggle(200, function(){
                 $(this).toggleClass('active');
             })
-        })
-        $('.dropdown-menu > li').click(function(){
-            $(this).closest(".ae-dropdown").find(".ae-select-content").html($(this).find("a").html());
         })
     })
 </script>
