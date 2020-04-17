@@ -18,25 +18,14 @@
 </section>
 <section class="content">
     <div class="container-fluid">
-        @if ($message = Session::get('success'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Success!</strong> {{ $message }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        @endif
+        @include("admin.includes.message")
         <div class="row">
             <div class="col-md-6">
                 <div class="card card-primary">
-                    {!! Form::model($cat, ['method'=>'PATCH','route'=>['admin.categories.update', $cat->id]])!!}
+                    {!! Form::model($category, ['method'=>'PATCH','route'=>['admin.categories.update', $category]])!!}
                     @include('admin/categories/_form')
                     {!! Form::close() !!}
-
                 </div>
-            </div>
-            <div class="col-md-6">
-
             </div>
         </div>
     </div>

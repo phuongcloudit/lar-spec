@@ -43,8 +43,9 @@ class PostController extends Controller
      */
     public function create()
     {
+        $post = new Post;
         $categories = Category::pluck('name', 'id');
-        return view('admin.posts.create')->withCategories($categories);
+        return view('admin.posts.create')->withPost($post)->withCategories($categories);
     }
 
     /**
@@ -53,42 +54,11 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PostsRequest $request): RedirectResponse
+    public function store(PostsRequest $request)
     {
-        
-       
-        // $post = Post::create($request->only(['title', 'category_id', 'donate_money', 'donate_day_end','content']));
-        
-        // $request->validate([
-        //     'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
-
-        // $this->validate($request, [
-        //     'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        // ]);
-        $data = $request->only("title","slug","category_id","content","donate_day_end");
-        $data["author_id"]  =   Auth::user()->id;        
-        $post = Post::create($data);
-       
-        if($request->hasfile('images'))
-        {
-            foreach($request->file('images') as $file)
-            {
-                // $name=$file->getClientOriginalName();
-                $name=$file->hashName();
-                $path = Storage::putFile('public/uploads', $file);
-                $file= new Image();
-                $file->image_name=$name;
-                $file->post_id=$post->id;
-                $file->save();
-            }
-        }
-
-        return redirect()->route('admin.posts.edit', $post)->with('success', 'Your post has been successfully added');
-  
-        // Session::flash('success','A Post created sucessfully');
-        // return redirect()->route('admin.post.index');
-    
+        $data = $request->only("category_id","date","title","slug","content","status");
+        $post   =   Post::create($data);
+        return redirect()->route('admin.posts.edit', $post)->with('success','Post created sucessfully');
     }
     
     /**
@@ -108,12 +78,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $post = Post::find($id);
-        $images = Image::where('post_id', $id)->get();
+    public function edit(Post $post){
         $categories = Category::pluck('name', 'id');
-        return view('admin.posts.edit')->withPost($post)->withCategories($categories)->withImages($images);;
+        return view('admin.posts.edit')->withPost($post)->withCategories($categories);
     }
 
     /**
@@ -124,36 +91,11 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function update(PostsRequest $request, $id)
+    public function update(PostsRequest $request, Post $post)
     {
-        
-        $post = Post::findOrFail($id);
-
-
-
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->category_id = $request->category_id;
-        $post->content = $request->content;
-        $post->donate_day_end = $request->donate_day_end;
-        $post->author_id = Auth::user()->id;
-        $post->save();
-       
-        if($request->hasfile('images'))
-        {
-            foreach($request->file('images') as $file)
-            {
-                $name=$file->hashName();
-                $path = Storage::putFile('public/uploads', $file);
-                $file= new Image();
-                $file->image_name=$name;
-                $file->post_id=$post->id;
-                $file->save();
-            }
-        }
-
-
-        return redirect()->route('admin.posts.edit', $id)->with('success','Post Updated sucessfully');
+        $data = $request->only("category_id","date","title","slug","content","status");
+        $post->update($data);
+        return redirect()->route('admin.posts.edit', $post)->with('success','Post Updated sucessfully');
     }
     /**
      * Remove the specified resource from storage.
@@ -161,47 +103,13 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        Post::find($id)->delete();
-        return redirect()->route('admin.posts.index')->with('success','A Post deleted successfully');
-    }
-
-    public function donate(Post $post){        
-        return view('admin.posts.donate')->withPost($post);
-    }
-    public function cancel(Donate $donate){        
-        $donate->state = 0;
-        $donate->save();
-        return redirect()->route('admin.posts.donate',$donate->post_id)->with('success','Success');
-    }
-    public function confirm(Donate $donate){        
-        $donate->state = 1;
-        $donate->save();
-        return redirect()->route('admin.posts.donate',$donate->post_id)->with('success','Success');
-    }
-    public function storeDonate(Request $request, Post $post){
-        $data = [
-            "post_id"          =>   $post->id,
-            "trans_code"       =>   rand(0,9999999),
-            "user_id"          =>   rand(0,99999999),
-            "state"            =>   1,
-            "money"            =>   $request->money,
-            "payment_name"     =>   "現金",
-            "credit_time"      =>   Carbon::now(),
-            "last_update"      =>   Carbon::now(),
-            "user_mail_add"    =>   "donate@specialthanks.jp",
-            "user_name"        =>   "現金",
-            "item_code"        =>   "SPEC".$post->id,
-            "item_name"        =>   $post->title,
-            "order_number"     =>   time(),
-            "st_code"          =>   "現金",
-            "pay_time"         =>   1,
-            "epsilon_info"     =>   json_encode([])
-        ];
-        
-        if(Donate::create($data))
-            return redirect()->route('admin.posts.donate',$post)->with('success','このプロジェクトに金額を追加しました。');
-        return redirect()->route('admin.posts.donate',$post)->with('error','このプロジェクトに金額が追加できませんでした。');
+        try {
+            $post->delete();
+            return redirect()->route('admin.categories.index')->with('success','A post deleted successfully');
+        } catch (\Exception $e) {
+            return redirect()->route('admin.categories.index')->with('error','Cannot delete post!');
+        }
     }
 }

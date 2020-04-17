@@ -229,7 +229,7 @@ class Epsilon
         }
 
         $data = [
-            "post_id"          =>   $result["memo1"],
+            "project_id"       =>   $result["memo1"],
             "trans_code"       =>   $result["trans_code"],
             "user_id"          =>   $result["user_id"],
             "state"            =>   $result["state"],

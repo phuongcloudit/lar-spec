@@ -1,18 +1,27 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Auth;
 class Post extends Model
 {
     protected $table = 'posts';
-    protected $fillable = ['title','author_id','donate_day_end', 'content','category_id','slug'];
-    public $timestamps = true;
+    protected $fillable = [
+        "id",
+        "category_id",
+        "date",
+        "title",
+        "slug",
+        "content",
+        "status",
+        "user_id",
+    ];
+    public $dates  = ['date'];
     protected static function boot()
     {
         parent::boot();
+        static::creating(function ($model) {
+            if(!$model->user_id) $model->user_id = Auth::user()->id;
+        });
         static::saving(function ($model) {
             if(!$model->slug){
                 $model->slug = $model->title;
@@ -20,31 +29,11 @@ class Post extends Model
         });
     }
 
-    public function author(): BelongsTo {
-        return $this->belongsTo('App\Models\User', 'author_id');
+    public function user(){
+        return $this->belongsTo('App\Models\User');
     }
   
     public function category() {
       return $this->belongsTo('App\Models\Category');
-    }
-    
-    public function images() {
-      return $this->hasMany('App\Models\Image');
-    }
-
-    public function donates() {
-      return $this->hasMany('App\Models\Donate')->orderby("created_at","DESC")->orderby("id","DESC");
-    }
-    public function getAuthNameAttribute(){
-        return $this->author->name;
-    }
-    public function getTotalDonatedNumberAttribute(){
-        return $this->donates()->where('state',1)->count();
-    }
-    public function getTotalDonatedAttribute(){
-        return $this->donates()->where('state',1)->sum("money");
-    }
-    public function getTotalDonatedFormatAttribute(){
-        return number_format($this->total_donated);
     }
 }

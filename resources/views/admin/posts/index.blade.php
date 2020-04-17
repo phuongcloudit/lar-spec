@@ -33,32 +33,32 @@
 	            <table class="table table-striped projects">
 	                <thead>
 	                    <tr>
-	                        <th> プロジェクト名</th>
-	                        <th style="width: 160px">カテゴリー</th>
-	                        <th style="width: 160px"  class="text-right">募金された金額合計</th>
+	                        <th style="width: 160px"> DATE </th>
+	                        <th style="width: 160px"  class="text-right">Category</th>
+	                        <th >Title</th>
+	                        <th style="width: 160px"> Status </th>
 	                        <th style="width: 180px"></th>
 	                    </tr>
 	                </thead>
 	                <tbody>
 	                    @foreach($posts as $post)
 	                    <tr>
+	                    	<td>
+	                    		{{ $post->date }}
+	                    	</td>
+	                        <td>
+	                        	<a class="post-title" href="{{ route('admin.posts.index',['category_name'=> $post->category->name]) }}"><b>{{ $post->category->name }}</b></a>
+	                            
+	                        </td>
 	                        <td>
 	                            <a class="post-title" target="_blank" href="{{ route('post.detail',['slug'=> $post->slug]) }}"><b>{{ $post->title }}</b></a>
-	                            <br/>
-	                            <small><b>{{$post->auth_name}}</b>によって<b>{{ $post->created_at->format("Y年n月j日 g:i A")}}</b>に作成されました。 最後の更新は <b>{{ $post->updated_at->format("Y年n月j日 g:i A")}}</b></small>
 	                        </td>
 	                        <td>
-	                            {{ $post->category->name }}
-	                        </td>
-	                        <td class="text-right">
-	                            {{ $post->total_donated_format }} 円
-	                        </td>
+	                    		{{ $post->status }}
+	                    	</td>
 	                        <td class="project-actions text-right">
 	                            <a target="_blank" class="btn btn-outline-primary btn-sm" href="{{ route('post.detail',['slug'=> $post->slug]) }}">
 	                                <i class="fas fa-eye"></i>
-	                            </a>
-	                            <a class="btn btn-outline-success btn-sm" href="{{ route('admin.posts.donate',$post) }}">
-	                                <i class="fas fa-hand-holding-usd"></i>
 	                            </a>
 	                            <a class="btn btn-success btn-sm" href="{{ route('admin.posts.edit', $post) }}">
 	                                <i class="fas fa-edit"></i>

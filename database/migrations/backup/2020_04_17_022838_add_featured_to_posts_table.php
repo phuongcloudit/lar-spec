@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeNewsTable extends Migration
+class AddFeaturedToPostsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,9 @@ class ChangeNewsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('posts', function (Blueprint $table) {
+            $table->boolean('featured')->default(0)->after('category_id');
+        });
     }
 
     /**
@@ -23,6 +25,8 @@ class ChangeNewsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropColumn('featured');
+        });
     }
 }

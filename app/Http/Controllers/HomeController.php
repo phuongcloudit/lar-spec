@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Post;
-use App\Models\News;
-use App\Models\Category;
 use App\Http\Controllers\Controller;
 
+use App\Models\ProjectCategory;
+use App\Models\Project;
+use App\Models\Post;
 
 class HomeController extends Controller
 {
@@ -21,9 +20,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('images','donates')->orderBy('created_at', 'desc')->take(10)->get();
-        $news = News::orderBy('created_at', 'desc')->take(5)->get();
-
-        return view('pages.top', compact(['posts','news']));
+        $project_categories = ProjectCategory::get();
+        $featured_projects  = Project::publish()->featured()->limit(10)->get();
+        $new_projects       = Project::publish()->new()->limit(10)->get();
+        $posts = Post::orderby("date","DESC")->limit(10)->get();
+        return view('pages.home',compact('project_categories','featured_projects','new_projects','posts'));
     }
 }

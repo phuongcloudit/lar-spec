@@ -11,7 +11,7 @@ class Donate extends Model
 	protected $table = 'donates';
     protected $fillable = [
         "id",
-        "post_id",
+        "project_id",
         "trans_code",
         "user_id",
         "state",
@@ -29,7 +29,7 @@ class Donate extends Model
         "epsilon_info"
     ];
     
-	public function post(){
-        return $this->belongsTo('App\Models\Post');
+	public function project(){
+        return $this->belongsTo('App\Models\Project');
     }
 }

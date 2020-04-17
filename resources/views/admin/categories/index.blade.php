@@ -21,16 +21,8 @@
 
 <!-- Main content -->
 <section class="content">
-    @if ($message = Session::get('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Success!</strong> {{ $message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
-    <!-- Default box -->
-    <div style="padding: 0 15px;">
+   <div class="container-fluid">
+        @include("admin.includes.message")
         <div class="row">
             <div class="col-sm-4">
                 <div class="card">

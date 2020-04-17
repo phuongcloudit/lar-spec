@@ -29,15 +29,38 @@
 				</a>
 			</li>
 			<li class="nav-item has-treeview ">
-				<a href="{{ route('admin.posts.index') }}" class="nav-link">
+				<a href="{{ route('admin.projects.index') }}" class="nav-link">
 					<i class="nav-icon fas fa-hand-holding-usd"></i>
 					<p>募金プロジェクト	<i class="fas fa-angle-left right"></i></p>
 				</a>
 				<ul class="nav nav-treeview">
 
 					<li class="nav-item">
-						<a href="{{ route('admin.posts.index') }}" class="nav-link">
+						<a href="{{ route('admin.projects.index') }}" class="nav-link">
 							<i class="far fa-circle nav-icon"></i> 募金プロジェクト
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ route('admin.projects.create') }}" class="nav-link">
+							<i class="far fa-circle nav-icon"></i> 新規追加
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ route('admin.project-categories.index') }}" class="nav-link">
+							<i class="far fa-circle nav-icon"></i> カテゴリー
+						</a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item has-treeview ">
+				<a href="{{ route('admin.posts.index') }}" class="nav-link">
+					<i class="nav-icon fas fa-edit"></i>
+					<p>News<i class="fas fa-angle-left right"></i></p>
+				</a>
+				<ul class="nav nav-treeview">
+					<li class="nav-item">
+						<a href="{{ route('admin.posts.index') }}" class="nav-link">
+							<i class="far fa-circle nav-icon"></i>	All news
 						</a>
 					</li>
 					<li class="nav-item">
@@ -47,25 +70,7 @@
 					</li>
 					<li class="nav-item">
 						<a href="{{ route('admin.categories.index') }}" class="nav-link">
-							<i class="far fa-circle nav-icon"></i> カテゴリー
-						</a>
-					</li>
-				</ul>
-			</li>
-			<li class="nav-item has-treeview ">
-				<a href="{{ route('admin.news.index') }}" class="nav-link">
-					<i class="nav-icon fas fa-edit"></i>
-					<p>News<i class="fas fa-angle-left right"></i></p>
-				</a>
-				<ul class="nav nav-treeview">
-					<li class="nav-item">
-						<a href="{{ route('admin.news.index') }}" class="nav-link">
-							<i class="far fa-circle nav-icon"></i>	All news
-						</a>
-					</li>
-					<li class="nav-item">
-						<a href="{{ route('admin.news.create') }}" class="nav-link">
-							<i class="far fa-circle nav-icon"></i> 新規追加
+							<i class="far fa-circle nav-icon"></i>  カテゴリー
 						</a>
 					</li>
 				</ul>

@@ -33,14 +33,16 @@ class PostsRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'title' => 'required',
-            'category_id' => 'required|numeric',
-            'donate_day_end' => 'required|date',
-            // 'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
-            'images' => 'required',
-            // 'images' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'author_id' => ['nullable', 'exists:users,id', new CanBeAuthor],
+        $rules =  [
+            'category_id'   =>  'required|exists:App\Models\Category,id',
+            'title' => 'required|max:255|unique:App\Models\Post,title',
+            'slug' => 'required|alpha_dash|max:255|unique:App\Models\Post,slug'
         ];
+        if($this->isMethod('PUT') || $this->isMethod('PATCH')):
+            $post = $this->route('post');
+            $rules['title'] = 'required|max:255|unique:App\Models\Post,title,'.$post->id;
+            $rules['slug'] = 'required|max:255|unique:App\Models\Post,slug,'.$post->id;
+        endif;
+        return $rules;
     }
 }

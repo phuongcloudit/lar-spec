@@ -129,9 +129,12 @@
 		<script type="text/javascript">
 			$(function(){
 				$(".delete-confirm").click(function(){
-					if(confirm("Are you sure you want to delete?")){
-						return true;
-					}else{
+					if(!confirm("Are you sure you want to delete?")){
+						return false;
+					}
+				})
+				$(".cancel-create").click(function(){
+					if(!confirm("Are you sure you want to cancel create?")){
 						return false;
 					}
 				})
