@@ -15,16 +15,16 @@ class DonateController extends Controller
     protected $default_email    =   "default@demo.com";
     protected $item_prefix  =   "SPEC";
     public function store(DonateRequest $request, $id){
-        $post = Post::findOrFail($id);
+        $project = Project::findOrFail($id);
         $data   =   [
             'user_id'       =>  rand(0,99999999),
             'user_name'     =>  $request->name?:$this->default_name,
             'user_mail_add' =>  $request->email?:$this->default_email,
-            'item_code'     =>  $this->item_prefix.$post->id,
-            'item_name'     =>  $post->title,
+            'item_code'     =>  $this->item_prefix.$project->id,
+            'item_name'     =>  $project->name,
             'order_number'  =>  time(),
             'item_price'    =>  $request->money,
-            'memo1'         =>  $post->id,
+            'memo1'         =>  $project->id,
             'memo2'         =>  ""
         ];
 

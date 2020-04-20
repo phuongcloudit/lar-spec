@@ -59,7 +59,9 @@
 		                    		{{ $project->status }}
 		                    	</td>
 		                        <td class="text-center" style="color: #3490dd;">
-		                        	<i class="{{ $project->featured?'fas':'far' }} fa-star"></i>
+		                        	<button class="btn btn-success btn-sm featured">
+		                        		<i class="{{ $project->featured?'fas':'far' }} fa-star"></i>
+		                        	</button>
 		                        </td>
 		                        <td class="project-actions text-right">
 		                            <a target="_blank" class="btn btn-outline-primary btn-sm" href="{{ route('project.detail',['slug'=> $project->slug]) }}">
@@ -91,3 +93,10 @@
 </section>
 
 @stop
+@push("scripts")
+<script type="text/javascript">
+	$(document).ready(function(){
+
+	})
+</script>
+@endpush
