@@ -1,0 +1,355 @@
+
+.media-manager .btn {
+    border-radius: 0
+}
+
+.mm {
+    position: relative
+}
+
+.mm .animated {
+    -webkit-animation-duration: .4s;
+    animation-duration: .4s
+}
+
+.mm-fixed-height>.panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0
+}
+
+.mm-fixed-height>.panel>.panel-body {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: auto
+}
+
+.mm-fixed-height>.panel>.panel-body>a {
+    font-size: 30px;
+    float: right;
+    margin-top: -40px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.mm-fixed-height .mm-content {
+    min-height: 250px;    
+    padding: 10px;
+}
+
+.upload-drop-zone {
+    background-color: #efeded;
+    outline: #ccc dashed 1px;
+    padding: 20px;
+    margin-bottom: 15px;
+    outline-offset: -10px;
+    transition: all .4s
+}
+
+.upload-drop-zone.drag-over {
+    background-color: #eee;
+    outline-color: #000
+}
+
+.upload-drop-zone.drag-over .upload-widget-icon {
+    opacity: 1
+}
+
+.upload-drop-zone form {
+    text-align: center
+}
+
+.upload-drop-zone label {
+    display: block;
+    font-size: 1.5em;
+    font-weight: 700
+}
+
+.upload-drop-zone label span {
+    font-weight: 400
+}
+
+.upload-drop-zone input[type=file] {
+    display: none
+}
+
+.upload-widget-icon {
+    margin: 0 auto;
+    opacity: .2;
+    transition: opacity .4s
+}
+
+.upload-status-widget .table-responsive {
+    margin-bottom: 15px
+}
+
+.upload-status-widget table {
+    font-size: 12px;
+    margin-bottom: 0
+}
+
+.upload-status-widget .progress {
+    width: 100%;
+    min-width: 150px;
+    margin-bottom: 0
+}
+
+.medias {
+    margin: -5px
+}
+
+.medias .file {
+    margin: 5px;
+    border: none;
+    background: #fff;
+    box-shadow: 1px 1px 4px #d0cccc
+}
+
+.context-menu {
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, .5);
+    z-index: 100
+}
+
+.context-menu ul {
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none
+}
+
+.context-menu li {
+    display: block
+}
+
+.context-menu li a {
+    display: block;
+    padding: 6px 15px;
+    font-weight: 400;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap
+}
+
+.context-menu li a:hover {
+    background-color: #eee
+}
+
+.file {
+    position: relative;
+    float: left;
+    width: 130px;
+    height: 150px;
+    border: 2px solid #eee;
+    transition: border-color .4s;
+    overflow: hidden
+}
+
+.file-preview .thumb {
+    width: 100%;
+    margin-top: -5px
+}
+
+.file-preview .icon {
+    text-align: center;
+    line-height: 92px;
+    font-size: 92px
+}
+
+.file-title {
+    position: absolute;
+    height: 25px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    transition: background-color .4s;
+    line-height: 25px
+}
+
+.file-title h3 {
+    color: #000;
+    margin: 4px;
+    line-height: 16px;
+    font-size: 12px;
+    transition: color .4s;
+    letter-spacing: 0;
+    font-weight: lighter;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center
+}
+
+.details-widget-content .buttons,
+.table-movie tbody tr td.action-btn {
+    text-align: right
+}
+
+.file.selected {
+    border-color: #333
+    border: 2px solid #ef700b;
+    padding: 1px;
+    transform: scale(1.05);
+    position: relative;    
+}
+.file.selected:after{
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    content: "\F14A";
+    font-family: "Font Awesome 5 Free";
+    color: #3490dc;
+    padding: 5px;
+    background: #FFF;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.file.selected .file-title {
+    background-color: #333
+}
+
+.file.selected .file-title h3 {
+    color: #fff
+}
+
+.file-no-title {
+    width: 100%;
+    height: 35px;
+    display: block;
+    background: 0 0!important;
+    box-shadow: none!important
+}
+
+.file-no-title .icon {
+    width: 50px;
+    height: 35px;
+    font-size: 20px;
+    line-height: 35px;
+    color: #fff;
+    background: #eee;
+    background-color: #1f91f3!important;
+    box-shadow: 1px 2px 4px #d2d2d2;
+    border-radius: 2px
+}
+
+.file-no-title .icon .fa-backward:before {
+    content: "\f122"
+}
+
+.input-file .input-group-addon {
+    padding: 0
+}
+
+.input-file input {
+    background: #eee;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .16), 0 2px 10px rgba(0, 0, 0, .12)
+}
+
+.details-widget-content .thumb {
+    max-height: 100px
+}
+
+.details-widget-content .icon {
+    line-height: 100px;
+    font-size: 50px
+}
+
+#media-manager-modal-tinymce {
+    z-index: 999999
+}
+
+.modal-mm .modal-dialog {
+    width: 1100px;
+    max-width: 100% !important;
+}
+
+.modal-mm .modal-dialog .modal-header {
+    padding: 10px 15px;
+    border-bottom: 1px solid #e5e5e5
+}
+
+.modal-mm .modal-dialog .modal-body {
+    padding: 0
+}
+
+.modal-mm .modal-dialog .modal-body .panel {
+    border: none;
+    background: #f9f9f9
+}
+
+.modal-mm .modal-dialog .modal-body .panel .panel-body {
+    padding-top: 0
+}
+
+.modal-mm .modal-dialog .modal-body .breadcrumb {
+    margin-bottom: 0;
+    font-size: 16px
+}
+
+.modal-mm .modal-dialog .modal-body .details-widget .panel-default {
+    max-width: 500px;
+    height: 300px;
+    margin: auto;
+    background: #fff
+}
+
+.select-media span{
+    cursor: pointer;
+    display: block;
+    text-align: center;
+    padding: 15px;
+    border: 2px dashed #3490dc;
+    line-height: 1em;
+    margin-bottom: 10px;
+}
+.delete-media{
+    border: 1px solid #ad1717;
+    color: #ad1717;
+    background-color: #FFF;
+    text-align: center;
+    padding: 5px;
+    margin-top: 2px;
+}
+.list-preview {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+.list-preview .item{
+    width: 33.3333%;
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 10px;
+    position: relative;
+}
+.list-preview .item img{
+    display: block;
+}
+.list-preview .item .remove{
+    position: absolute;
+    top: 2px;
+    right: 7px;
+    background-color: #FFF;
+    color: #ef0707;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}

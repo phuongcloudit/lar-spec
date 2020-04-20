@@ -1,0 +1,12 @@
+{
+    "name": "mrtaiw/media-manager",
+    "description": "manager media for laravel 5.4 with bootstrap and jquery",
+    "type": "metapackage",
+    "authors": [
+        {
+            "name": "MrTaiw",
+            "email": "mrtaiw@gmail.com"
+        }
+    ],
+    "require": {}
+}

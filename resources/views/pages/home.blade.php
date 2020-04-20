@@ -66,12 +66,12 @@
         <ul class="categories">
             @foreach($project_categories as $projectCat)
             <li>
-                <div class="category">
-                    <a href="{{ route('projects.category', $projectCat->slug) }}" >
+                <a class="category" href="{{ route('projects.category', $projectCat->slug) }}" >
+                    <div>
                         <img src="{{ $projectCat->image?$projectCat->image:asset('assets/images/common/category-human.png') }}" alt="">
                         <div class="title">{{ $projectCat->name  }}</div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             </li>
             @endforeach
         </ul>

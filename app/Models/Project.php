@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
+use Carbon\Carbon;
 class Project extends Model
 {
     use SoftDeletes;
@@ -20,9 +21,13 @@ class Project extends Model
         "content",
         "featured",
         "status",
+        "money",
+        "donated",
         "user_id",
     ];
-
+    protected $dates = [
+        "end_time"
+    ];
     protected static function boot()
     {
         parent::boot();
@@ -72,5 +77,18 @@ class Project extends Model
     }
     public function getTotalDonatedFormatAttribute(){
         return number_format($this->total_donated,0,",",".");
+    }
+    public function getGalleryAttribute(){
+        return json_decode($this->galleries);
+    }
+
+    public function getDaysLeftAttribute(){
+        if($this->end_time <  Carbon::today())
+            return "完了済み";
+        if($this->end_time->eq(Carbon::today()))
+            return "Today";
+
+        $left = $this->end_time->diff(Carbon::today())->days;
+        return $left." 日";
     }
 }

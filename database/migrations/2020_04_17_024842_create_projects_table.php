@@ -18,12 +18,14 @@ class CreateProjectsTable extends Migration
             $table->unsignedBigInteger('project_category_id');
             $table->string("name")->unique();
             $table->string("slug")->unique();
-            $table->dateTime("end_time");
+            $table->date("end_time");
             $table->string("thumbnail")->nullable();
             $table->text("galleries")->nullable();
             $table->longText("content")->nullable();
             $table->boolean('featured')->default(0);
             $table->enum("status",["publish","draft"])->default("publish");
+            $table->integer("money")->default(0);
+            $table->integer("donated")->default(0);
             $table->unsignedBigInteger('user_id');
             $table->softDeletes();
             $table->timestamps();

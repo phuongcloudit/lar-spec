@@ -1,9 +1,8 @@
-@charset "UTF-8";
 html, html * {
   box-sizing: border-box; }
 
 body {
-  font-family: "小塚ゴシック Pr6N", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
+  font-family: "KozGo Pr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
   font-size: 16px;
   color: #000000;
   margin: 0; }
@@ -76,14 +75,15 @@ header#header .header-content {
 
 .heading {
   font-size: 52px;
-  font-family: "HiraginoSans W0", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
+  font-family: "HiraginoSans W0", "Meiryo", "Hiragino Kaku Gothic Pro";
   position: relative;
   margin-top: 0;
   margin-bottom: 20px;
   line-height: 1em;
   padding: 25px 35px;
   padding-bottom: 10px;
-  font-weight: normal; }
+  font-weight: normal;
+  text-transform: capitalize; }
   .heading:before, .heading:after {
     content: "";
     position: absolute;
@@ -97,7 +97,7 @@ header#header .header-content {
     left: 7px; }
   .heading p {
     font-size: 16px;
-    font-family: "小塚ゴシック Pr6N", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
+    font-family: "KozGo Pr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
     margin-top: 15px;
     margin-bottom: 0; }
     .heading p::first-letter {
@@ -117,13 +117,21 @@ header#header .header-content {
     width: calc( 50% + 600px);
     max-width: 100%;
     float: right;
-    background-color: rgba(255, 255, 255, 0.8); }
+    background-color: rgba(255, 255, 255, 0.9); }
     #home-content .content > .container {
       margin-left: 0;
-      padding: 60px 70px; }
+      padding: 60px 70px;
+      position: relative; }
       #home-content .content > .container p {
         line-height: 1.8em;
         margin-bottom: 2em; }
+      #home-content .content > .container .content-right {
+        font-size: 45px;
+        width: 45px;
+        position: absolute;
+        right: -40px;
+        top: 0;
+        padding-top: 60px; }
 
 .projects {
   margin-left: -10px;
@@ -137,14 +145,19 @@ header#header .header-content {
     padding-right: 10px; }
     .projects .project .project-item {
       display: block;
-      border: 1px solid #bc173f;
+      border: 1px solid #b36376;
       background-color: #efefee;
-      text-decoration: none; }
+      text-decoration: none;
+      transition: all .2s; }
+      .projects .project .project-item:hover {
+        filter: drop-shadow(2px 4px 8px #b36376); }
       .projects .project .project-item .thumbnail {
         position: relative;
         height: 0;
         padding-bottom: 80%;
-        background-size: cover;
+        background-image: url("../images/common/project-demo.png");
+        background-repeat: no-repeat;
+        background-size: contain;
         background-position: center; }
         .projects .project .project-item .thumbnail .project-info {
           position: absolute;
@@ -157,7 +170,9 @@ header#header .header-content {
             font-size: 14px;
             padding: 7px 15px;
             display: inline-block;
-            border-radius: 27px; }
+            border-radius: 27px;
+            min-width: 120px;
+            text-align: center; }
           .projects .project .project-item .thumbnail .project-info .title {
             padding: 5px 7px;
             background-color: rgba(255, 255, 255, 0.8); }
@@ -166,7 +181,7 @@ header#header .header-content {
               color: #231815;
               font-weight: normal;
               line-height: 1.5em;
-              font-family: "小塚ゴシック Pr6N", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
+              font-family: "KozGo Pr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
               margin: 0;
               display: -webkit-box;
               -webkit-line-clamp: 2;
@@ -193,7 +208,7 @@ header#header .header-content {
             padding-right: 20px;
             border-bottom: 1px solid #c0bdbd;
             font-weight: bold;
-            font-family: "HiraginoSans W4", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro"; }
+            font-family: "HiraginoSans W4", "Meiryo", "Hiragino Kaku Gothic Pro"; }
   .projects.colums-5 .project {
     width: 20%; }
   .projects.colums-3 .project {
@@ -208,13 +223,13 @@ header#header .header-content {
   position: relative; }
   #categories h2 {
     font-size: 52px;
-    font-family: "HiraginoSans W0", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
+    font-family: "HiraginoSans W0", "Meiryo", "Hiragino Kaku Gothic Pro";
     font-weight: normal;
     margin: 0;
     margin-bottom: 50px; }
     #categories h2 span {
       margin-top: 20px;
-      font-family: "小塚ゴシック Pr6N", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
+      font-family: "KozGo Pr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
       font-size: 18px;
       display: block; }
   #categories ul.categories {
@@ -234,7 +249,11 @@ header#header .header-content {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      justify-content: center; }
+      justify-content: center;
+      transition: all .2s;
+      text-decoration: none; }
+      #categories ul.categories li .category:hover {
+        filter: drop-shadow(2px 4px 8px #b36376); }
       #categories ul.categories li .category .title {
         width: 100%;
         color: #231815;
@@ -246,56 +265,214 @@ header#header .header-content {
     display: block;
     margin: 0 auto; }
 
-#news .news {
-  margin-top: 20px; }
-  #news .news ul {
-    list-style: none;
-    margin: 0 auto;
-    padding: 0;
-    max-width: 930px; }
-    #news .news ul li {
-      border-bottom: 1px solid #9f9e9f;
-      padding: 5px 15px;
+#news {
+  margin-bottom: 20px; }
+  #news .news {
+    margin-top: 20px; }
+    #news .news ul {
+      list-style: none;
+      margin: 0 auto;
+      padding: 0;
+      max-width: 930px; }
+      #news .news ul li {
+        border-bottom: 1px solid #9f9e9f;
+        padding: 5px 15px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        color: #231815;
+        margin-bottom: 10px; }
+        #news .news ul li .date {
+          width: 150px;
+          font-family: "HiraginoSans W3", "Meiryo", "Hiragino Kaku Gothic Pro";
+          font-size: 22px; }
+        #news .news ul li .category {
+          width: 100px; }
+          #news .news ul li .category span {
+            padding: 5px 10px;
+            border-radius: 10px;
+            background-color: #6b6b6b;
+            color: #FFF;
+            font-size: 14px; }
+        #news .news ul li .content {
+          width: calc(100% - 250px);
+          padding-right: 80px;
+          font-size: 18px;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          position: relative; }
+          #news .news ul li .content:after {
+            position: absolute;
+            content: "";
+            width: 80px;
+            height: 100%;
+            background-image: url("../images/common/detail-news.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            right: 0;
+            top: 0;
+            transform: translateY(-5px); }
+
+.sorting {
+  background-color: #f6f7f9;
+  padding: 20px 0; }
+  .sorting .sort {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 70px;
+    padding-right: 70px; }
+    .sorting .sort .category {
+      width: 30%;
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
-      color: #231815;
-      margin-bottom: 10px; }
-      #news .news ul li .date {
-        width: 150px;
-        font-family: "HiraginoSans W3", "KozGoPr6N", "Meiryo", "Hiragino Kaku Gothic Pro";
-        font-size: 22px; }
-      #news .news ul li .category {
+      align-items: center; }
+      .sorting .sort .category label {
         width: 100px; }
-        #news .news ul li .category span {
-          padding: 5px 10px;
-          border-radius: 10px;
-          background-color: #6b6b6b;
-          color: #FFF;
-          font-size: 14px; }
-      #news .news ul li .content {
-        width: calc(100% - 250px);
-        padding-right: 80px;
-        font-size: 18px;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        position: relative; }
-        #news .news ul li .content:after {
+      .sorting .sort .category .select-category {
+        width: calc(100% - 100px);
+        position: relative;
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        /* iOS Safari */
+        -webkit-user-select: none;
+        /* Safari */
+        -khtml-user-select: none;
+        /* Konqueror HTML */
+        -moz-user-select: none;
+        /* Old versions of Firefox */
+        -ms-user-select: none;
+        /* Internet Explorer/Edge */
+        user-select: none; }
+        .sorting .sort .category .select-category .selecting {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center; }
+        .sorting .sort .category .select-category img {
+          max-width: 35px;
+          max-height: 35px;
+          margin-right: 20px; }
+        .sorting .sort .category .select-category .dropdown {
+          margin-top: 20px;
           position: absolute;
-          content: "";
-          width: 80px;
-          height: 100%;
-          background-image: url("../images/common/detail-news.png");
-          background-position: center;
-          background-repeat: no-repeat;
-          right: 0;
-          top: 0;
-          transform: translateY(-5px); }
+          width: 100%;
+          z-index: +1;
+          display: none; }
+          .sorting .sort .category .select-category .dropdown.active {
+            display: block; }
+          .sorting .sort .category .select-category .dropdown ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f7f9;
+            border: 1px solid #e0e0e0; }
+            .sorting .sort .category .select-category .dropdown ul li {
+              min-height: 50px;
+              display: flex;
+              align-items: center; }
+              .sorting .sort .category .select-category .dropdown ul li:not(:last-child) {
+                border-bottom: 1px solid #e0e0e0; }
+              .sorting .sort .category .select-category .dropdown ul li a {
+                padding: 7px 10px;
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                color: inherit; }
+    .sorting .sort .ordering {
+      width: 70%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end; }
+      .sorting .sort .ordering ul {
+        list-style: none;
+        margin: 0; }
+        .sorting .sort .ordering ul li {
+          display: inline-block; }
+          .sorting .sort .ordering ul li a {
+            background-color: #FFF;
+            color: #231815;
+            margin: 0 3px;
+            padding: 7px 20px;
+            display: block;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: all .2s; }
+          .sorting .sort .ordering ul li a:hover, .sorting .sort .ordering ul li.active a {
+            border-color: #c55960;
+            background-color: #e94c56;
+            color: #FFF; }
+
+.pagination {
+  margin: 0;
+  margin-top: 40px;
+  list-style: none;
+  padding: 0;
+  text-align: center; }
+  .pagination li {
+    display: inline-block; }
+    .pagination li .page-link {
+      padding: 5px 10px;
+      background-color: #aaaaa9;
+      color: #FFF;
+      text-align: center;
+      text-decoration: none;
+      transition: all .3s; }
+    .pagination li.disabled .page-link {
+      display: none; }
+    .pagination li .page-link:hover, .pagination li.active .page-link {
+      background-color: #e94c56; }
 
 footer {
   margin-top: 100px;
   background-color: #f3a47d;
-  padding-top: 65px; }
+  color: #FFF; }
+  footer .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-top: 65px;
+    padding-bottom: 40px; }
+    footer .footer-content .footer-left {
+      width: 350px; }
+    footer .footer-content .footer-center {
+      width: calc(100% - 600px);
+      display: flex;
+      flex-wrap: wrap; }
+      footer .footer-content .footer-center ul {
+        list-style: none;
+        margin: 0;
+        padding: 0 15px; }
+        footer .footer-content .footer-center ul li {
+          padding: 5px 5px; }
+          footer .footer-content .footer-center ul li a {
+            font-size: 18px;
+            color: #FFF;
+            display: block; }
+    footer .footer-content .footer-right {
+      width: 250px; }
+      footer .footer-content .footer-right .btn-contact {
+        margin-top: 30px;
+        color: #343434;
+        background-color: #FFF;
+        display: block;
+        padding: 10px;
+        text-align: center;
+        position: relative;
+        font-weight: bold; }
+        footer .footer-content .footer-right .btn-contact:before {
+          position: absolute;
+          content: "";
+          width: 0px;
+          height: 0px;
+          border-bottom: 14px solid transparent;
+          border-left: 20px solid #f4a47f;
+          top: 2px;
+          left: 2px; }
+  footer .copyright {
+    text-align: center;
+    font-family: "HiraginoSans W3", "Meiryo", "Hiragino Kaku Gothic Pro";
+    font-size: 12px;
+    padding: 20px 0; }

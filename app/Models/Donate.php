@@ -28,7 +28,16 @@ class Donate extends Model
         "pay_time",
         "epsilon_info"
     ];
-    
+    protected static function boot()
+    {
+        parent::boot();
+        static::saved(function ($model) {
+            $project = $model->project;
+            $project->money = $project->TotalDonated;
+            $project->donated = $project->TotalDonatedNumber;
+            $project->save();
+        });
+    }
 	public function project(){
         return $this->belongsTo('App\Models\Project');
     }

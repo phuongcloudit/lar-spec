@@ -56,6 +56,7 @@ body a:hover {
 
 header#header .header-content {
   padding-top: 20px;
+  padding-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -336,6 +337,13 @@ header#header .header-content .header-nav > ul > li > a:hover img {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+#categories ul.categories li .category:hover {
+  -webkit-filter: drop-shadow(2px 4px 8px #b36376);
+          filter: drop-shadow(2px 4px 8px #b36376);
 }
 
 #categories ul.categories li .category .title {
@@ -646,5 +654,183 @@ footer .copyright {
   font-family: "HiraginoSans W3", "Meiryo", "Hiragino Kaku Gothic Pro";
   font-size: 12px;
   padding: 20px 0;
+}
+
+.slider-pickups {
+  background-color: #d5c8c4;
+}
+
+.project-detail {
+  padding-top: 80px;
+  background-color: #f9fafa;
+}
+
+.single-project .page-title {
+  text-align: center;
+  font-size: 50px;
+  color: #160306;
+  line-height: 1.2em;
+  font-weight: normal;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.single-project .page-title span {
+  padding-left: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+.single-project .page-title span:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background-color: #160306;
+}
+
+.single-project .page-title span:after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 0;
+  width: 5px;
+  height: 100%;
+  background-color: #160306;
+}
+
+.single-project .category {
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+.single-project .category span {
+  margin-left: 30px;
+  background-color: #e25d3e;
+  color: #FFF;
+  font-size: 22px;
+  display: inline-block;
+  padding: 10px 35px;
+  border-radius: 7px;
+}
+
+.single-project .project-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: -30px;
+  margin-right: -30px;
+}
+
+.single-project .project-info .left {
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 66.6666666667%;
+}
+
+.single-project .project-info .left .swiper-container {
+  width: 100%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.single-project .project-info .left .gallery-project {
+  height: 80%;
+  width: 100%;
+  padding-bottom: 10px;
+}
+
+.single-project .project-info .left .gallery-project .swiper-slide {
+  padding: 0;
+}
+
+.single-project .project-info .left .gallery-thumbs {
+  height: 20%;
+  box-sizing: border-box;
+}
+
+.single-project .project-info .left .gallery-thumbs .swiper-slide {
+  height: 100%;
+  opacity: 0.4;
+  padding: 0;
+}
+
+.single-project .project-info .left .gallery-thumbs .swiper-slide.swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+.single-project .project-info .right {
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 33.3333333333%;
+}
+
+.single-project .project-info .project-content {
+  text-align: justify;
+}
+
+.single-project .details .detail {
+  font-size: 20px;
+  color: #323333;
+}
+
+.single-project .details .detail .info {
+  font-size: 42px;
+  line-height: 2em;
+  color: #e94c56;
+}
+
+.single-project .details .detail .info.donated {
+  color: #656666;
+}
+
+.single-project .donate-control {
+  margin-bottom: 10px;
+}
+
+.single-project .donate-control input {
+  width: 100%;
+  padding: 7px 15px;
+}
+
+.single-project .detail-action .btn {
+  position: relative;
+  color: #FFF;
+  line-height: 1.5em;
+  font-size: 24px;
+  border: none;
+  padding: 15px 10px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.single-project .detail-action .btn:after {
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  border-bottom: 8px solid transparent;
+  border-top: 8px solid transparent;
+  border-left: 13px solid #fff;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-60%);
+}
+
+.single-project .detail-action .btn.btn-donate {
+  display: block;
+  background-color: #39a069;
+  display: block;
+  width: 100%;
+}
+
+.single-project .detail-action .btn.btn-report {
+  padding: 15px 35px;
+  margin-top: 20px;
+  background-color: #ed731d;
 }
 

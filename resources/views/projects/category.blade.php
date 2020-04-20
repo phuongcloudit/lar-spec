@@ -1,16 +1,6 @@
 @extends('layouts.app')
-@push('scripts')
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('.select-category').click(function(){
-            $(this).children(".dropdown").slideToggle(200, function(){
-                $(this).toggleClass('active');
-            })
-        })
-    })
-</script>
-@endpush
 @section('content')
+@include("includes.pickups")
 @include("includes.sorting")
 <section class="section">
     <div class="container">

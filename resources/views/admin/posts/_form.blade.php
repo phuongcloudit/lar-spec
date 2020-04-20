@@ -28,36 +28,35 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-group">
-
+                    @if($post->exists)
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-5 offset-7">
+                                <a  class="btn btn-success  btn-block" href="{{ route('post.detail',['slug'=> $post->slug]) }}" target="_blank">
+                                    <i class="fas fa-eye"></i> View
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                     <div class="form-group">
                         {{ Form::label('status', "カテゴリー") }}
                         {!! Form::select('status', ["publish"   =>  "Công khai" ,"draft"    =>  "Nháp"], old('status', $post->status?:'publish'), ['class' => 'form-control custom-select']) !!}
                     </div>
                     <div class="form-group">
-                    @if($post->exists)
                         <div class="row">
                             <div class="col-md-4">
                                  {{ Form::button('<i class="fas fa-save"></i> Save', ['class' => 'btn btn-primary btn-block', 'type'=>'submit']) }}
                             </div>
                             <div class="col-md-4">
-                                <a  class="btn btn-success  btn-block" href="{{ route('post.detail',['slug'=> $post->slug]) }}" target="_blank">
-                                    <i class="fas fa-eye"></i> View
-                                </a>
+                                <button class="btn btn-outline-success btn-block" type="reset">
+                                    <i class="fas fa-undo"></i> Reset
+                                </button>
                             </div>
                             <div class="col-md-4">
-                                <a href="{{ route('admin.posts.index') }}" class="btn btn-outline-secondary  btn-block cancel-update"><i class="fas fa-undo"></i> キャンセル</a>
+                                <a href="{{ route('admin.posts.index') }}" class="btn btn-outline-secondary  btn-block cancel-update"><i class="fas fa-arrow-left"></i>  キャンセル</a>
                             </div>
                         </div>
-                    @else
-                        <div class="row">
-                            <div class="col-md-6">
-                                 {{ Form::button('<i class="fas fa-save"></i> Save', ['class' => 'btn btn-primary btn-block', 'type'=>'submit']) }}
-                            </div>
-                            <div class="col-md-6">
-                                <a href="{{ route('admin.posts.index') }}" class="btn btn-outline-secondary  btn-block cancel-create"><i class="fas fa-undo"></i> キャンセル</a>
-                            </div>
-                        </div>
-                    @endif
                     </div>
                 </div>
             </div>
