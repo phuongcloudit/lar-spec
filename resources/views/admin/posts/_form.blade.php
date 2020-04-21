@@ -40,8 +40,8 @@
                     </div>
                     @endif
                     <div class="form-group">
-                        {{ Form::label('status', "カテゴリー") }}
-                        {!! Form::select('status', ["publish"   =>  "Công khai" ,"draft"    =>  "Nháp"], old('status', $post->status?:'publish'), ['class' => 'form-control custom-select']) !!}
+                        {{ Form::label('status', "ステータス") }}
+                        {!! Form::select('status', ["publish"   =>  "公開" ,"draft"    =>  "下書き"], old('status', $post->status?:'publish'), ['class' => 'form-control custom-select']) !!}
                     </div>
                     <div class="form-group">
                         <div class="row">
@@ -84,3 +84,5 @@
         </div>
     </div>
 </div>
+
+@include("admin.includes.media")
