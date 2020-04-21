@@ -1,4 +1,11 @@
+<?php 
+	$orderby 	= trim(Request::query('orderby'));
+	$order 		= trim(Request::query('order'))=="ASC"?"DESC":"ASC";
+	$sort_icon  = '<i class="fas fa-sort-amount-down'.($order=="DESC"?"-alt":"") .'"></i> ';
+	$category_name = trim(Request::query('category_name'));
+?>
 @extends('admin.layouts.master') @section('content')
+
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -16,6 +23,32 @@
     <!-- /.container-fluid -->
 </section>
 
+<section >
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4 offset-8">
+				{!! Form::open(['method' => 'GET', 'route'=>['admin.projects.index']]) !!} 
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<select class="custom-select" name="category_name">
+						   		<option value="">All</option>
+								@foreach($projectCategories as $cat)
+								<option value="{{ $cat->slug }}" {{ $category_name==$cat->slug?'selected':'' }} >{{ $cat->name }}</option>
+								@endforeach
+						  </select>
+						</div>
+						{!! Form::text('s',  Request::query('s'), array('class' => 'form-control', 'placeholder'	=>	"キーワードを入力して検索")) !!}
+						<div class="input-group-append">
+							{!! Form::button('<i class="fa fa-search" aria-hidden="true"></i> 検索', ['class' => 'btn btn-success',  'type' => 'submit']) !!} 
+						</div>
+					</div>
+					
+                    	
+                {!! Form::close() !!}
+			</div>
+		</div>
+	</div>
+</section>
 <!-- Main content -->
 <section class="content">
 	<div class="container-fluid">
@@ -27,12 +60,23 @@
 		            <table class="table table-striped projects">
 		                <thead>
 		                    <tr>
-		                        <th> プロジェクト名</th>
-		                        <th style="width: 160px">カテゴリー</th>
-		                        <th style="width: 160px"  class="text-right">募金総額</th>
-	                        	<th style="width: 100px" class="text-right">募金者数</th>
-	                        	<th style="width: 100px" class="text-right"> Status </th>
-		                        <th style="width: 160px">注目のプロジェクト</th>
+		                        <th>
+		                        	<a href="{{ Request::fullUrlWithQuery(['orderby' => 'name', 'order'	=>	$order]) }}">{!! $orderby=="name"?$sort_icon:"" !!}プロジェクト名</a>
+		                        </th>
+		                        <th style="width: 160px">
+		                        	<a href="{{ Request::fullUrlWithQuery(['orderby' => 'project_category_id', 'order'	=>	$order]) }}">{!! $orderby=="project_category_id"?$sort_icon:"" !!}カテゴリー</a>
+		                        </th>
+		                        <th style="width: 160px"  class="text-right">
+			                        <a href="{{ Request::fullUrlWithQuery(['orderby' => 'money', 'order'	=>	$order]) }}">{!! $orderby=="money"?$sort_icon:"" !!}募金総額</a>
+			                    </th>
+	                        	<th style="width: 120px" class="text-right">
+	                        		<a href="{{ Request::fullUrlWithQuery(['orderby' => 'donated', 'order'	=>	$order]) }}">{!! $orderby=="donated"?$sort_icon:"" !!}募金者数</a>
+	                        	</th>
+	                        	<th style="width: 120px" class="text-right">
+	                        		<a href="{{ Request::fullUrlWithQuery(['orderby' => 'status', 'order'	=>	$order]) }}">{!! $orderby=="status"?$sort_icon:"" !!}ステータス</a>
+	                        	</th>
+		                        <th style="width: 180px">
+		                        	<a href="{{ Request::fullUrlWithQuery(['orderby' => 'featured', 'order'	=>	$order]) }}">{!! $orderby=="featured"?$sort_icon:"" !!}注目のプロジェクト</a></th>
 		                        <th style="width: 180px"></th>
 		                    </tr>
 		                </thead>
@@ -56,10 +100,10 @@
 		                            {{$project->TotalDonatedNumber}}人
 		                        </td>
 		                        <td class="text-right">
-		                    		{{ $project->status }}
+		                    		{{ $project->statusName }}
 		                    	</td>
 		                        <td class="text-center" style="color: #3490dd;">
-		                        	<button class="btn btn-success btn-sm featured">
+		                        	<button class="btn btn-{{ !$project->featured?'outline-':'' }}success btn-sm featured" data-switch_url="{{ route('admin.projects.featured', $project) }}" data-featured="{{ $project->featured }}">
 		                        		<i class="{{ $project->featured?'fas':'far' }} fa-star"></i>
 		                        	</button>
 		                        </td>
@@ -86,7 +130,7 @@
 	        <!-- /.card-body -->
 	    </div>
 	    <div class="text-right">
-	        <?php echo $projects->render(); ?>
+	    	{{ $projects->appends(Request::query())->render() }}
 	    </div>
 	    <!-- /.card -->
 	</div>
@@ -96,7 +140,33 @@
 @push("scripts")
 <script type="text/javascript">
 	$(document).ready(function(){
-
+		$(".featured").click(function(){
+			_this = $(this)
+			var featured = $(this).data("featured")?0:1,
+			switch_url = $(this).data("switch_url")
+			console.log(featured);
+			$.ajax({
+				url : switch_url,
+				data : { featured : featured },
+				type : 'POST',
+				beforeSend : function ( xhr ) {
+					_this.removeClass("btn-success");
+					_this.addClass("btn-outline-success");
+					_this.html('<i class="fas fa-spinner"></i>'); // change the button text, you can also add a preloader image
+				},
+				success : function( data ){
+					console.log(data);
+					var fa = 'far';
+					if(data.featured==1){
+						fa = 'fas';
+						_this.addClass("btn-success");
+						_this.removeClass("btn-outline-success");
+					}
+					_this.data("featured", data.featured)
+					_this.html(`<i class="${fa} fa-star"></i>`);
+				}
+			})
+		})
 	})
 </script>
 @endpush

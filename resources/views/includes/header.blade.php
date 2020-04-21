@@ -7,6 +7,14 @@
 						<img src="{{ asset('./assets/images/logo.png') }}" width="250" alt="届くが見える︒想いが届く︑" >
 					</a>
 				</div>
+				<a class="menu-mobile" href="javascript:;">
+					<svg width="36" height="32" stroke="#394261" stroke-width="2">
+							<line x1="2" y1="4" x2="28" y2="4"></line>
+						<line x1="2" y1="12" x2="32" y2="12"></line>
+						<line x1="2" y1="20" x2="28" y2="20"></line>
+						<line x1="2" y1="28" x2="32" y2="28"></line>
+					</svg>
+				</a>
 			</div>
 			<div class="header-nav">
 				<ul>

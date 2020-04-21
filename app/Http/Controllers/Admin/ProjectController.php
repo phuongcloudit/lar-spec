@@ -27,9 +27,16 @@ class ProjectController extends Controller
             if($category)
                 $projects = $projects->where("project_category_id",$category->id);
         }
+        if($request->has("s")){
+            $projects = $projects->where("name","LIKE", "%{$request->s}%");
+        }
         $limit = $request->limit?$request->limit:20;
-        $projects = $projects->orderby("updated_at","DESC")->paginate($limit);
-        return view('admin.projects.index', compact('projects'));
+        $orderby = trim($request->input('orderby'));
+        $orderby = in_array($orderby, ['name', "project_category_id", "money", "donated", "status","featured"]) ? $orderby : 'created_at';
+        $order = trim($request->input('order'))=="ASC"?"ASC":"DESC";
+        $projects = $projects->orderby($orderby,$order)->paginate($limit);
+        $projectCategories = ProjectCategory::get();
+        return view('admin.projects.index', compact('projects'))->withProjectCategories($projectCategories);
     }
 
     /**
@@ -108,7 +115,11 @@ class ProjectController extends Controller
         Project::findOrFail($id)->delete();
         return redirect()->route('admin.projects.index')->with('success','A Post deleted successfully');
     }
-
+    public function switchFeaured(Request $request, Project $project){
+        $project->featured = $request->featured==1?1:0;
+        $project->save();
+        return response()->json(['featured'  =>  $project->featured]);
+    }
     public function donate(Project $project){
         return view('admin.projects.donate')->withProject($project);
     }

@@ -18,6 +18,7 @@ Auth::routes();
 Route::name('admin.')->prefix('admin')->namespace("Admin")->group(function () {
     Route::group(['middleware' => ['auth', 'admin']], function(){
         Route::get('/','DashboardController@index')->name('dashboard');
+        Route::post('projects/{project}/featured', 'ProjectController@switchFeaured')->name("projects.featured");
 
         Route::get('projects/donate/{project}', 'ProjectController@donate')->name("projects.donate");
         Route::post('projects/donate/{project}/store', 'ProjectController@storeDonate')->name("projects.donate.store");

@@ -88,11 +88,13 @@
             <ul>
                 @foreach($posts as $post)
                 <li>
-                    <div class="date">
-                        {{ $post->date->format("Y.m.d") }}
-                    </div>
-                    <div class="category">
-                        <span>{{ $post->category->name }}</span>
+                    <div class="meta">
+                        <div class="date">
+                            {{ $post->date->format("Y.m.d") }}
+                        </div>
+                        <div class="category">
+                            <span>{{ $post->category->name }}</span>
+                        </div>
                     </div>
                     <div class="content">
                         {{ $post->title }}

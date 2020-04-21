@@ -69,6 +69,9 @@ class Project extends Model
     public function getUserNameAttribute(){
         return $this->user->name;
     }
+    public function getStatusNameAttribute(){
+        return $this->status=="publish"?"公開":"下書き";
+    }
     public function getTotalDonatedNumberAttribute(){
         return $this->donates()->where('state',1)->count();
     }
@@ -84,10 +87,9 @@ class Project extends Model
 
     public function getDaysLeftAttribute(){
         if($this->end_time <  Carbon::today())
-            return "完了済み";
+            return "完成済み";
         if($this->end_time->eq(Carbon::today()))
-            return "Today";
-
+            return "今日中に完成";
         $left = $this->end_time->diff(Carbon::today())->days;
         return $left." 日";
     }

@@ -38,7 +38,7 @@
                 @endif
                 <div class="form-group">
                     <div class="form-group">
-                        {{ Form::label('status', "カテゴリー") }}
+                        {{ Form::label('status', "ステータス") }}
                         {!! Form::select('status', ["publish"   =>  "公開" ,"draft"    =>  "下書き"], old('status', $project->status?:'publish'), ['class' => 'form-control custom-select']) !!}
                     </div>
                     <div class="form-group">
