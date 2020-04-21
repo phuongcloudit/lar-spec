@@ -60,7 +60,7 @@ class ProjectController extends Controller
     public function store(ProjectRequest $request)
     {
         
-        $data = $request->only("project_category_id", "name", "slug", "end_time", "thumbnail", "galleries", "content", "featured", "status");
+        $data = $request->only("project_category_id", "name", "slug", "end_time", "thumbnail", "galleries", "content", "recruiter_avatar","recruiter_name","recruiter_content", "featured", "status");
         $project = Project::create($data);
         return redirect()->route('admin.projects.edit', $project)->with('success','Project has been created sucessfully');
     }
@@ -99,7 +99,7 @@ class ProjectController extends Controller
     
     public function update(ProjectRequest $request, Project $project)
     {
-        $data = $request->only("project_category_id", "name", "slug", "end_time", "thumbnail", "galleries", "content", "featured", "status");
+        $data = $request->only("project_category_id", "name", "slug", "end_time", "thumbnail", "galleries", "content", "recruiter_avatar","recruiter_name","recruiter_content", "featured", "status");
         $project->update($data);
 
         return redirect()->route('admin.projects.edit', $project)->with('success','Post Updated sucessfully');

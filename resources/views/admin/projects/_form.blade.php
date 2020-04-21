@@ -14,58 +14,54 @@
                     {{ Form::text('slug', null, array('class' => 'form-control',  'minlength' => '5')) }}
                     @if ($errors->has('slug'))<div class="alert alert-danger">{{$errors->first('slug')}}</div>@endif
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>アバター画像</label>
-                            <div class="select-media" data-input="#thumbnail" data-preview="#thumbnail-preview"  data-multiple="false">
-                                <span>アバター画像選択</span>
-                            </div>
-                            <input type="hidden" class="form-control" name="thumbnail" id="thumbnail" value="{{ old('status', $project->thumbnail) }}">
-                            <div id="thumbnail-preview">
-                                @if(old('thumbnail',$project->thumbnail))
-                                <img src="{{ old('thumbnail',$project->thumbnail) }}">
-                                @endif
-                            </div>
-                            <div class="delete-media" data-input="#thumbnail" data-preview="#thumbnail-preview">
-                               アバター画像削除
-                            </div>
-                        </div>
-                    </div>
-                     <div class="col-md-8">
-                        <div class="form-group">
-                            <label>ギャラリー</label>
-                            <div class="select-media" data-input="#galleries" data-preview="#galleries-preview" data-multiple="true" data-size="file">
-                                <span>ギャラリーに追加する</span>
-                            </div>
-                            <input type="hidden" class="form-control" name="galleries" id="galleries" value="{{ old('status', $project->galleries) }}">
-                            <div id="galleries-preview" class="list-preview" data-input="#galleries" data-preview="#galleries-preview">
-                                @if($project->gallery)
-                                    @foreach ($project->gallery as $gallery)
-                                    <div class="item">
-                                        <img src="{{ $gallery }}" />
-                                        <span class="remove"><i class="far fa-trash-alt"></i></span>
-                                    </div>
-                                    @endforeach
-                                @endif
-                            </div>
-                            <div class="delete-media" data-input="#galleries" data-preview="#galleries-preview">
-                                ギャラリー削除
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="form-group">
                     {{ Form::label('content', "Content") }}
                     {!! Form::textarea('content', null, ['id' => 'content', 'class' => 'form-control' ]) !!}
                 </div>
             </div>
         </div>
+        <div class="card">
+            <div class="card-body">
+                募集者
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>アバター画像</label>
+                            <div class="select-media" data-input="#recruiter_avatar" data-preview="#recruiter_avatar-preview"  data-multiple="false">
+                                <span>アバター画像選択</span>
+                            </div>
+                            <input type="hidden" class="form-control" name="recruiter_avatar" id="recruiter_avatar" value="{{ old('status', $project->recruiter_avatar) }}">
+                            <div id="recruiter_avatar-preview">
+                                @if(old('recruiter_avatar',$project->recruiter_avatar))
+                                <img src="{{ old('recruiter_avatar',$project->recruiter_avatar) }}">
+                                @endif
+                            </div>
+                            <div class="delete-media" data-input="#recruiter_avatar" data-preview="#recruiter_avatar-preview">
+                               アバター画像削除
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            {{ Form::label('recruiter_name', "募集者の名前") }}
+                            {{ Form::text('recruiter_name', null, ['class' => 'form-control']) }}
+                            @if ($errors->has('recruiter_name'))
+                                <div class="alert alert-danger">{{$errors->first('recruiter_name')}}</div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    {{ Form::label('recruiter_content', "Content") }}
+                    {!! Form::textarea('recruiter_content', null, ['id' => 'recruiter_content', 'class' => 'form-control' ]) !!}
+                </div>
+            </div>
+        </div>
+        
     </div>
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
-                
                 @if($project->exists)
                 <div class="form-group">
                     <div class="row">
@@ -121,6 +117,49 @@
                         {{ Form::date('end_time', Carbon\Carbon::now(), ['class' => 'form-control']) }}
                     @endif
                     @if ($errors->has('end_time'))<div class="alert alert-danger">{{$errors->first('end_time')}}</div>@endif
+                </div>
+            </div>
+        </div>
+         <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>ギャラリー</label>
+                    <div class="select-media" data-input="#galleries" data-preview="#galleries-preview" data-multiple="true" data-size="file">
+                        <span>ギャラリーに追加する</span>
+                    </div>
+                    <input type="hidden" class="form-control" name="galleries" id="galleries" value="{{ old('status', $project->galleries) }}">
+                    <div id="galleries-preview" class="list-preview" data-input="#galleries" data-preview="#galleries-preview">
+                        @if($project->gallery)
+                            @foreach ($project->gallery as $gallery)
+                            <div class="item">
+                                <img src="{{ $gallery }}" />
+                                <span class="remove"><i class="far fa-trash-alt"></i></span>
+                            </div>
+                            @endforeach
+                        @endif
+                    </div>
+                    <div class="delete-media" data-input="#galleries" data-preview="#galleries-preview">
+                        ギャラリー削除
+                    </div>
+                </div>
+            </div>
+        </div>
+         <div class="card">
+            <div class="card-body">
+                <div class="form-group">
+                    <label>アバター画像</label>
+                    <div class="select-media" data-input="#thumbnail" data-preview="#thumbnail-preview"  data-multiple="false">
+                        <span>アバター画像選択</span>
+                    </div>
+                    <input type="hidden" class="form-control" name="thumbnail" id="thumbnail" value="{{ old('status', $project->thumbnail) }}">
+                    <div id="thumbnail-preview">
+                        @if(old('thumbnail',$project->thumbnail))
+                        <img src="{{ old('thumbnail',$project->thumbnail) }}">
+                        @endif
+                    </div>
+                    <div class="delete-media" data-input="#thumbnail" data-preview="#thumbnail-preview">
+                       アバター画像削除
+                    </div>
                 </div>
             </div>
         </div>

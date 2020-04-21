@@ -79,6 +79,17 @@
         		<div class="project-content" >
         			{!! $project->content !!}
         		</div>
+	            <div class="project-recruiter">
+	            	<div class="info">
+	            		<div class="avatar">
+	            			<img src="{{  $project->recruiter_avatar }}">
+	            		</div>
+	            		<h3 class="name">{{  $project->recruiter_name }}</h3>
+	            	</div>
+	            	<div class="about">
+	            		{!!  nl2br($project->recruiter_content) !!}
+	            	</div>
+	            </div>
         	</div>
         </div>
     </div>
