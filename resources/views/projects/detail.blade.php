@@ -82,7 +82,7 @@
 	            <div class="project-recruiter">
 	            	<div class="info">
 	            		<div class="avatar">
-	            			<img src="{{  $project->recruiter_avatar }}">
+	            			<img src="{{  $project->recruiter_avatar?:asset('assets/images/common/recruiter-avatar.png') }}">
 	            		</div>
 	            		<h3 class="name">{{  $project->recruiter_name }}</h3>
 	            	</div>

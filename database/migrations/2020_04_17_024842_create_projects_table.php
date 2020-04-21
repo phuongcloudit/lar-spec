@@ -22,6 +22,9 @@ class CreateProjectsTable extends Migration
             $table->string("thumbnail")->nullable();
             $table->text("galleries")->nullable();
             $table->longText("content")->nullable();
+            $table->string('recruiter_avatar')->nullable();
+            $table->string('recruiter_name');
+            $table->text('recruiter_content')->nullable();
             $table->boolean('featured')->default(0);
             $table->enum("status",["publish","draft"])->default("publish");
             $table->integer("money")->default(0);

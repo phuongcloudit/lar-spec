@@ -30,7 +30,7 @@
                             <div class="select-media" data-input="#recruiter_avatar" data-preview="#recruiter_avatar-preview"  data-multiple="false">
                                 <span>アバター画像選択</span>
                             </div>
-                            <input type="hidden" class="form-control" name="recruiter_avatar" id="recruiter_avatar" value="{{ old('status', $project->recruiter_avatar) }}">
+                            <input type="hidden" class="form-control" name="recruiter_avatar" id="recruiter_avatar" value="{{ old('recruiter_avatar', $project->recruiter_avatar) }}">
                             <div id="recruiter_avatar-preview">
                                 @if(old('recruiter_avatar',$project->recruiter_avatar))
                                 <img src="{{ old('recruiter_avatar',$project->recruiter_avatar) }}">
@@ -39,6 +39,9 @@
                             <div class="delete-media" data-input="#recruiter_avatar" data-preview="#recruiter_avatar-preview">
                                アバター画像削除
                             </div>
+                            @if ($errors->has('recruiter_avatar'))
+                                <div class="alert alert-danger">{{$errors->first('recruiter_avatar')}}</div>
+                            @endif
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -53,6 +56,9 @@
                 </div>
                 <div class="form-group">
                     {{ Form::label('recruiter_content', "Content") }}
+                    @if ($errors->has('recruiter_content'))
+                        <div class="alert alert-danger">{{$errors->first('recruiter_content')}}</div>
+                    @endif
                     {!! Form::textarea('recruiter_content', null, ['id' => 'recruiter_content', 'class' => 'form-control' ]) !!}
                 </div>
             </div>

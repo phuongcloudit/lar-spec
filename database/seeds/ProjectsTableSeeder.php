@@ -13,22 +13,23 @@ class ProjectsTableSeeder extends Seeder
      */
     public function run()
     {
-    	$thumbnails = ["project-demo.png","project-demo-1.png","project-demo-2.png"];
         for($i=1; $i<200; $i++){
-        	$thumbnail = $thumbnails[array_rand($thumbnails, 1)];
         	$project = Project::firstOrCreate([
         			"project_category_id"	=>	rand(1,4),
-        			"thumbnail"	=>	 asset("assets/images/common/".$thumbnail),
+        			"thumbnail"	=>	 asset("assets/images/common/project-demo-1.png"),
 		        	"name"      => "#{$i} - タイトルタイトルタイトルタイトルタイトルタイトルタイトルタイトルタイトル",
                     'slug'      => "project-slug-{$i}",
         			"end_time"	=>	Carbon::now()->add(rand(20,40), 'day'),
 		            "content" 		=> "# ".$i." #  - テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
 		            <p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p><p>テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>",
+		            "recruiter_avatar"	=>	asset('assets/images/common/recruiter-avatar.png'),
+		            "recruiter_name"	=>	"募集者の名前",
+		            "recruiter_content"	=>	"紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テキスト紹介テ",
 		            "featured"		=>	rand(0,1),
 		            "status"		=>	"publish",
         			"user_id"		=>	1,
 	    	]);
-	    	$number = rand(30,100);
+	    	$number = rand(10,20);
 	    	for($j=1; $j<$number; $j++){
 	    		Donate::create([
 	    			"project_id"		=>	$project->id,

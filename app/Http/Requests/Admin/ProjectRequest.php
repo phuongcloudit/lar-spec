@@ -21,7 +21,10 @@ class ProjectRequest extends FormRequest
             'project_category_id'   =>  'required|exists:App\Models\ProjectCategory,id',
             'name'                  => 'required|max:255|unique:App\Models\Project,name',
             'slug'                  => 'required|max:255|unique:App\Models\Project,slug',
-            'end_time'              =>  'required'
+            'end_time'              =>  'required',
+            "recruiter_avatar"     =>  'required',
+            "recruiter_name"       =>  'required',
+            "recruiter_content"    =>  'required'
         ];
         if($this->isMethod('PUT') || $this->isMethod('PATCH')):
             $project = $this->route('project');
