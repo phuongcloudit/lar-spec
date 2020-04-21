@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@push('title'){{ $project->name }}@endpush
 @section('content')
 
 @include("includes.sorting")

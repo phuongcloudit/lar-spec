@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@push('title'){{ $projectCategory->name }}@endpush
 @section('content')
 @include("includes.pickups")
 @include("includes.sorting")

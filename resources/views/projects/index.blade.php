@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@push('title')募金プロジェクト@endpush
 @section('content')
 <section class="section">
     <div class="container">
