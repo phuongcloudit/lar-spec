@@ -65,7 +65,7 @@
 	                        <button class="btn btn-donate" type="submit">このプロジェクトに募金する</button>
 	                    </div>
                 	</form>
-                	<a href="#" class="btn  btn-report">
+                	<a href="{{ route('reports.index') }}" class="btn  btn-report">
                 		募金現場レポート
                 	</a>
         		</div>
