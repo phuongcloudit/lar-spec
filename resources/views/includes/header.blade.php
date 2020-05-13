@@ -32,8 +32,8 @@
 					</li>
 					<li>
 						<a href="{{ route('home') }}">
-							<span>募金現場レポート</span>
-							<img src="{{ asset('assets/images/common/btn-orange.png') }}" alt="募金現場レポート">
+							<span>Special Thanksとは</span>
+							<img src="{{ asset('assets/images/common/btn-pink.png') }}" alt="Special Thanksとは">
 						</a>
 					</li>
 				</ul>

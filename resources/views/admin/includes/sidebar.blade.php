@@ -53,6 +53,30 @@
 				</ul>
 			</li>
 			<li class="nav-item has-treeview ">
+				<a href="" class="nav-link">
+				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+					<p>募金現場レポート<i class="fas fa-angle-left right"></i></p>
+				</a>
+				<ul class="nav nav-treeview">
+					<li class="nav-item">
+						<a href="{{ route('admin.reports.index') }}" class="nav-link">
+							<i class="far fa-circle nav-icon"></i> Report
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ route('admin.reports.create') }}" class="nav-link">
+							<i class="far fa-circle nav-icon"></i> Report Cretae
+						</a>
+					</li>
+					<li class="nav-item">
+						<a href="{{ route('admin.report-types.index') }}" class="nav-link">
+							<i class="far fa-circle nav-icon"></i> 各プロジェクト
+						</a>
+					</li>
+					
+				</ul>
+			</li>
+			<li class="nav-item has-treeview ">
 				<a href="{{ route('admin.posts.index') }}" class="nav-link">
 					<i class="nav-icon fas fa-edit"></i>
 					<p>News<i class="fas fa-angle-left right"></i></p>

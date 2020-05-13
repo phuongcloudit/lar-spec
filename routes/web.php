@@ -31,6 +31,10 @@ Route::name('admin.')->prefix('admin')->namespace("Admin")->group(function () {
         Route::resource('categories', 'CategoryController');
         Route::resource('posts', 'PostController');
 
+        Route::resource('report-types', 'ReportTypeController');
+        Route::resource('reports', 'ReportController');
+        Route::post('reports/{report}/featured', 'ReportController@switchFeaured')->name("reports.featured");
+
         Route::resource('users', 'UserController')->only(['index', 'edit', 'update']);
     
     });
@@ -50,6 +54,23 @@ Route::get('order', function(){
 Route::get('confirm', function(){
     return view("epsilons.confirm");
 });
+
+// sub page
+
+Route::get('/about', function () {
+    return view('pages.about');
+});
+
+Route::get('/terms-of-services', function () {
+    return view('pages.terms-of-services');
+});
+
+Route::get('/privacy-policy', function () {
+    return view('pages.privacy-policy');
+});
+Route::get('/page-1', function () {
+    return view('pages.page-1');
+});
 // public route
 Route::group(['middleware' => ['web']], function(){
     Route::get('/', 'HomeController@index')->name("home");
@@ -59,7 +80,17 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('/news/{slug}', 'PostController@getSingle')->where('slug', '[\w\d\-\_]+')->name("post.detail");
     Route::get('category/{slug}', ['as' => 'category.single', 'uses' => 'CategoryController@getSingle'])
     ->where('slug', '[\w\d\-\_]+');
+
+    Route::get('/reports', 'ReportController@index')->where('slug', '[\w\d\-\_]+')->name("reports.index");
+    Route::get('/reports/search', 'ReportController@search')->where('slug', '[\w\d\-\_]+')->name("reports.search");
+    Route::get('/report/{slug}', 'ReportController@detail')->where('slug', '[\w\d\-\_]+')->name("reports.detail");
+    Route::get('/reports/{slug}/types/', 'ReportController@getByType')->where('slug', '[\w\d\-\_]+')->name("reports.type");
+    Route::get('/reports/{slug}/projects/', 'ReportController@getByProjectCategory')->where('slug', '[\w\d\-\_]+')->name("reports.project");
     
     Route::get('/{slug}', 'ProjectController@detail')->where('slug', '[\w\d\-\_]+')->name("project.detail");
+
 });
 
+Route::group(['middleware' => 'filter'], function() {
+    Route::resource('Reposts', 'RepostController');
+});
