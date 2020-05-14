@@ -12,7 +12,8 @@
 </section>
 
 
-<section id="content-sidebar">
+
+<section id="content-sidebar" class="section">
     <div class="container">
         <div class="main-content">
 
