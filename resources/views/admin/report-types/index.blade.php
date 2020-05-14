@@ -1,18 +1,18 @@
 @extends('admin.layouts.master')
 
-@section('title', '各プロジェクト')
+@section('title', 'カテゴリー')
 
 @section('content')
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>各プロジェクト</h1>
+                <h1>カテゴリー</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                    <li class="breadcrumb-item active">各プロジェクト</li>
+                    <li class="breadcrumb-item active">カテゴリー</li>
                 </ol>
             </div>
         </div>
@@ -38,10 +38,10 @@
                     <div class="card-body">
                         <div class="rows">
                             <div class="col-md-6 offset-md-6" >
-                                {!! Form::open(['method'=>'GET',    'route'=>['admin.project-categories.index'],'style'=> 'display:inline', 'title' => 'Search'])
+                                {!! Form::open(['method'=>'GET',    'route'=>['admin.report-types.index'],'style'=> 'display:inline', 'title' => 'Search'])
                                 !!}
                                 <div class="input-group mb-3">
-                                    <input type="text" name="category_name" class="form-control" placeholder="キーワードを入力..." aria-describedby="basic-addon2">
+                                    <input type="text" name="report_type_name" class="form-control" placeholder="キーワードを入力..." aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary p-20" type="submit"> &nbsp&nbsp&nbsp<i class="fas fa-search"></i> &nbsp&nbsp</button>
                                     </div>
@@ -53,23 +53,21 @@
                             <table class="table table-striped projects">
                                 <thead>
                                     <tr>
-                                        <th style="width: 300px;">Name</th>
-                                        <th style="width: 300px;">プロジェクト数</th>                                    
+                                        <th style="width: 20%">カテゴリー名</th>
+                                        <th style="width: 20%">カテゴリー数</th>                                    
                                         <th>Description</th>
-                                        <th style="width: 200px;" >Slug</th>
-                                        <th class="text-center" style="width: 160px;" >Action</th>
+                                        <th style="width: 15%">Slug</th>
+                                        <th class="text-center" style="width: 160px;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($types as $type)
                                     <tr>
                                         <td>
-                                            <a target="_blank" class="post-title"  href="{{ url('') }}/types/{{ $type->slug }}"> {{ $type->name }}</a>
+                                            <a class="post-title"  href="{{ route('admin.reports.index',['report_type_name'   => $type->slug ]) }}"> {{ $type->name }}</a>
                                         </td>
                                         <td>
-                                        <a href="" >
                                                 {{ $type->total_reports }}
-                                            </a>
                                         </td>
                                         <td>
                                             {{ $type->description }}
@@ -77,8 +75,8 @@
                                         <td>
                                             {{ $type->slug }}
                                         </td>
-                                        <td class="project-actions text-right">
-                                            <a  target="_blank" class="btn btn-primary btn-sm" href="{{ url('') }}/type/{{ $type->slug }}" title="View">
+                                        <td class="text-right">
+                                            <a  target="_blank" class="btn btn-primary btn-sm" href="{{ route('reports.type',['slug'=> $type->slug]) }}" title="View">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             <a class="btn btn-success btn-sm" href="{{ route('admin.report-types.edit', $type->id) }}" title="Edit">

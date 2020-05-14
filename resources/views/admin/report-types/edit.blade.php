@@ -1,18 +1,18 @@
 @extends('admin.layouts.master')
 
-@section('title', '各プロジェクト')
+@section('title', 'カテゴリー')
 
 @section('content')
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>各プロジェクト</h1>
+                <h1>カテゴリー</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                    <li class="breadcrumb-item active">各プロジェクト</li>
+                    <li class="breadcrumb-item active">カテゴリー</li>
                 </ol>
             </div>
         </div>

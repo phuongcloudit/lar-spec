@@ -64,7 +64,7 @@
                                     @foreach ($categories as $category)
                                     <tr>
                                         <td>
-                                            <a target="_blank" class="post-title"  href="{{ url('') }}/category/{{ $category->slug }}"> {{ $category->name }}</a>
+                                            <a class="post-title"  href="{{ route('admin.projects.index',['category_name'   => $category->slug ]) }}"> {{ $category->name }}</a>
                                         </td>
                                         <td>
                                             <a href="{{ route('admin.projects.index',['category_name'   => $category->slug ]) }}" >
@@ -78,7 +78,7 @@
                                             {{ $category->slug }}
                                         </td>
                                         <td class="project-actions text-right">
-                                            <a  target="_blank" class="btn btn-primary btn-sm" href="{{ url('') }}/category/{{ $category->slug }}" title="View">
+                                            <a  target="_blank" class="btn btn-primary btn-sm" href="{{ route('projects.category',['slug'=> $category->slug]) }}" title="View">
                                                 <i class="fas fa-eye"></i>
                                             </a>
                                             <a class="btn btn-success btn-sm" href="{{ route('admin.project-categories.edit', $category->id) }}" title="Edit">

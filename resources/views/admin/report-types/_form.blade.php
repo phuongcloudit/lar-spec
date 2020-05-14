@@ -1,6 +1,6 @@
 <div class="card-body">
     <div class="form-group">
-        {{ Form::label('name', "各プロジェクト") }}
+        {{ Form::label('name', "カテゴリー名") }}
         {{ Form::text('name', null, ['class' => 'form-control']) }}
         @if ($errors->has('name'))
         <div class="alert alert-danger">{{$errors->first('name')}}</div>

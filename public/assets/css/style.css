@@ -1130,6 +1130,7 @@ footer .copyright {
   background-color: #39a069;
   display: block;
   width: 100%;
+  cursor: pointer;
 }
 
 .single-project .detail-action .btn.btn-report {
@@ -1354,7 +1355,7 @@ footer .copyright {
 }
 
 #content-sidebar {
-  margin-top: 55px;
+  overflow: hidden;
 }
 
 #content-sidebar .main-content {
@@ -1723,6 +1724,10 @@ footer .copyright {
   margin-top: 25px;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+#content-sidebar .main-content .the-article .post-body .entry-content {
+  margin-top: 20px;
 }
 
 #content-sidebar .main-content .the-article .post-body p {

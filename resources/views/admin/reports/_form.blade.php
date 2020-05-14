@@ -25,7 +25,17 @@
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
-
+            @if($report->exists)
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-5 offset-7">
+                            <a  class="btn btn-success  btn-block" href="{{ route('reports.detail',['slug'=> $report->slug]) }}" target="_blank">
+                                <i class="fas fa-eye"></i> View
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                @endif
                 <div class="form-group">
                     <div class="form-group">
                         {{ Form::label('status', "ステータス") }}
@@ -60,14 +70,8 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-group">
-                    {{ Form::label('user_id', "Author") }}
+                    {{ Form::label('user_id', "User") }}
                     {!! Form::select('user_id', $users, old('user_id', $report->users), ['class' => 'form-control custom-select']) !!}
-                </div>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" name="custom_author" value="1">
-                        Custom Author
-                    </label>
                 </div>
                 <div class="form-group">
                     {{ Form::label('author', "Author: ") }}
@@ -81,7 +85,7 @@
             <div class="card-body">
                 <div class="form-group">
                     {{ Form::label('project_category_id', "カテゴリー") }}
-                    {!! Form::select('project_category_id', $projectCategories, null, ['class' => 'form-control
+                    {!! Form::select('project_category_id',  $projectCategories, null, ['class' => 'form-control
                     custom-select']) !!}
                     @if ($errors->has('project_category_id'))<div class="alert alert-danger">
                         {{$errors->first('project_category_id')}}</div>@endif

@@ -19,20 +19,28 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $reports = Report::with(["project_category","report_type","user"]);
+        if($request->has("category_name")){
+            $category = ProjectCategory::where("slug", $request->category_name)->first();
+            if($category)
+                $reports = $reports->where("project_category_id",$category->id);
+        }
+        if($request->has("report_type_name")){
+            $report_type = ReportType::where("slug", $request->report_type_name)->first();
+            if($report_type)
+                $reports = $reports->where("report_type_id",$report_type->id);
+        }
         $limit = $request->limit?$request->limit:20;
         $orderby = trim($request->input('orderby'));
         $orderby = in_array($orderby, ["title","user_id","project_category_id", "report_type_id", "status","featured"]) ? $orderby : 'created_at';
         $order = trim($request->input('order'))=="ASC"?"ASC":"DESC";
         $reports = $reports->orderby($orderby,$order)->paginate($limit);
-
-
         return view('admin.reports.index', compact('reports'));
     }
     public function create()
     {
         $users = User::pluck('name', 'id');
-        $projectCategories = ProjectCategory::pluck('name', 'id');
-        $reportTypes = ReportType::pluck('name', 'id');
+        $projectCategories = ProjectCategory::pluck('name', 'id')->prepend('None', '');
+        $reportTypes = ReportType::pluck('name', 'id')->prepend('None', '');
         // $reportTypes->prepend('None');
         $report = new Report;
         return view('admin.reports.create')->withReport($report)->withProjectCategories($projectCategories)->withReportTypes($reportTypes)->withUsers($users);
@@ -49,18 +57,14 @@ class ReportController extends Controller
     {
         $report = Report::findOrFail($id);
         $users = User::pluck('name', 'id');
-        $projectCategories = ProjectCategory::pluck('name', 'id');
-        $reportTypes = ReportType::pluck('name', 'id');
+        $projectCategories = ProjectCategory::pluck('name', 'id')->prepend('None', '');
+        $reportTypes = ReportType::pluck('name', 'id')->prepend('None', '');
         return view('admin.reports.edit')->withReport($report)->withProjectCategories($projectCategories)->withReportTypes($reportTypes)->withUsers($users);
     }
     public function update(ReportRequest $request, Report $report)
     {
         $data = $request->only("project_category_id","report_type_id", "title", "slug", "date", "thumbnail", "content","user_id","author", "featured", "status");
-        var_dump($data);
-        // die();
-      
         $report->update($data);
-     
         return redirect()->route('admin.reports.edit', $report)->with('success','Report Updated sucessfully');
     }
 
@@ -75,7 +79,4 @@ class ReportController extends Controller
         return response()->json(['featured'  =>  $report->featured]);
     }
     
-
-  
-
 }

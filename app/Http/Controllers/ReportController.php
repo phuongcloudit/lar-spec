@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\Models\Report;
 
+use App\Models\Project;
 use App\Models\ReportType;
 use Illuminate\Http\Request;
 use App\Models\ProjectCategory;
@@ -15,12 +16,13 @@ class ReportController extends Controller
     public function index(Request $request)
     {
         $report_first  = Report::publish()->orderby("date","DESC")->first();
-        $reports  = Report::publish()->orderby("date","DESC")->where('id','<>',$report_first->id)->paginate(2);
+        $reports  = Report::publish()->orderby("date","DESC")->where('id','<>',$report_first->id)->paginate(10);
         $reportTypes = ReportType::with('reports');
         $categories = ProjectCategory::with('reports');
         $featureReports = Report::publish()->orderby("view_count","DESC")->take(3)->get();
         $reportCategories = ProjectCategory::with('reports')->get();
         $reportTypes = ReportType::with('reports')->get();
+        $featured_projects  = Project::publish()->featured()->limit(10)->get();
         $links = DB::table('reports')
                                 ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) report_count'))
                                 ->groupBy('year')
@@ -30,7 +32,7 @@ class ReportController extends Controller
                                 ->get();
 
       
-        return view('reports.index', compact('reportCategories','reportTypes','report_first','links'))->withReports($reports)->withReportTypes($reportTypes)->withCategories($categories)->withFeatureReports($featureReports);
+        return view('reports.index', compact('reportCategories','reportTypes','report_first','links'))->withReports($reports)->withReportTypes($reportTypes)->withCategories($categories)->withFeatureReports($featureReports)->withFeaturedProjects($featured_projects);
     }
 
     public function detail($slug){
@@ -40,6 +42,7 @@ class ReportController extends Controller
         Event::dispatch('report.view', $report);
         $reportCategories = ProjectCategory::with('reports')->get();
         $reportTypes = ReportType::with('reports')->get();
+        $featured_projects  = Project::publish()->featured()->limit(10)->get();
         $links = DB::table('reports')
         ->select(DB::raw('YEAR(created_at) year, MONTH(created_at) month, MONTHNAME(created_at) month_name, COUNT(*) report_count'))
         ->groupBy('year')
@@ -47,7 +50,7 @@ class ReportController extends Controller
         ->orderBy('year', 'desc')
         ->orderBy('month', 'desc')
         ->get();
-        return view('reports.detail', compact('reportCategories','reportTypes','links'))->withReport($report)->withReportTypes($reportTypes)->withCategories($categories);
+        return view('reports.detail', compact('reportCategories','reportTypes','links'))->withReport($report)->withReportTypes($reportTypes)->withCategories($categories)->withFeaturedProjects($featured_projects);
     }
 
     public function getByType(Request $request, $slug){

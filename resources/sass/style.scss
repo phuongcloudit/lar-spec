@@ -1174,6 +1174,7 @@ footer {
                 background-color: #39a069;
                 display: block;
                 width: 100%;
+                cursor: pointer;
             }
 
             &.btn-report {
@@ -1428,8 +1429,7 @@ footer {
 
 
 #content-sidebar {
-    margin-top: 55px;
-
+    overflow: hidden;
     .main-content {
 
         width: 100%;
@@ -1828,6 +1828,9 @@ footer {
                 margin-top: 25px;
                 padding-left: 20px;
                 padding-right: 20px;
+                .entry-content{
+                    margin-top: 20px;
+                }
 
                 p {
                     line-height: 1.8em;

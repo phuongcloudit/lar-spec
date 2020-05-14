@@ -15,8 +15,8 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('project_category_id');
-            $table->unsignedBigInteger('report_type_id');
+            $table->unsignedBigInteger('project_category_id')->nullable();
+            $table->unsignedBigInteger('report_type_id')->nullable();
             $table->string("title")->unique();
             $table->string("slug")->unique();
             $table->longText("content")->nullable();

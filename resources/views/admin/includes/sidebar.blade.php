@@ -53,24 +53,24 @@
 				</ul>
 			</li>
 			<li class="nav-item has-treeview ">
-				<a href="" class="nav-link">
-				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+				<a href="{{ route('admin.reports.index') }}" class="nav-link">
+					<i class="nav-icon fas fa-file-alt"></i>
 					<p>募金現場レポート<i class="fas fa-angle-left right"></i></p>
 				</a>
 				<ul class="nav nav-treeview">
 					<li class="nav-item">
 						<a href="{{ route('admin.reports.index') }}" class="nav-link">
-							<i class="far fa-circle nav-icon"></i> Report
+							<i class="far fa-circle nav-icon"></i> Reports
 						</a>
 					</li>
 					<li class="nav-item">
 						<a href="{{ route('admin.reports.create') }}" class="nav-link">
-							<i class="far fa-circle nav-icon"></i> Report Cretae
+							<i class="far fa-circle nav-icon"></i> Report 新規追加
 						</a>
 					</li>
 					<li class="nav-item">
 						<a href="{{ route('admin.report-types.index') }}" class="nav-link">
-							<i class="far fa-circle nav-icon"></i> 各プロジェクト
+							<i class="far fa-circle nav-icon"></i>カテゴリー
 						</a>
 					</li>
 					

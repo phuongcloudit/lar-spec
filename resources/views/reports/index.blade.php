@@ -41,7 +41,7 @@
 
 </section>
 
-<section id="content-sidebar">
+<section id="content-sidebar" class="section">
     <div class="container">
         <div class="main-content">
             <div class="new-report">
@@ -107,5 +107,5 @@
 </section>
 <div class="clear"></div>
 
-
+@include("includes.pickups")
 @stop

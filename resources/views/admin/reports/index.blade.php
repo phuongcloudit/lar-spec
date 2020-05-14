@@ -2,7 +2,8 @@
 	$orderby 	= trim(Request::query('orderby'));
 	$order 		= trim(Request::query('order'))=="ASC"?"DESC":"ASC";
 	$sort_icon  = '<i class="fas fa-sort-amount-down'.($order=="DESC"?"-alt":"") .'"></i> ';
-	$category_name = trim(Request::query('category_name'));
+    $category_name = trim(Request::query('category_name'));
+    $report_type_name = trim(Request::query('report_type_name'));
 ?>
 @extends('admin.layouts.master') @section('content')
 
@@ -10,12 +11,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>募金プロジェクト</h1>
+                <h1>募金現場レポート</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active">募金プロジェクト</li>
+                    <li class="breadcrumb-item active">募金現場レポート</li>
                 </ol>
             </div>
         </div>
@@ -70,7 +71,7 @@
                             @foreach($reports as $report)
                             <tr>
                                 <td>
-                                    <a class="post-title" target="_blank" href=""><b>{{ $report->title }}</b></a>
+                                    <a class="post-title" target="_blank" href="{{ route('reports.detail',['slug'=> $report->slug]) }}"><b>{{ $report->title }}</b></a>
                                     <br />
                                     <small>最後の更新は<b>{{ $report->updated_at->format("Y年n月j日 g:i A")}}</b></small>
                                 </td>
@@ -82,12 +83,12 @@
                                         @endif
                                 </td>
                                 <td class="text-right">
-                                     <a href="">
+                                     <a href="{{ route('admin.reports.index',['category_name'   =>  $report->project_category->slug ]) }}">
                                         {{ $report->project_category->name }}
                                     </a>
                                 </td>
                                 <td class="text-right">
-                                <a href="">
+                                <a href="{{ route('admin.reports.index',['report_type_name'   =>  $report->report_type->slug ]) }}">
                                         {{ $report->report_type->name }}
                                     </a>
                                 </td>
@@ -122,7 +123,7 @@
             <!-- /.card-body -->
         </div>
         <div class="text-right">
-
+            {{ $reports->appends(Request::query())->render() }}
         </div>
         <!-- /.card -->
     </div>

@@ -18,8 +18,8 @@ class ReportRequest extends FormRequest
     public function rules(): array
     {
         $rules =  [          
-            'project_category_id'   =>  'required|exists:App\Models\ProjectCategory,id',
-            'report_type_id'        =>  'required',
+            // 'project_category_id'   =>  'required|exists:App\Models\ProjectCategory,id',
+            // 'report_type_id'        =>  'required',
             'title'                 =>  'required|max:255|unique:App\Models\Report,title',
             'slug'                  =>  'required|max:255|unique:App\Models\Report,slug',
             'date'                  =>  'required',
