@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@push('title')特定商取引法の表記@endpush
 @section('content')
 
 <main>

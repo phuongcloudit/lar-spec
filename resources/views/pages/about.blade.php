@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@push('title')Special Thanksとは@endpush
 @section('content')
 
 <main>

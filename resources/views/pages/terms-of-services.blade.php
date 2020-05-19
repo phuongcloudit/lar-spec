@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@push('title')利用規約@endpush
 @section('content')
 
 <main>

@@ -19,19 +19,19 @@
 			<div class="header-nav">
 				<ul>
 					<li>
-						<a href="{{ route('home') }}">
+					<a href="javascript:void(0)">
 							<span>募金先を探す</span>
 							<img src="{{ asset('assets/images/common/btn-green.png') }}" alt="募金先を探す">
 						</a>
 					</li>
 					<li>
-						<a href="{{ route('home') }}">
+						<a href="javascript:void(0)">
 							<span>募金を募集する</span>
 							<img src="{{ asset('assets/images/common/btn-blue.png') }}" alt="募金を募集する">
 						</a>
 					</li>
 					<li>
-						<a href="{{ route('home') }}">
+						<a href="{{ route('home') }}/about">
 							<span>Special Thanksとは</span>
 							<img src="{{ asset('assets/images/common/btn-pink.png') }}" alt="Special Thanksとは">
 						</a>

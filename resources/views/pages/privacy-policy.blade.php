@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@push('title')個人情報保護方針@endpush
 @section('content')
 
 <main>

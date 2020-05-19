@@ -68,8 +68,8 @@ Route::get('/terms-of-services', function () {
 Route::get('/privacy-policy', function () {
     return view('pages.privacy-policy');
 });
-Route::get('/page-1', function () {
-    return view('pages.page-1');
+Route::get('/specific-trade-law', function () {
+    return view('pages.specific-trade-law');
 });
 // public route
 Route::group(['middleware' => ['web']], function(){
