@@ -20,7 +20,7 @@ class CreateReportsTable extends Migration
             $table->string("title")->unique();
             $table->string("slug")->unique();
             $table->longText("content")->nullable();
-            $table->date("date");
+            $table->dateTime("date");
             $table->enum("status",["publish","draft"])->default("publish");
             $table->string("thumbnail")->nullable();
             $table->boolean('featured')->default(0);

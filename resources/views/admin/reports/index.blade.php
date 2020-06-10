@@ -61,9 +61,9 @@
                                 <th style="width: 15%;" class="text-right">
                                 <a href="{{ Request::fullUrlWithQuery(['orderby' => 'status', 'order'	=>	$order]) }}">{!! $orderby=="status"?$sort_icon:"" !!}ステータス</a>
                                 </th>
-                                <th style="width: 15%;" class="text-right">
+                                <!-- <th style="width: 15%;" class="text-right">
                                 <a href="{{ Request::fullUrlWithQuery(['orderby' => 'featured', 'order'	=>	$order]) }}">{!! $orderby=="name"?$sort_icon:"" !!}注目のプロジェクト</a> 
-                                </th>
+                                </th> -->
                                 <th></th>
                             </tr>
                         </thead>
@@ -94,13 +94,13 @@
                                 </td>
                                 <td class="text-right">
                                     {{ $report->statusName }}<br/>
-                                   <small>{{ $report->created_at->format("Y年n月j日 g:i A")}}</small>
+                                   <small>{{ $report->date->format("Y年n月j日 g:i A")}}</small>
                                 </td>
-                                <td class="text-center" style="color: #3490dd;">
+                                <!-- <td class="text-center" style="color: #3490dd;">
                                     <button class="btn btn-{{ !$report->featured?'outline-':'' }}success btn-sm featured" data-switch_url="{{ route('admin.reports.featured', $report) }}" data-featured="{{ $report->featured }}">
 		                        		<i class="{{ $report->featured?'fas':'far' }} fa-star"></i>
 		                        	</button>
-                                </td>
+                                </td> -->
                                 <td class="project-actions text-right">
                                     <a target="_blank" class="btn btn-outline-primary btn-sm" href="{{ route('reports.detail',['slug'=> $report->slug]) }}">
                                         <i class="fas fa-eye"></i>

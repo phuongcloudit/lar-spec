@@ -41,12 +41,12 @@
                         {{ Form::label('status', "ステータス") }}
                         {!! Form::select('status', ["publish"   =>  "公開" ,"draft"    =>  "下書き"], old('status', $report->status?:'publish'), ['class' => 'form-control custom-select']) !!}
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label>
                             <input type="checkbox" name="featured" value="1" {{ old('featured',$report->featured)?'checked':'' }}>
                             注目のプロジェクト
                         </label>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-4">
@@ -100,9 +100,9 @@
                 <div class="form-group">
                     {{ Form::label('date', "募集終了まで") }}
                     @if($report->exists)
-                    {{ Form::date('date', Carbon\Carbon::parse($report->date)->format('yy-m-d'), ['class' => 'form-control']) }}
+                    {{ Form::input('dateTime-local', 'date', Carbon\Carbon::parse($report->date)->format('yy-m-d\Th:m'), ['class' => 'form-control']) }}
                     @else
-                    {{ Form::date('date', Carbon\Carbon::now(), ['class' => 'form-control']) }}
+                    {{ Form::input('dateTime-local', 'date', Carbon\Carbon::now()->format('yy-m-d\Th:m'), ['class' => 'form-control']) }}
                     @endif
                     @if ($errors->has('date'))<div class="alert alert-danger">{{$errors->first('date')}}</div>@endif
                 </div>

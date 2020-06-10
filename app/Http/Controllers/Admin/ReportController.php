@@ -10,6 +10,7 @@ use App\Models\ReportType;
 use App\Models\Report;
 use App\Models\User;
 use Carbon\Carbon;
+use DateTime;
 use Auth;
 
 use App\Http\Requests\Admin\ReportRequest;
@@ -39,9 +40,10 @@ class ReportController extends Controller
     public function create()
     {
         $users = User::pluck('name', 'id');
-        $projectCategories = ProjectCategory::pluck('name', 'id')->prepend('None', '');
-        $reportTypes = ReportType::pluck('name', 'id')->prepend('None', '');
-        // $reportTypes->prepend('None');
+        // $projectCategories = ProjectCategory::pluck('name', 'id')->prepend('None', '');
+        $projectCategories = ProjectCategory::pluck('name', 'id');
+        // $reportTypes = ReportType::pluck('name', 'id')->prepend('None', '');
+        $reportTypes = ReportType::pluck('name', 'id');
         $report = new Report;
         return view('admin.reports.create')->withReport($report)->withProjectCategories($projectCategories)->withReportTypes($reportTypes)->withUsers($users);
     }
@@ -50,6 +52,8 @@ class ReportController extends Controller
     {
         
         $data = $request->only("project_category_id","report_type_id", "title", "slug", "date", "thumbnail", "content","user_id","author", "featured", "status");
+        $date = new DateTime($request->date);
+        $data['date'] = $date->format('Y-m-d h:m:s'); 
         $report = Report::create($data);
         return redirect()->route('admin.reports.edit', $report)->with('success','Report has been created sucessfully');
     }
@@ -57,13 +61,17 @@ class ReportController extends Controller
     {
         $report = Report::findOrFail($id);
         $users = User::pluck('name', 'id');
-        $projectCategories = ProjectCategory::pluck('name', 'id')->prepend('None', '');
-        $reportTypes = ReportType::pluck('name', 'id')->prepend('None', '');
+        // $projectCategories = ProjectCategory::pluck('name', 'id')->prepend('None', '');
+        // $reportTypes = ReportType::pluck('name', 'id')->prepend('None', '');
+        $projectCategories = ProjectCategory::pluck('name', 'id');
+        $reportTypes = ReportType::pluck('name', 'id');
         return view('admin.reports.edit')->withReport($report)->withProjectCategories($projectCategories)->withReportTypes($reportTypes)->withUsers($users);
     }
     public function update(ReportRequest $request, Report $report)
     {
         $data = $request->only("project_category_id","report_type_id", "title", "slug", "date", "thumbnail", "content","user_id","author", "featured", "status");
+        $date = new DateTime($request->date);
+        $data['date'] = $date->format('Y-m-d h:m:s'); 
         $report->update($data);
         return redirect()->route('admin.reports.edit', $report)->with('success','Report Updated sucessfully');
     }

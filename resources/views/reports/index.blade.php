@@ -46,7 +46,7 @@
         <div class="main-content">
             <div class="new-report">
                 <h2 class="title">
-                    人気ブログ
+                新着記事
                 </h2>
 
                 <div class="new-report-content">
