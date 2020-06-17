@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\DonateRequest;
 
-use App\Models\Post;
+use App\Models\Project;
 use App\Models\Donate;
 use Illuminate\Http\Request;
 use App\Payments\Epsilon;
