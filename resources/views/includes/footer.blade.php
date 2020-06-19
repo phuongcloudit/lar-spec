@@ -9,10 +9,10 @@
             <div class="footer-center">
                 <ul>
                     <li><a href="">募金先を探す</a></li>
-                    <li><a href="">ヒューマン</a></li>
-                    <li><a href="">ペット</a></li>
-                    <li><a href="">医療</a></li>
-                    <li><a href="">スポーツ</a></li>
+                    <li><a href="{{ route('home') }}/human/projects">ヒューマン</a></li>
+                    <li><a href="{{ route('home') }}/petto/projects">ペット</a></li>
+                    <li><a href="{{ route('home') }}/iryou/projects">医療</a></li>
+                    <li><a href="{{ route('home') }}/supottsu/projects">スポーツ</a></li>
                 </ul>
                 <ul>
                     <li><a href="">募金先レポート</a></li>

@@ -75,6 +75,7 @@ body {
     color: #d71528;
 }
 
+
 header#header {
     .header-content {
         padding-top: 20px;
@@ -148,6 +149,7 @@ header#header {
 
                 img {
                     width: 200px;
+                    height: 45px;
                 }
             }
         }
@@ -157,6 +159,7 @@ header#header {
         .header-content .header-nav>ul>li>a {
             img {
                 width: 160px;
+                height: 40px;
             }
 
             span {
@@ -191,6 +194,30 @@ header#header {
 
             .header-nav {
                 display: none;
+
+                &.active{
+                    display: block;
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    padding: 20px 0;
+                    background-color: #fff;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 552px) {
+        .header-content {
+            .header-nav {
+                &.active{
+                   ul{
+                       li{
+                           width: 100%;
+                           text-align: center;
+                       }
+                   }
+                }
             }
         }
     }

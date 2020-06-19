@@ -17,6 +17,7 @@
 @include('includes.footer')
 <link rel="stylesheet" href="{{ asset('/assets/css/fonts.css') }}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="{{ asset('/assets/js/script.js') }}"></script>
 @stack('scripts')
 </body>
 </html>

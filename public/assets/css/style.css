@@ -128,12 +128,14 @@ header#header .header-content .header-nav > ul > li > a:hover img {
 
   header#header .header-content .header-nav > ul > li > a img {
     width: 200px;
+    height: 45px;
   }
 }
 
 @media screen and (max-width: 800px) {
   header#header .header-content .header-nav > ul > li > a img {
     width: 160px;
+    height: 40px;
   }
 
   header#header .header-content .header-nav > ul > li > a span {
@@ -166,6 +168,22 @@ header#header .header-content .header-nav > ul > li > a:hover img {
 
   header#header .header-content .header-nav {
     display: none;
+  }
+
+  header#header .header-content .header-nav.active {
+    display: block;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    background-color: #fff;
+  }
+}
+
+@media screen and (max-width: 552px) {
+  header#header .header-content .header-nav.active ul li {
+    width: 100%;
+    text-align: center;
   }
 }
 
