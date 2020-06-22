@@ -20,6 +20,11 @@
                     <li><a href="">新着情報</a></li>
                     <li><a href="">サイトマップ</a></li>
                 </ul>
+                <ul>
+                    <li><a href="{{ route('home') }}/privacy-policy">プライバシーポリシー</a></li>
+                    <li><a href="{{ route('home') }}/terms-of-services">利用規約</a></li>
+                    <li><a href="{{ route('home') }}/specific-trade-law">特定商取引法の表記</a></li>
+                </ul>
             </div>
             <div class="footer-right">
                  <a class="btn-contact" href="#">
